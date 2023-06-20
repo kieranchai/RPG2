@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27c45c94288d8ad4db3fb1b9b72518e7, type: 3}
-  m_Name: rifle
+  m_Name: pistol
   m_EditorClassIdentifier: 
-  weaponId: 1
-  weaponName: rifle
-  attackPower: 5
+  weaponId: 3
+  weaponName: pistol
+  attackPower: 10
+  spritePath: Sprites/Desert Eagle
+  weaponType: ranged
+  cooldown: 0.5
+  weaponRange: 5

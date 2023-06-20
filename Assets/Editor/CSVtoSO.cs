@@ -28,7 +28,7 @@ public class CSVtoSO
             character.characterName = splitData[3];
             character.spritePath = splitData[4];
 
-            AssetDatabase.CreateAsset(character, $"Assets/ScriptableObjects/Characters/{character.characterName}.asset");
+            AssetDatabase.CreateAsset(character, $"Assets/Resources/ScriptableObjects/Characters/{character.characterName}.asset");
         }
 
         AssetDatabase.SaveAssets();
@@ -43,7 +43,7 @@ public class CSVtoSO
         {
             string[] splitData = s.Split(',');
 
-            if (splitData.Length != 3)
+            if (splitData.Length != 7)
             {
                 return;
             }
@@ -52,8 +52,12 @@ public class CSVtoSO
             weapon.weaponId = int.Parse(splitData[0]);
             weapon.weaponName = splitData[1];
             weapon.attackPower = int.Parse(splitData[2]);
+            weapon.spritePath = splitData[3];
+            weapon.weaponType = splitData[4];
+            weapon.cooldown = float.Parse(splitData[5]);
+            weapon.weaponRange = float.Parse(splitData[6]);
 
-            AssetDatabase.CreateAsset(weapon, $"Assets/ScriptableObjects/Weapons/{weapon.weaponName}.asset");
+            AssetDatabase.CreateAsset(weapon, $"Assets/Resources/ScriptableObjects/Weapons/{weapon.weaponName}.asset");
         }
 
         AssetDatabase.SaveAssets();

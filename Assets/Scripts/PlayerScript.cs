@@ -13,16 +13,19 @@ public class PlayerScript : MonoBehaviour
     public bool hasInit;
 
     public Rigidbody2D rb;
+    public Animator anim;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         hasInit = false;
         transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void SetPlayerData(Character characterData)
     {
+
         this.characterId = characterData.characterId;
         this.characterName = characterData.characterName;
         this.maxHealth = characterData.maxHealth;
@@ -33,10 +36,9 @@ public class PlayerScript : MonoBehaviour
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
         characterSprite.sprite = sprite;
 
-        RefreshColliders();
-
         hasInit = true;
         transform.GetChild(0).gameObject.SetActive(true);
+        anim.SetTrigger(characterName);
     }
 
     public void LookAtMouse()
@@ -51,12 +53,13 @@ public class PlayerScript : MonoBehaviour
     {
         var input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         rb.velocity = input.normalized * speed;
-    }
 
-    private void RefreshColliders()
-    {
-        Destroy(GetComponent<PolygonCollider2D>());
-        gameObject.AddComponent<PolygonCollider2D>();
-        GetComponent<PolygonCollider2D>().isTrigger = true;
+        if(rb.velocity.magnitude > 0)
+        {
+            anim.SetBool("isWalking", true);
+        } else
+        {
+            anim.SetBool("isWalking", false);
+        }
     }
 }

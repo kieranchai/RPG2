@@ -5,10 +5,10 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     private int attackPower;
-    private int weaponRange;
+    private float weaponRange;
     private Vector3 initialPosition;
 
-    public void Initialize(int attackPower, int weaponRange)
+    public void Initialize(int attackPower, float weaponRange)
     {
         this.attackPower = attackPower;
         this.weaponRange = weaponRange;
