@@ -11,6 +11,8 @@ public class WeaponScript : MonoBehaviour
     public string spritePath;
     public string weaponType;
 
+    public float cooldown; //CSV
+
     private bool isCooldown;
 
     private void Awake()
@@ -33,7 +35,7 @@ public class WeaponScript : MonoBehaviour
         this.weaponName = weaponData.weaponName;
         this.attackPower = weaponData.attackPower;
 
-        //tentative
+        //tentative hardcode 
         if (this.weaponName == "pistol")
         {
             this.spritePath = "Sprites/Desert Eagle";
@@ -41,6 +43,15 @@ public class WeaponScript : MonoBehaviour
             Sprite sprite = Resources.Load<Sprite>(this.spritePath);
             weaponSprite.sprite = sprite;
             this.weaponType = "ranged";
+            this.cooldown = 0.5f;
+        } else if (this.weaponName == "rifle")
+        {
+            this.spritePath = "Sprites/M4 Tactical";
+            SpriteRenderer weaponSprite = gameObject.GetComponent<SpriteRenderer>();
+            Sprite sprite = Resources.Load<Sprite>(this.spritePath);
+            weaponSprite.sprite = sprite;
+            this.weaponType = "ranged";
+            this.cooldown = 0.1f;
         }
 
         RefreshColliders();
@@ -53,7 +64,7 @@ public class WeaponScript : MonoBehaviour
             switch (this.weaponType)
             {
                 case "ranged":
-                    StartCoroutine(RangedAttack());
+                    StartCoroutine(RangedAttack(this.cooldown));
                     break;
                 default:
                     StartCoroutine(ForwardAttack());
@@ -75,12 +86,12 @@ public class WeaponScript : MonoBehaviour
         Vector3 initialPosition = transform.localPosition;
         float elapsedTime = 0;
 
-        // weapon cooldown
+        // weapon cooldown CSV
         float waitTime = 0.3f;
 
         var pos = transform.localPosition;
 
-        // weapon range
+        // weapon range CSV
         pos.x += 0.5f;
 
         while (elapsedTime < waitTime)
@@ -94,17 +105,17 @@ public class WeaponScript : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator RangedAttack()
+    IEnumerator RangedAttack(float cooldown)
     {
         isCooldown = true;
 
-        // weapon cooldown
-        float waitTime = 0.5f;
+        // weapon cooldown CSV
+        float waitTime = cooldown;
 
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"), transform.position, Quaternion.identity);
-        //weapon range
+        //weapon range 5 CSV
         bullet.GetComponent<BulletScript>().Initialize(this.attackPower, 5);
-        //projectile speed
+        //projectile speed CSV
         bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * 300);
 
         yield return new WaitForSeconds(waitTime);

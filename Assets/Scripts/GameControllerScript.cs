@@ -20,7 +20,7 @@ public class GameControllerScript : MonoBehaviour
             player.LookAtMouse();
             player.MovePlayer();
 
-            if (Input.GetMouseButtonDown(0)) player.transform.GetChild(0).GetComponentInChildren<WeaponScript>().TryAttack();
+            if (Input.GetMouseButton(0)) player.transform.GetChild(0).GetComponentInChildren<WeaponScript>().TryAttack();
         }
     }
 }

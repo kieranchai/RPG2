@@ -18,6 +18,7 @@ public class PlayerScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         hasInit = false;
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void SetPlayerData(Character characterData)
@@ -35,6 +36,7 @@ public class PlayerScript : MonoBehaviour
         RefreshColliders();
 
         hasInit = true;
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 
     public void LookAtMouse()
