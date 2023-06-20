@@ -10,27 +10,51 @@ public class PlayerScript : MonoBehaviour
     public float speed;
     public string spritePath;
 
-    public void setPlayerData(Character characterData)
+    public bool hasInit;
+
+    public Rigidbody2D rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        hasInit = false;
+    }
+
+    public void SetPlayerData(Character characterData)
     {
         this.characterId = characterData.characterId;
         this.characterName = characterData.characterName;
-        this.maxHealth= characterData.maxHealth;
+        this.maxHealth = characterData.maxHealth;
         this.speed = characterData.speed;
         this.spritePath = characterData.spritePath;
 
         SpriteRenderer characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
         characterSprite.sprite = sprite;
+
+        RefreshColliders();
+
+        hasInit = true;
     }
 
-    public void movePlayer(Vector2 moveDir)
+    public void LookAtMouse()
     {
-        //move player position
-        this.transform.position += (Vector3)moveDir * speed;
+        Vector2 mousePos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.up = (Vector3)(mousePos - new Vector2(transform.position.x, transform.position.y));
+
+        transform.GetChild(0).gameObject.transform.right = this.transform.up.normalized;
     }
 
-    public void tryAttack()
+    public void MovePlayer()
     {
-        gameObject.GetComponentInChildren<WeaponScript>().doAttack();
+        var input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        rb.velocity = input.normalized * speed;
+    }
+
+    private void RefreshColliders()
+    {
+        Destroy(GetComponent<PolygonCollider2D>());
+        gameObject.AddComponent<PolygonCollider2D>();
+        GetComponent<PolygonCollider2D>().isTrigger = true;
     }
 }

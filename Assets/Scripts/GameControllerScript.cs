@@ -15,25 +15,12 @@ public class GameControllerScript : MonoBehaviour
 
     private void Update()
     {
-        if (!isPaused)
+        if (!isPaused && player.hasInit)
         {
-            if (Input.GetMouseButtonDown(0)) player.tryAttack();
-        }
-    }
+            player.LookAtMouse();
+            player.MovePlayer();
 
-    private void FixedUpdate()
-    {
-        if (!isPaused)
-        {
-            Vector2 moveDir = Vector2.zero;
-            if (Input.GetKey(KeyCode.W)) moveDir += Vector2.up;
-            if (Input.GetKey(KeyCode.S)) moveDir += Vector2.down;
-            if (Input.GetKey(KeyCode.A)) moveDir += Vector2.left;
-            if (Input.GetKey(KeyCode.D)) moveDir += Vector2.right;
-
-            //move player position
-            player.movePlayer(moveDir.normalized * Time.fixedDeltaTime);
-
+            if (Input.GetMouseButtonDown(0)) player.transform.GetChild(0).GetComponentInChildren<WeaponScript>().TryAttack();
         }
     }
 }
