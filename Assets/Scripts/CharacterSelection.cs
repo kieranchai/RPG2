@@ -19,7 +19,7 @@ public class CharacterSelection : MonoBehaviour
 
     void FillCharacterData()
     {
-        characterName.text = characterData.characterName;
+        characterName.text = characterData.characterName.ToUpper();
         characterImage.sprite = Resources.Load<Sprite>(characterData.spritePath);
         characterHp.text = characterData.maxHealth.ToString() + "HP";
         characterSpeed.text = characterData.speed.ToString() + "MS";

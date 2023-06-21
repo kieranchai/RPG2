@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -17,9 +18,12 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer characterSprite;
 
     public Weapon equippedWeapon;
-    public List<Weapon> inventory = new List<Weapon>();
+    public List<Weapon> inventory = new List<Weapon>(9);
     public int gold = 0;
     public int currentHealth;
+
+    [SerializeField] private GameObject inventoryPanel;
+    private GameObject[] slots;
 
     private void Awake()
     {
@@ -35,6 +39,14 @@ public class PlayerScript : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
 
         SetPlayerData(GameControllerScript.GameController.selectedCharacter);
+
+        slots = new GameObject[inventoryPanel.transform.childCount];
+        for (int i = 0; i < inventoryPanel.transform.childCount; i++)
+        {
+            slots[i] = inventoryPanel.transform.GetChild(i).gameObject;
+        }
+
+        RefreshUI();
     }
 
     private void LateUpdate()
@@ -60,12 +72,54 @@ public class PlayerScript : MonoBehaviour
 
     public void EquipWeapon(Weapon weaponData)
     {
-        if (this.equippedWeapon)
+        if (inventory.Count < inventory.Capacity)
         {
-            inventory.Add(this.equippedWeapon);
+            if (this.equippedWeapon)
+            {
+                AddToInventory(this.equippedWeapon);
+            }
+            this.equippedWeapon = weaponData;
+            transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().SetWeaponData(weaponData);
         }
-        this.equippedWeapon = weaponData;
-        transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().SetWeaponData(weaponData);
+        else
+        {
+            //inven full
+            return;
+        }
+
+    }
+
+    public void AddToInventory(Weapon weaponData)
+    {
+        if (!weaponData) return;
+
+        inventory.Add(weaponData);
+        RefreshUI();
+    }
+
+    public void RemoveFromInventory(Weapon weaponData)
+    {
+        if (!weaponData) return;
+
+        inventory.Remove(weaponData);
+        RefreshUI();
+    }
+
+    public void RefreshUI()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            try
+            {
+                slots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
+                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(inventory[i].spritePath);
+            }
+            catch
+            {
+                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
+                slots[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
+            }
+        }
     }
 
     public void SkinChoice()

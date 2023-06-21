@@ -64,6 +64,13 @@ public class WeaponScript : MonoBehaviour
     {
         Destroy(GetComponent<PolygonCollider2D>());
         gameObject.AddComponent<PolygonCollider2D>();
+        StartCoroutine(SetColliderTrigger());
+
+    }
+
+    IEnumerator SetColliderTrigger()
+    {
+        yield return new WaitForFixedUpdate();
         GetComponent<PolygonCollider2D>().isTrigger = true;
     }
 

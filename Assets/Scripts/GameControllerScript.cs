@@ -40,6 +40,7 @@ public class GameControllerScript : MonoBehaviour
             {
                 PlayerScript.Player.EquipWeapon(PlayerScript.Player.inventory.ElementAt(GetPressedNumber() - 1));
                 PlayerScript.Player.inventory.RemoveAt(GetPressedNumber() - 1);
+                PlayerScript.Player.RefreshUI();
             }
         }
     }
