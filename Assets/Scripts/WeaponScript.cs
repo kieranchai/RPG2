@@ -87,8 +87,8 @@ public class WeaponScript : MonoBehaviour
         isCooldown = true;
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"), transform.position, Quaternion.identity);
         bullet.GetComponent<BulletScript>().Initialize(this.attackPower, weaponRange);
-        //can add Projectile Speed to CSV (300 here)
-        bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * 300);
+        //can add Projectile Speed to CSV (600 here)
+        bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * 600);
         yield return new WaitForSeconds(cooldown);
         isCooldown = false;
         yield return null;
