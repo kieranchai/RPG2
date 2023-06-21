@@ -4,28 +4,35 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    public static PlayerScript Player { get; private set; }
+
     public int characterId;
     public string characterName;
     public int maxHealth;
     public float speed;
     public string spritePath;
 
-    public bool hasInit;
-
     public Rigidbody2D rb;
     public Animator anim;
 
     private void Awake()
     {
+        if (Player != null && Player != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Player = this;
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        hasInit = false;
         transform.GetChild(0).gameObject.SetActive(false);
+
+        SetPlayerData(GameControllerScript.GameController.selectedCharacter);
     }
 
     public void SetPlayerData(Character characterData)
     {
-
         this.characterId = characterData.characterId;
         this.characterName = characterData.characterName;
         this.maxHealth = characterData.maxHealth;
@@ -36,7 +43,6 @@ public class PlayerScript : MonoBehaviour
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
         characterSprite.sprite = sprite;
 
-        hasInit = true;
         transform.GetChild(0).gameObject.SetActive(true);
         anim.SetTrigger(characterName);
     }
@@ -54,10 +60,11 @@ public class PlayerScript : MonoBehaviour
         var input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         rb.velocity = input.normalized * speed;
 
-        if(rb.velocity.magnitude > 0)
+        if (rb.velocity.magnitude > 0)
         {
             anim.SetBool("isWalking", true);
-        } else
+        }
+        else
         {
             anim.SetBool("isWalking", false);
         }

@@ -15,7 +15,7 @@ public class WeaponScript : MonoBehaviour
 
     private bool isCooldown;
 
-    private void Awake()
+    private void Start()
     {
        SetWeaponData(Resources.Load<Weapon>("ScriptableObjects/Weapons/hands"));
        RefreshColliders();
