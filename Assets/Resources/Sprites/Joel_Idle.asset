@@ -6,7 +6,7 @@ Sprite:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Joel
+  m_Name: Joel_Idle
   m_Rect:
     serializedVersion: 2
     x: 0

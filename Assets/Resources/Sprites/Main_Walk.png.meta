@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 45e95974ec1f38e4a90e3e858d73c2e9
+guid: 5527ac740b1ed89478cb3e6d4622d1fb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Kieran_Walk_0
+      name: Main_Walk_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 175
-        width: 57
-        height: 35
+        y: 418.5
+        width: 132.5
+        height: 139.5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,83 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c10f143c6f259c04b89454f2860c6904
-      internalID: 436857965
+      spriteID: c9812e1a6376d0f4fba80deaf099affe
+      internalID: -1688305850
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kieran_Walk_1
+      name: Main_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 418.5
+        width: 132.5
+        height: 139.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1293d32ca055aa4d9512602e17f32c6
+      internalID: -190456126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Main_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 279
+        width: 132
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6c4d3733ba27f14c825481cfa053133
+      internalID: 117396594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Main_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 280
+        width: 132
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92c1bb233b3696048ac6c292ab35da3c
+      internalID: -339840716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Main_Walk_4
       rect:
         serializedVersion: 2
         x: 0
         y: 140
-        width: 57
-        height: 35
+        width: 132
+        height: 140
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 787924bc7693d27489c5d64f937ee892
-      internalID: 506960061
+      spriteID: 73797501e1ea5f54cb10196d71becb19
+      internalID: 821119518
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kieran_Walk_2
+      name: Main_Walk_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 105
-        width: 57
-        height: 35
+        x: 132
+        y: 140.5
+        width: 132.5
+        height: 139.5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,71 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 262de5a6b72f8464db55509066240be1
-      internalID: 1533268118
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kieran_Walk_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 70
-        width: 57
-        height: 35
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fa211dd0396b4be47b14b049e15daaec
-      internalID: 1230297669
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kieran_Walk_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 35
-        width: 57
-        height: 35
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 498b7a38ea8eba049af1e1f7121a50bd
-      internalID: -375905874
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kieran_Walk_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 57
-        height: 35
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8dee713ceec6d8f4c9e36ed5a41e09d0
-      internalID: 219745488
+      spriteID: 2fc144c8a80464b4e839813c69b79ea8
+      internalID: -992377760
       vertices: []
       indices: 
       edges: []
@@ -241,12 +241,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Kieran_Walk_0: 436857965
-      Kieran_Walk_1: 506960061
-      Kieran_Walk_2: 1533268118
-      Kieran_Walk_3: 1230297669
-      Kieran_Walk_4: -375905874
-      Kieran_Walk_5: 219745488
+      Main_Walk_0: -1688305850
+      Main_Walk_1: -190456126
+      Main_Walk_2: 117396594
+      Main_Walk_3: -339840716
+      Main_Walk_4: 821119518
+      Main_Walk_5: -992377760
+      WalkMain_6: 1240932985
+      WalkMain_7: 1561327294
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

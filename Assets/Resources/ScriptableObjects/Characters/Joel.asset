@@ -16,4 +16,4 @@ MonoBehaviour:
   characterName: Joel
   maxHealth: 50
   speed: 5
-  spritePath: Sprites/joel
+  spritePath: Sprites/Joel

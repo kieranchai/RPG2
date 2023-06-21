@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7243ad7bae6694243bfbf69052f87988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterData: {fileID: 0}
+  selectedCharacter: {fileID: 0}
 --- !u!4 &167003659
 Transform:
   m_ObjectHideFlags: 0
@@ -327,6 +327,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1498916170}
     m_Modifications:
+    - target: {fileID: 6746964356556907862, guid: a06cef66d5e6fdf478c537a6bf29ff32, type: 3}
+      propertyPath: characterData
+      value: 
+      objectReference: {fileID: 11400000, guid: 9c496a247e0ec974ea6afc07faaca8e1, type: 2}
     - target: {fileID: 6746964356556907863, guid: a06cef66d5e6fdf478c537a6bf29ff32, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

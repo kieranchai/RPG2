@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
 
     public Rigidbody2D rb;
     public Animator anim;
+    public SpriteRenderer characterSprite;
 
     private void Awake()
     {
@@ -31,6 +32,11 @@ public class PlayerScript : MonoBehaviour
         SetPlayerData(GameControllerScript.GameController.selectedCharacter);
     }
 
+    private void LateUpdate()
+    {
+        SkinChoice();
+    }
+
     public void SetPlayerData(Character characterData)
     {
         this.characterId = characterData.characterId;
@@ -39,12 +45,20 @@ public class PlayerScript : MonoBehaviour
         this.speed = characterData.speed;
         this.spritePath = characterData.spritePath;
 
-        SpriteRenderer characterSprite = gameObject.GetComponent<SpriteRenderer>();
+        characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
         characterSprite.sprite = sprite;
 
         transform.GetChild(0).gameObject.SetActive(true);
-        anim.SetTrigger(characterName);
+    }
+
+    public void SkinChoice()
+    {
+        if (characterSprite.sprite.name.Contains("Main")){
+            string spriteName = characterSprite.sprite.name;
+            spriteName = spriteName.Replace("Main", characterName);
+            characterSprite.sprite = Resources.Load<Sprite>("Sprites/" + spriteName);
+        }
     }
 
     public void LookAtMouse()
