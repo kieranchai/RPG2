@@ -16,6 +16,11 @@ public class PlayerScript : MonoBehaviour
     public Animator anim;
     public SpriteRenderer characterSprite;
 
+    public Weapon equippedWeapon;
+    public List<Weapon> inventory = new List<Weapon>();
+    public int gold = 0;
+    public int currentHealth;
+
     private void Awake()
     {
         if (Player != null && Player != this)
@@ -44,6 +49,7 @@ public class PlayerScript : MonoBehaviour
         this.maxHealth = characterData.maxHealth;
         this.speed = characterData.speed;
         this.spritePath = characterData.spritePath;
+        this.currentHealth = this.maxHealth;
 
         characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
@@ -52,9 +58,20 @@ public class PlayerScript : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(true);
     }
 
+    public void EquipWeapon(Weapon weaponData)
+    {
+        if (this.equippedWeapon)
+        {
+            inventory.Add(this.equippedWeapon);
+        }
+        this.equippedWeapon = weaponData;
+        transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().SetWeaponData(weaponData);
+    }
+
     public void SkinChoice()
     {
-        if (characterSprite.sprite.name.Contains("Main")){
+        if (characterSprite.sprite.name.Contains("Main"))
+        {
             string spriteName = characterSprite.sprite.name;
             spriteName = spriteName.Replace("Main", characterName);
             characterSprite.sprite = Resources.Load<Sprite>("Sprites/" + spriteName);

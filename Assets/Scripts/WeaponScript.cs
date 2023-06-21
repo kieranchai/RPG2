@@ -12,14 +12,12 @@ public class WeaponScript : MonoBehaviour
     public string weaponType;
     public float cooldown;
     public float weaponRange;
+    public int maxAmmoCount;
 
-    private bool isCooldown;
+    private bool isReloading = false;
+    private bool limitAttack;
 
-    private void Start()
-    {
-       SetWeaponData(Resources.Load<Weapon>("ScriptableObjects/Weapons/hands"));
-       RefreshColliders();
-    }
+    public int currentAmmoCount;
 
     public void SetWeaponData(Weapon weaponData)
     {
@@ -30,6 +28,8 @@ public class WeaponScript : MonoBehaviour
         this.weaponType = weaponData.weaponType;
         this.cooldown = weaponData.cooldown;
         this.weaponRange = weaponData.weaponRange;
+        this.maxAmmoCount = weaponData.ammoCount;
+        this.currentAmmoCount = maxAmmoCount;
 
         SpriteRenderer weaponSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
@@ -40,18 +40,22 @@ public class WeaponScript : MonoBehaviour
 
     public void TryAttack()
     {
-        if (!isCooldown)
+        if (!limitAttack && PlayerScript.Player.equippedWeapon)
         {
-            switch (this.weaponType)
+            if (!isReloading)
             {
-                case "melee_forward":
-                    StartCoroutine(MeleeForwardAttack(this.cooldown, this.weaponRange));
-                    break;
-                case "ranged":
-                    StartCoroutine(RangedAttack(this.cooldown, this.weaponRange));
-                    break;
-                default:
-                    break;
+                switch (this.weaponType)
+                {
+                    case "line":
+                        StartCoroutine(LineAttack(this.cooldown, this.weaponRange));
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                StartCoroutine(Reload());
             }
         }
     }
@@ -63,34 +67,34 @@ public class WeaponScript : MonoBehaviour
         GetComponent<PolygonCollider2D>().isTrigger = true;
     }
 
-    IEnumerator MeleeForwardAttack(float cooldown, float weaponRange)
+    IEnumerator Reload()
     {
-        isCooldown = true;
-        Vector3 initialPosition = transform.localPosition;
-        float elapsedTime = 0;
-        var pos = transform.localPosition;
-        pos.x += weaponRange;
-
-        while (elapsedTime < cooldown)
-        {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, pos, (elapsedTime / cooldown));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        transform.localPosition = initialPosition;
-        isCooldown = false;
+        this.currentAmmoCount = this.maxAmmoCount;
+        //can add reload speed 5f
+        yield return new WaitForSeconds(5f);
+        isReloading = false;
         yield return null;
     }
 
-    IEnumerator RangedAttack(float cooldown, float weaponRange)
+    IEnumerator LineAttack(float cooldown, float weaponRange)
     {
-        isCooldown = true;
-        GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"), transform.position, Quaternion.identity);
-        bullet.GetComponent<BulletScript>().Initialize(this.attackPower, weaponRange);
-        //can add Projectile Speed to CSV (600 here)
-        bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * 600);
-        yield return new WaitForSeconds(cooldown);
-        isCooldown = false;
+        limitAttack = true;
+        if (this.currentAmmoCount > 0)
+        {
+            GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"), transform.position, Quaternion.identity);
+            bullet.GetComponent<BulletScript>().Initialize(this.attackPower, weaponRange);
+
+            //can add Projectile Speed to CSV (600 here)
+            bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * 600);
+
+            --this.currentAmmoCount;
+            yield return new WaitForSeconds(cooldown);
+        }
+        else
+        {
+            isReloading = true;
+        }
+        limitAttack = false;
         yield return null;
     }
 }

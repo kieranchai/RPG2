@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c45c94288d8ad4db3fb1b9b72518e7, type: 3}
   m_Name: rifle
   m_EditorClassIdentifier: 
-  weaponId: 2
+  weaponId: 1
   weaponName: rifle
   attackPower: 5
   spritePath: Sprites/M4 Tactical
-  weaponType: ranged
+  weaponType: line
   cooldown: 0.1
   weaponRange: 10
+  ammoCount: 30

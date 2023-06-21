@@ -1,3 +1,2 @@
-1,hands,1,Sprites/Fists,melee_forward,0.3,0.5
-2,rifle,5,Sprites/M4 Tactical,ranged,0.1,10
-3,pistol,10,Sprites/Desert Eagle,ranged,0.5,5
+1,rifle,5,Sprites/M4 Tactical,line,0.1,10,30
+2,pistol,10,Sprites/Desert Eagle,line,0.5,5,6
