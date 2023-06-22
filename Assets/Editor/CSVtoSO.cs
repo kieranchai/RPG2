@@ -43,7 +43,7 @@ public class CSVtoSO
         {
             string[] splitData = s.Split(',');
 
-            if (splitData.Length != 8)
+            if (splitData.Length != 9)
             {
                 return;
             }
@@ -57,6 +57,7 @@ public class CSVtoSO
             weapon.cooldown = float.Parse(splitData[5]);
             weapon.weaponRange = float.Parse(splitData[6]);
             weapon.ammoCount = int.Parse(splitData[7]);
+            weapon.cost = int.Parse(splitData[8]);
 
             AssetDatabase.CreateAsset(weapon, $"Assets/Resources/ScriptableObjects/Weapons/{weapon.weaponName}.asset");
         }

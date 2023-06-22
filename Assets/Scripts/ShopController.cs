@@ -1,0 +1,98 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ShopController : MonoBehaviour
+{
+    public static ShopController shop { get; private set; }
+
+    [SerializeField] private GameObject shopPanel;
+    private GameObject[] slots;
+
+    private Weapon[] allWeapons;
+    private Weapon[] availableWeapons = new Weapon[3];
+
+    public bool isOpen = false;
+    private float nextRefreshTime = 5f;
+    private float period = 0.1f;
+
+    private void Awake()
+    {
+        if (shop != null && shop != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        shop = this;
+
+        allWeapons = Resources.LoadAll<Weapon>("ScriptableObjects/Weapons");
+
+        slots = new GameObject[shopPanel.transform.childCount];
+        for (int i = 0; i < shopPanel.transform.childCount; i++)
+        {
+            slots[i] = shopPanel.transform.GetChild(i).gameObject;
+        }
+        RefreshShopWeapons();
+    }
+
+    private void Update()
+    {
+        if (Time.time > nextRefreshTime)
+        {
+            nextRefreshTime += Time.time + period;
+            RefreshShopWeapons();
+        }
+    }
+
+    public void OpenShop()
+    {
+        shopPanel.SetActive(true);
+        isOpen = true;
+    }
+
+    public void CloseShop()
+    {
+        shopPanel.SetActive(false);
+        isOpen = false;
+    }
+
+    public void BuyWeapon(Weapon weaponToBuy)
+    {
+        if (PlayerScript.Player.cash >= weaponToBuy.cost)
+        {
+            PlayerScript.Player.EquipWeapon(weaponToBuy);
+            PlayerScript.Player.cash -= weaponToBuy.cost;
+        } else
+        {
+            //not enough money to buy
+            return;
+        }
+    }
+
+    public void RefreshShopWeapons()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            availableWeapons[i] = allWeapons[Random.Range(0, allWeapons.Length)];
+        }
+        RefreshUI();
+    }
+
+    public void RefreshUI()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            int i2 = i;
+            slots[i].transform.GetComponent<Button>().onClick.AddListener(() => BuyWeapon(availableWeapons[i2]));
+            slots[i].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(availableWeapons[i].spritePath);
+            slots[i].transform.Find("Name").GetComponent<Text>().text = availableWeapons[i].weaponName;
+            slots[i].transform.Find("Cost").GetComponent<Text>().text = "$" + availableWeapons[i].cost.ToString();
+            slots[i].transform.Find("Damage").GetComponent<Text>().text = availableWeapons[i].attackPower.ToString() + "DMG";
+            slots[i].transform.Find("Fire Rate").GetComponent<Text>().text = availableWeapons[i].cooldown.ToString() + "/S";
+            slots[i].transform.Find("Range").GetComponent<Text>().text = availableWeapons[i].weaponRange.ToString() + "M";
+            slots[i].transform.Find("Ammo Count").GetComponent<Text>().text = availableWeapons[i].ammoCount.ToString();
+        }
+    }
+}

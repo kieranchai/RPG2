@@ -11,4 +11,5 @@ public class Weapon : ScriptableObject
     public float cooldown;
     public float weaponRange;
     public int ammoCount;
+    public int cost;
 }

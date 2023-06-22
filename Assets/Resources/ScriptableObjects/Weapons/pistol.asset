@@ -20,3 +20,4 @@ MonoBehaviour:
   cooldown: 0.5
   weaponRange: 5
   ammoCount: 6
+  cost: 60

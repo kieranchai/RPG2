@@ -12,6 +12,7 @@ public class WeaponScript : MonoBehaviour
     public string weaponType;
     public float cooldown;
     public float weaponRange;
+    public int cost;
     public int maxAmmoCount;
 
     private bool isReloading = false;
@@ -29,6 +30,7 @@ public class WeaponScript : MonoBehaviour
         this.cooldown = weaponData.cooldown;
         this.weaponRange = weaponData.weaponRange;
         this.maxAmmoCount = weaponData.ammoCount;
+        this.cost = weaponData.cost;
         this.currentAmmoCount = maxAmmoCount;
 
         SpriteRenderer weaponSprite = gameObject.GetComponent<SpriteRenderer>();
@@ -77,8 +79,8 @@ public class WeaponScript : MonoBehaviour
     IEnumerator Reload()
     {
         this.currentAmmoCount = this.maxAmmoCount;
-        //can add reload speed 5f
-        yield return new WaitForSeconds(5f);
+        //can add reload speed 2f
+        yield return new WaitForSeconds(2f);
         isReloading = false;
         yield return null;
     }

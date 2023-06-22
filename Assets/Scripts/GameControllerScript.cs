@@ -34,12 +34,22 @@ public class GameControllerScript : MonoBehaviour
                 PlayerScript.Player.transform.GetChild(0).GetComponentInChildren<WeaponScript>().TryAttack();
             }
 
-            // Haven't try to see if completely no bugs but can switch and save weapons
             if (Input.GetKeyDown(KeyCode.Q) && PlayerScript.Player.inventory.Count == PlayerScript.Player.inventory.Capacity)
             {
                 Weapon temp = PlayerScript.Player.inventory[0];
                 PlayerScript.Player.inventory[0] = PlayerScript.Player.equippedWeapon;
                 PlayerScript.Player.EquipWeapon(temp);
+            }
+
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                if (!ShopController.shop.isOpen)
+                {
+                    ShopController.shop.OpenShop();
+                } else
+                {
+                    ShopController.shop.CloseShop();
+                }
             }
         }
     }

@@ -19,7 +19,7 @@ public class PlayerScript : MonoBehaviour
 
     public Weapon equippedWeapon;
     public List<Weapon> inventory = new List<Weapon>(1);
-    public int cash = 0;
+    public int cash;
     public int currentHealth;
 
     [SerializeField] private GameObject inventoryPanel;
@@ -63,6 +63,7 @@ public class PlayerScript : MonoBehaviour
         this.speed = characterData.speed;
         this.spritePath = characterData.spritePath;
         this.currentHealth = this.maxHealth;
+        this.cash = 100;
 
         characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
