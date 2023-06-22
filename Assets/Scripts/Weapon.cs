@@ -7,9 +7,11 @@ public class Weapon : ScriptableObject
     public string weaponName;
     public int attackPower;
     public string spritePath;
+    public string thumbnailPath;
     public string weaponType;
     public float cooldown;
     public float weaponRange;
     public int ammoCount;
     public int cost;
+    public float reloadSpeed;
 }

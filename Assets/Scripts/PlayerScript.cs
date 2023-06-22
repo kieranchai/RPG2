@@ -63,7 +63,7 @@ public class PlayerScript : MonoBehaviour
         this.speed = characterData.speed;
         this.spritePath = characterData.spritePath;
         this.currentHealth = this.maxHealth;
-        this.cash = 100;
+        this.cash = 800;
 
         characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
@@ -116,7 +116,7 @@ public class PlayerScript : MonoBehaviour
             try
             {
                 slots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
-                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(inventory[i].spritePath);
+                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(inventory[i].thumbnailPath);
             }
             catch
             {
@@ -128,13 +128,22 @@ public class PlayerScript : MonoBehaviour
         try
         {
             weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().enabled = true;
-            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(this.equippedWeapon.spritePath);
+            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Text>().enabled =  true;
+            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(this.equippedWeapon.thumbnailPath);
+            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().currentAmmoCount.ToString();
         }
         catch
         {
             weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = null;
             weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().enabled = false;
+            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = null;
+            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Text>().enabled = false;
         }
+    }
+
+    public void ReloadAmmoUI()
+    {
+        weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = "...";
     }
 
     public void SkinChoice()

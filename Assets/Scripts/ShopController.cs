@@ -15,8 +15,6 @@ public class ShopController : MonoBehaviour
     private Weapon[] availableWeapons = new Weapon[3];
 
     public bool isOpen = false;
-    private float nextRefreshTime = 5f;
-    private float period = 0.1f;
 
     private void Awake()
     {
@@ -34,16 +32,8 @@ public class ShopController : MonoBehaviour
         {
             slots[i] = shopPanel.transform.GetChild(i).gameObject;
         }
-        RefreshShopWeapons();
-    }
 
-    private void Update()
-    {
-        if (Time.time > nextRefreshTime)
-        {
-            nextRefreshTime += Time.time + period;
-            RefreshShopWeapons();
-        }
+        InvokeRepeating("RefreshShopWeapons", 0.0f, 5.0f);
     }
 
     public void OpenShop()
@@ -84,10 +74,11 @@ public class ShopController : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
+            slots[i].transform.GetComponent<Button>().onClick.RemoveAllListeners();
             int i2 = i;
             slots[i].transform.GetComponent<Button>().onClick.AddListener(() => BuyWeapon(availableWeapons[i2]));
-            slots[i].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(availableWeapons[i].spritePath);
-            slots[i].transform.Find("Name").GetComponent<Text>().text = availableWeapons[i].weaponName;
+            slots[i].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(availableWeapons[i].thumbnailPath);
+            slots[i].transform.Find("Name").GetComponent<Text>().text = availableWeapons[i].weaponName.ToUpper();
             slots[i].transform.Find("Cost").GetComponent<Text>().text = "$" + availableWeapons[i].cost.ToString();
             slots[i].transform.Find("Damage").GetComponent<Text>().text = availableWeapons[i].attackPower.ToString() + "DMG";
             slots[i].transform.Find("Fire Rate").GetComponent<Text>().text = availableWeapons[i].cooldown.ToString() + "/S";

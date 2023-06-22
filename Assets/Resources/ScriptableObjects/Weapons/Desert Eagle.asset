@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27c45c94288d8ad4db3fb1b9b72518e7, type: 3}
-  m_Name: pistol
+  m_Name: Desert Eagle
   m_EditorClassIdentifier: 
   weaponId: 2
-  weaponName: pistol
+  weaponName: Desert Eagle
   attackPower: 10
   spritePath: Sprites/Desert Eagle
+  thumbnailPath: Sprites/UI/Desert Eagle
   weaponType: line
   cooldown: 0.5
   weaponRange: 5
   ammoCount: 6
   cost: 60
+  reloadSpeed: 1
