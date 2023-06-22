@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,24 +35,13 @@ public class GameControllerScript : MonoBehaviour
             }
 
             // Haven't try to see if completely no bugs but can switch and save weapons
-            if (Input.GetKey((KeyCode)(48 + GetPressedNumber())) && PlayerScript.Player.inventory.Count >= GetPressedNumber())
+            if (Input.GetKeyDown(KeyCode.Q) && PlayerScript.Player.inventory.Count == PlayerScript.Player.inventory.Capacity)
             {
-                PlayerScript.Player.EquipWeapon(PlayerScript.Player.inventory.ElementAt(GetPressedNumber() - 1));
-                PlayerScript.Player.inventory.RemoveAt(GetPressedNumber() - 1);
-                PlayerScript.Player.RefreshUI();
+                Weapon temp = PlayerScript.Player.inventory[0];
+                PlayerScript.Player.inventory[0] = PlayerScript.Player.equippedWeapon;
+                PlayerScript.Player.EquipWeapon(temp);
             }
         }
-    }
-
-    public int GetPressedNumber()
-    {
-        for (int number = 1; number <= 9; number++)
-        {
-            if (Input.GetKeyDown(number.ToString()))
-                return number;
-        }
-
-        return -1;
     }
 
     public void QuitGame()

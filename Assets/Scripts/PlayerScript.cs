@@ -18,11 +18,12 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer characterSprite;
 
     public Weapon equippedWeapon;
-    public List<Weapon> inventory = new List<Weapon>(9);
-    public int gold = 0;
+    public List<Weapon> inventory = new List<Weapon>(1);
+    public int cash = 0;
     public int currentHealth;
 
     [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private GameObject weaponPanel;
     private GameObject[] slots;
 
     private void Awake()
@@ -83,10 +84,11 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            //inven full
-            return;
+            //inven full, replace equipped weapon
+            this.equippedWeapon = weaponData;
+            transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().SetWeaponData(weaponData);
         }
-
+        RefreshUI();
     }
 
     public void AddToInventory(Weapon weaponData)
@@ -107,6 +109,7 @@ public class PlayerScript : MonoBehaviour
 
     public void RefreshUI()
     {
+        //inventory panel
         for (int i = 0; i < slots.Length; i++)
         {
             try
@@ -119,6 +122,17 @@ public class PlayerScript : MonoBehaviour
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
                 slots[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
             }
+        }
+        //weapon panel
+        try
+        {
+            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().enabled = true;
+            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(this.equippedWeapon.spritePath);
+        }
+        catch
+        {
+            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = null;
+            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().enabled = false;
         }
     }
 
