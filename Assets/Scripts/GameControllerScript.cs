@@ -27,7 +27,17 @@ public class GameControllerScript : MonoBehaviour
         if (!isPaused && PlayerScript.Player)
         {
             PlayerScript.Player.LookAtMouse();
-            PlayerScript.Player.MovePlayer();
+            bool success = PlayerScript.Player.MovePlayer(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized);
+
+            if (!success)
+            {
+                success = PlayerScript.Player.MovePlayer(new Vector2(Input.GetAxisRaw("Horizontal"), 0));
+
+                if (!success)
+                {
+                    success = PlayerScript.Player.MovePlayer(new Vector2(0, Input.GetAxisRaw("Vertical")));
+                }
+            }
 
             if (Input.GetMouseButton(0))
             {
@@ -46,7 +56,8 @@ public class GameControllerScript : MonoBehaviour
                 if (!ShopController.shop.isOpen)
                 {
                     ShopController.shop.OpenShop();
-                } else
+                }
+                else
                 {
                     ShopController.shop.CloseShop();
                 }
@@ -67,6 +78,6 @@ public class GameControllerScript : MonoBehaviour
     public void LoadSceneWithCharacter(Character characterData)
     {
         this.selectedCharacter = characterData;
-        SceneManager.LoadScene("Scene1");
+        SceneManager.LoadScene("Loading");
     }
 }

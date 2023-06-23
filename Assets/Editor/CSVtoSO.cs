@@ -5,6 +5,7 @@ using System.IO;
 public class CSVtoSO
 {
     private static string characterCSVPath = "/Editor/CSVs/CharacterCSV.csv";
+    private static string enemyCSVPath = "/Editor/CSVs/EnemyCSV.csv";
     private static string weaponCSVPath = "/Editor/CSVs/WeaponCSV.csv";
 
     [MenuItem("Utilities/Generate Characters")]
@@ -29,6 +30,34 @@ public class CSVtoSO
             character.spritePath = splitData[4];
 
             AssetDatabase.CreateAsset(character, $"Assets/Resources/ScriptableObjects/Characters/{character.characterName}.asset");
+        }
+
+        AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Utilities/Generate Enemies")]
+    public static void GenerateEnemies()
+    {
+        string[] allLines = File.ReadAllLines(Application.dataPath + enemyCSVPath);
+
+        foreach (string s in allLines)
+        {
+            string[] splitData = s.Split(',');
+
+            if (splitData.Length != 6)
+            {
+                return;
+            }
+
+            Enemy enemy = ScriptableObject.CreateInstance<Enemy>();
+            enemy.enemyId = int.Parse(splitData[0]);
+            enemy.speed = float.Parse(splitData[1]);
+            enemy.maxHealth = int.Parse(splitData[2]);
+            enemy.enemyName = splitData[3];
+            enemy.spritePath = splitData[4];
+            enemy.equippedWeaponName = splitData[5];
+
+            AssetDatabase.CreateAsset(enemy, $"Assets/Resources/ScriptableObjects/Enemies/{enemy.enemyName}.asset");
         }
 
         AssetDatabase.SaveAssets();

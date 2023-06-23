@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,10 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject playerStatsPanel;
 
     private GameObject[] slots;
+
+    public ContactFilter2D movementFilter;
+    private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+    public float collisionOffset;
 
     private void Awake()
     {
@@ -166,6 +171,16 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void takeDamage(int damageTaken)
+    {
+        currentHealth -= damageTaken;
+        UpdateHealth();
+        if (currentHealth <= 0)
+        {
+            //Player Died
+        }
+    }
+
     public void SkinChoice()
     {
         if (characterSprite.sprite.name.Contains("Main"))
@@ -184,18 +199,29 @@ public class PlayerScript : MonoBehaviour
         transform.GetChild(0).gameObject.transform.right = this.transform.up.normalized;
     }
 
-    public void MovePlayer()
+    public bool MovePlayer(Vector2 direction)
     {
-        var input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        rb.velocity = input.normalized * speed;
+        int count = rb.Cast(
+            direction,
+            movementFilter,
+            castCollisions,
+            speed * Time.fixedDeltaTime + collisionOffset);
 
-        if (rb.velocity.magnitude > 0)
+        if (count == 0)
         {
-            anim.SetBool("isWalking", true);
+            Vector2 moveVector = direction * speed * Time.fixedDeltaTime;
+
+            rb.MovePosition(rb.position + moveVector);
+            return true;
         }
         else
         {
-            anim.SetBool("isWalking", false);
+/*            foreach (RaycastHit2D hit in castCollisions)
+            {
+                print(hit.ToString());
+            }*/
+            return false;
         }
     }
 }
+

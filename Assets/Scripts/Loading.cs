@@ -25,6 +25,6 @@ public class Loading : MonoBehaviour
             scroll.size = (timer/duration);
             yield return null;
         }
-        SceneManager.LoadScene("Character Selection");
+        SceneManager.LoadScene("Scene1");
     }
 }

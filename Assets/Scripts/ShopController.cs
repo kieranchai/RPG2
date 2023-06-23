@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +8,7 @@ public class ShopController : MonoBehaviour
     [SerializeField] private GameObject shopPanel;
     private GameObject[] slots;
 
-    private Weapon[] allWeapons;
+    public Weapon[] allWeapons;
     private Weapon[] availableWeapons = new Weapon[3];
 
     public bool isOpen = false;
@@ -26,7 +23,6 @@ public class ShopController : MonoBehaviour
         shop = this;
 
         allWeapons = Resources.LoadAll<Weapon>("ScriptableObjects/Weapons");
-
         slots = new GameObject[shopPanel.transform.childCount];
         for (int i = 0; i < shopPanel.transform.childCount; i++)
         {

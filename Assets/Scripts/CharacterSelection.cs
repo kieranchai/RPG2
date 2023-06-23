@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CharacterSelection : MonoBehaviour
@@ -18,6 +18,24 @@ public class CharacterSelection : MonoBehaviour
     {
         allCharacters = Resources.LoadAll<Character>("ScriptableObjects/Characters");
         UpdateCharacterData(selectedCharacter);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            NextCharacter();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            PrevCharacter();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            LoadGame();
+        }
     }
 
     void UpdateCharacterData(int selectedCharacter)

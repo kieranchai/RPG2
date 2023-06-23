@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
@@ -17,7 +15,21 @@ public class BulletScript : MonoBehaviour
 
     private void Update()
     {
-        if((transform.position - initialPosition).magnitude >= this.weaponRange)
+        if ((transform.position - initialPosition).magnitude >= this.weaponRange)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EnemyScript>().Attacked(this.attackPower);
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.tag == "Tilemap Colliders")
         {
             Destroy(gameObject);
         }

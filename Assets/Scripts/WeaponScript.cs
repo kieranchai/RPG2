@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class WeaponScript : MonoBehaviour
@@ -48,8 +46,6 @@ public class WeaponScript : MonoBehaviour
         SpriteRenderer weaponSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
         weaponSprite.sprite = sprite;
-
-        RefreshColliders();
     }
 
     private void Update()
@@ -77,20 +73,6 @@ public class WeaponScript : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void RefreshColliders()
-    {
-        Destroy(GetComponent<PolygonCollider2D>());
-        gameObject.AddComponent<PolygonCollider2D>();
-        StartCoroutine(SetColliderTrigger());
-
-    }
-
-    IEnumerator SetColliderTrigger()
-    {
-        yield return new WaitForFixedUpdate();
-        GetComponent<PolygonCollider2D>().isTrigger = true;
     }
 
     IEnumerator Reload()
