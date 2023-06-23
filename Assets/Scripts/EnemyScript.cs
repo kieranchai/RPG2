@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -20,10 +21,12 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private Enemy testEnemy;
 
     public ContactFilter2D movementFilter;
+
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     public float collisionOffset;
 
-    private bool inRange;
+    float timer = 0;
+    float duration = 3f;
 
     public enum EnemyState
     {
@@ -39,10 +42,13 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         SetEnemyData(testEnemy);
+        this.currentState = EnemyState.PATROL;
     }
 
     private void Update()
     {
+        transform.GetChild(0).gameObject.transform.right = this.transform.up.normalized;
+        Debug.Log(currentState);
         switch (currentState)
         {
             case EnemyState.PATROL:
@@ -50,11 +56,9 @@ public class EnemyScript : MonoBehaviour
                 break;
             case EnemyState.CHASE:
                 Chase();
-                CheckInRange();
                 break;
             case EnemyState.ATTACK:
                 Attack();
-                CheckInRange();
                 break;
             default:
                 break;
@@ -77,7 +81,6 @@ public class EnemyScript : MonoBehaviour
 
         transform.GetChild(0).gameObject.SetActive(true);
         EquipWeapon(Array.Find(ShopController.shop.allWeapons, weapon => weapon.weaponName == this.equippedWeaponName));
-
     }
 
     public void EquipWeapon(Weapon weaponData)
@@ -89,24 +92,54 @@ public class EnemyScript : MonoBehaviour
     public void Patrol()
     {
         //add wandering ai
-
+        
         //if sees player switch to chase
+        if (CheckInSight())
+        {
+            this.currentState = EnemyState.CHASE;
+        }
     }
 
     public void Chase()
     {
-        transform.up = (PlayerScript.Player.transform.position - new Vector3(transform.position.x, transform.position.y));
 
         bool success = MoveEnemy(PlayerScript.Player.transform.position - transform.position);
-        if (!success)
+        if (success)
         {
-            Debug.Log("WALL");
-            //GO AROUND WALL
+            transform.up = (PlayerScript.Player.transform.position - new Vector3(transform.position.x, transform.position.y));
         }
 
-        if (inRange)
+        if (!success)
         {
-            this.currentState = EnemyState.ATTACK;
+            //TRY GO AROUND WALL or just make him rotate and wander around then switch back to patrol
+            /*            success = MoveEnemy(new Vector2(1, 0));
+                        if (!success)
+                        {
+                            success = MoveEnemy(new Vector2(-1,0));
+                            if (!success)
+                            {
+                                success = MoveEnemy(new Vector2(0,1));
+                                if (!success)
+                                {
+                                    success = MoveEnemy(new Vector2(0, -1));
+                                }
+                            }
+                        }*/
+        }
+
+        if (CheckInSight())
+        {
+            timer = 0;
+            if (CheckInRange())
+            {
+                this.currentState = EnemyState.ATTACK;
+            }
+        }
+
+        timer += Time.deltaTime;
+        if (timer >= duration)
+        {
+            this.currentState = EnemyState.PATROL;
         }
     }
 
@@ -126,24 +159,40 @@ public class EnemyScript : MonoBehaviour
 
     public void Attack()
     {
-        transform.GetChild(0).GetComponentInChildren<EnemyWeaponScript>().TryAttack();
-
-        //need to check if enemy sees player also not just range cos now if u stand beside also considered in range
-        if (!inRange)
+        if (!CheckInSight() || !CheckInRange())
         {
             this.currentState = EnemyState.CHASE;
         }
+
+        transform.up = (PlayerScript.Player.transform.position - new Vector3(transform.position.x, transform.position.y));
+        transform.GetChild(0).GetComponentInChildren<EnemyWeaponScript>().TryAttack();
     }
 
-    public void CheckInRange()
+    public bool CheckInRange()
     {
         if (Vector3.Distance(PlayerScript.Player.transform.position, transform.position) <= equippedWeapon.weaponRange)
         {
-            inRange = true;
-        } else
-        {
-            inRange = false;
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool CheckInSight()
+    {
+        bool inRange = Vector3.Distance(PlayerScript.Player.transform.position, transform.position) <= equippedWeapon.weaponRange;
+        float sightAngle = Vector2.Angle(PlayerScript.Player.transform.position - transform.position, transform.up);
+
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, PlayerScript.Player.transform.position, 1 << LayerMask.NameToLayer("Tilemap Colliders"));
+        Debug.DrawRay(transform.position, (PlayerScript.Player.transform.position - transform.position).normalized * equippedWeapon.weaponRange, Color.magenta);
+        if (hit.collider != null)
+        {
+            return false;
+        }
+
+        return inRange && (sightAngle < 30f);
     }
 
     public bool MoveEnemy(Vector2 direction)

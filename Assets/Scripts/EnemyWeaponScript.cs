@@ -80,7 +80,7 @@ public class EnemyWeaponScript : MonoBehaviour
             bullet.GetComponent<EnemyBulletScript>().Initialize(this.attackPower, weaponRange);
 
             //can add Projectile Speed to CSV (600 here)
-            bullet.GetComponent<Rigidbody2D>().AddForce(transform.up * 600);
+            bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * 600);
 
             --this.currentAmmoCount;
             yield return new WaitForSeconds(cooldown);
