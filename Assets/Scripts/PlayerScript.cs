@@ -24,6 +24,8 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject weaponPanel;
+    [SerializeField] private GameObject playerStatsPanel;
+
     private GameObject[] slots;
 
     private void Awake()
@@ -70,6 +72,8 @@ public class PlayerScript : MonoBehaviour
         characterSprite.sprite = sprite;
 
         transform.GetChild(0).gameObject.SetActive(true);
+        UpdateCash();
+        UpdateHealth();
     }
 
     public void EquipWeapon(Weapon weaponData)
@@ -127,23 +131,39 @@ public class PlayerScript : MonoBehaviour
         //weapon panel
         try
         {
-            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().enabled = true;
-            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Text>().enabled =  true;
-            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(this.equippedWeapon.thumbnailPath);
-            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().currentAmmoCount.ToString();
+            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().enabled = true;
+            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().enabled = true;
+            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(this.equippedWeapon.thumbnailPath);
+            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().currentAmmoCount.ToString();
         }
         catch
         {
-            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = null;
-            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>().enabled = false;
-            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = null;
-            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Text>().enabled = false;
+            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = null;
+            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().enabled = false;
+            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = null;
+            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().enabled = false;
         }
     }
 
     public void ReloadAmmoUI()
     {
-        weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = "...";
+        weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "...";
+    }
+
+    public void UpdateCash()
+    {
+        playerStatsPanel.transform.Find("Cash").GetComponent<Text>().text = "$" + this.cash;
+    }
+
+    public void UpdateHealth()
+    {
+        for (int i = 0; i < playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts.Length; i++)
+        {
+            if (i >= currentHealth)
+            {
+                playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts[playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts.Length - 1 - i].enabled = false;
+            }
+        }
     }
 
     public void SkinChoice()

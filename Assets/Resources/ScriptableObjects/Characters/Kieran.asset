@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: 2
   characterName: Kieran
-  maxHealth: 70
+  maxHealth: 3
   speed: 8
   spritePath: Sprites/Kieran
