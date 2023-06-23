@@ -6,14 +6,13 @@ using UnityEngine.UI;
 
 public class Loading : MonoBehaviour
 {
-    private float duration;
+    public float duration;
 
-    [SerializeField] private Scrollbar myScroll;
+    [SerializeField] private Scrollbar scroll;
 
     // Fake loader lol
     void Start()
     {
-        duration = 5.0f;
         StartCoroutine(Load());
     }
 
@@ -23,7 +22,7 @@ public class Loading : MonoBehaviour
         while (timer < duration)
         {
             timer += Time.deltaTime;
-            myScroll.size = (timer/duration);
+            scroll.size = (timer/duration);
             yield return null;
         }
         SceneManager.LoadScene("Character Selection");
