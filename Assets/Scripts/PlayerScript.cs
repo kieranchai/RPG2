@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -26,6 +26,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject weaponPanel;
     [SerializeField] private GameObject playerStatsPanel;
+    [SerializeField] private TMP_Text playerPanelCash;
+    [SerializeField] private TMP_Text playerWeaponAmmo;
 
     private GameObject[] slots;
 
@@ -33,9 +35,6 @@ public class PlayerScript : MonoBehaviour
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     public float collisionOffset;
 
-    private Vector3 oldpos;
-    private Vector3 newpos;
-    public Vector3 velocity { get; private set; }
 
     private void Awake()
     {
@@ -59,11 +58,6 @@ public class PlayerScript : MonoBehaviour
         }
 
         RefreshUI();
-    }
-
-    private void Update()
-    {
-
     }
 
     private void LateUpdate()
@@ -154,27 +148,27 @@ public class PlayerScript : MonoBehaviour
         try
         {
             weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().enabled = true;
-            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().enabled = true;
+            playerWeaponAmmo.enabled = true;
             weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(this.equippedWeapon.thumbnailPath);
-            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().currentAmmoCount.ToString();
+            playerWeaponAmmo.text = transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().currentAmmoCount.ToString();
         }
         catch
         {
             weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = null;
             weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().enabled = false;
-            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = null;
-            weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().enabled = false;
+            playerWeaponAmmo.text = null;
+            playerWeaponAmmo.enabled = false;
         }
     }
 
     public void ReloadAmmoUI()
     {
-        weaponPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "...";
+        playerWeaponAmmo.text = "...";
     }
 
     public void UpdateCash()
     {
-        playerStatsPanel.transform.Find("Cash").GetComponent<Text>().text = "$" + this.cash;
+        playerPanelCash.text = "$" + this.cash;
     }
 
     public void UpdateHealth()
