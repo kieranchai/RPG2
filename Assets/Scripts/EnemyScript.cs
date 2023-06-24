@@ -25,8 +25,17 @@ public class EnemyScript : MonoBehaviour
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     public float collisionOffset;
 
-    float timer = 0;
-    float duration = 3f;
+    private float timer = 0;
+    private float duration = 3f;
+
+    private Vector3 playerLastSeenPos;
+
+    private Vector3 targetDirection;
+    private float changeDirectionCooldown;
+    private float patrolSpeed;
+    private float chaseSpeed;
+
+    private Weapon[] allWeapons;
 
     public enum EnemyState
     {
@@ -40,15 +49,20 @@ public class EnemyScript : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
 
+    private void Start()
+    {
+        allWeapons = ShopController.shop.allWeapons;
         SetEnemyData(testEnemy);
         this.currentState = EnemyState.PATROL;
+        targetDirection = transform.up;
+        changeDirectionCooldown = 1f;
     }
 
     private void Update()
     {
         transform.GetChild(0).gameObject.transform.right = this.transform.up.normalized;
-        Debug.Log(currentState);
         switch (currentState)
         {
             case EnemyState.PATROL:
@@ -75,12 +89,15 @@ public class EnemyScript : MonoBehaviour
         this.equippedWeaponName = enemyData.equippedWeaponName;
         this.currentHealth = this.maxHealth;
 
+        this.patrolSpeed = this.speed / 3;
+        this.chaseSpeed = this.speed;
+
         enemySprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
         enemySprite.sprite = sprite;
 
         transform.GetChild(0).gameObject.SetActive(true);
-        EquipWeapon(Array.Find(ShopController.shop.allWeapons, weapon => weapon.weaponName == this.equippedWeaponName));
+        EquipWeapon(Array.Find(allWeapons, weapon => weapon.weaponName == this.equippedWeaponName));
     }
 
     public void EquipWeapon(Weapon weaponData)
@@ -92,54 +109,98 @@ public class EnemyScript : MonoBehaviour
     public void Patrol()
     {
         //add wandering ai
-        
+        this.speed = this.patrolSpeed;
+        bool success = MoveEnemy(targetDirection);
+        if (!success)
+        {
+            float angleChange = Random.Range(90f, 270f);
+            Quaternion rotation = Quaternion.AngleAxis(angleChange, transform.forward);
+            targetDirection = rotation * targetDirection;
+            transform.up = targetDirection;
+        }
+
+        changeDirectionCooldown -= Time.deltaTime;
+        if (changeDirectionCooldown <= 0)
+        {
+            float angleChange = Random.Range(-90f,90f);
+            Quaternion rotation = Quaternion.AngleAxis(angleChange, transform.forward);
+            targetDirection = rotation * targetDirection;
+            transform.up = targetDirection;
+            changeDirectionCooldown = Random.Range(1, 5);
+        }
+
         //if sees player switch to chase
         if (CheckInSight())
         {
+            playerLastSeenPos = PlayerScript.Player.transform.position;
             this.currentState = EnemyState.CHASE;
         }
     }
 
     public void Chase()
     {
-
-        bool success = MoveEnemy(PlayerScript.Player.transform.position - transform.position);
-        if (success)
-        {
-            transform.up = (PlayerScript.Player.transform.position - new Vector3(transform.position.x, transform.position.y));
-        }
-
-        if (!success)
-        {
-            //TRY GO AROUND WALL or just make him rotate and wander around then switch back to patrol
-            /*            success = MoveEnemy(new Vector2(1, 0));
-                        if (!success)
-                        {
-                            success = MoveEnemy(new Vector2(-1,0));
-                            if (!success)
-                            {
-                                success = MoveEnemy(new Vector2(0,1));
-                                if (!success)
-                                {
-                                    success = MoveEnemy(new Vector2(0, -1));
-                                }
-                            }
-                        }*/
-        }
-
+        this.speed = this.chaseSpeed;
         if (CheckInSight())
         {
+            playerLastSeenPos = PlayerScript.Player.transform.position;
+
             timer = 0;
+            bool success = MoveEnemy(PlayerScript.Player.transform.position - transform.position);
+            if (success)
+            {
+                transform.up = (PlayerScript.Player.transform.position - new Vector3(transform.position.x, transform.position.y));
+            }
+
             if (CheckInRange())
             {
                 this.currentState = EnemyState.ATTACK;
             }
         }
-
-        timer += Time.deltaTime;
-        if (timer >= duration)
+        else
         {
-            this.currentState = EnemyState.PATROL;
+            if (Vector3.Distance(playerLastSeenPos, transform.position) < 0.05f)
+            {
+                Debug.Log("At last seen");
+                //walk around
+                changeDirectionCooldown -= Time.deltaTime;
+                if (changeDirectionCooldown <= 0)
+                {
+                    float angleChange = Random.Range(90f, 270f);
+                    Quaternion rotation = Quaternion.AngleAxis(angleChange, transform.forward);
+                    targetDirection = rotation * targetDirection;
+                    transform.up = targetDirection;
+                    changeDirectionCooldown = Random.Range(1, 5);
+                }
+            }
+            else
+            {
+                bool success = MoveEnemy(playerLastSeenPos - transform.position);
+                if (success)
+                {
+                    transform.up = (playerLastSeenPos - new Vector3(transform.position.x, transform.position.y));
+                }
+                else
+                {
+                    Debug.Log("Stuck on wall");
+                    //walk around
+                    changeDirectionCooldown -= Time.deltaTime;
+                    if (changeDirectionCooldown <= 0)
+                    {
+                        float angleChange = Random.Range(90f, 270f);
+                        Quaternion rotation = Quaternion.AngleAxis(angleChange, transform.forward);
+                        targetDirection = rotation * targetDirection;
+                        transform.up = targetDirection;
+                        changeDirectionCooldown = Random.Range(1, 5);
+                    }
+
+                }
+            }
+            timer += Time.deltaTime;
+            if (timer >= duration)
+            {
+                Debug.Log("Gave Up");
+                this.currentState = EnemyState.PATROL;
+            }
         }
     }
 
@@ -159,13 +220,20 @@ public class EnemyScript : MonoBehaviour
 
     public void Attack()
     {
-        if (!CheckInSight() || !CheckInRange())
+        playerLastSeenPos = PlayerScript.Player.transform.position;
+        if (!CheckInRange() || !CheckInSight())
         {
             this.currentState = EnemyState.CHASE;
         }
 
         transform.up = (PlayerScript.Player.transform.position - new Vector3(transform.position.x, transform.position.y));
         transform.GetChild(0).GetComponentInChildren<EnemyWeaponScript>().TryAttack();
+        bool success = MoveEnemy(PlayerScript.Player.transform.position - transform.position);
+        if (success)
+        {
+            transform.up = (PlayerScript.Player.transform.position - new Vector3(transform.position.x, transform.position.y));
+        }
+
     }
 
     public bool CheckInRange()
@@ -186,7 +254,6 @@ public class EnemyScript : MonoBehaviour
         float sightAngle = Vector2.Angle(PlayerScript.Player.transform.position - transform.position, transform.up);
 
         RaycastHit2D hit = Physics2D.Linecast(transform.position, PlayerScript.Player.transform.position, 1 << LayerMask.NameToLayer("Tilemap Colliders"));
-        Debug.DrawRay(transform.position, (PlayerScript.Player.transform.position - transform.position).normalized * equippedWeapon.weaponRange, Color.magenta);
         if (hit.collider != null)
         {
             return false;
