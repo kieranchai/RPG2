@@ -15,6 +15,7 @@ public class EnemyScript : MonoBehaviour
 
     public Weapon equippedWeapon;
 
+    public Animator anim;
     public Rigidbody2D rb;
     public SpriteRenderer enemySprite;
 
@@ -36,6 +37,7 @@ public class EnemyScript : MonoBehaviour
     private float chaseSpeed;
 
     private Weapon[] allWeapons;
+    private Vector3 previousPosition;
 
     public enum EnemyState
     {
@@ -48,16 +50,18 @@ public class EnemyScript : MonoBehaviour
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
         allWeapons = ShopController.shop.allWeapons;
-        SetEnemyData(testEnemy);
+        SetEnemyData(Resources.LoadAll<Enemy>("ScriptableObjects/Enemies")[Random.Range(0, Resources.LoadAll<Enemy>("ScriptableObjects/Enemies").Length)]);
         this.currentState = EnemyState.PATROL;
         targetDirection = transform.up;
         changeDirectionCooldown = 1f;
+        anim.SetBool("isWalking", true);
     }
 
     private void Update()
@@ -76,6 +80,21 @@ public class EnemyScript : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        SkinChoice();
+    }
+
+    public void SkinChoice()
+    {
+        if (enemySprite.sprite.name.Contains("Main"))
+        {
+            string spriteName = enemySprite.sprite.name;
+            spriteName = spriteName.Replace("Main", enemyName);
+            enemySprite.sprite = Resources.Load<Sprite>("Sprites/" + spriteName);
         }
     }
 
@@ -206,6 +225,7 @@ public class EnemyScript : MonoBehaviour
 
     public void Attacked(int damageTaken)
     {
+        playerLastSeenPos = PlayerScript.Player.transform.position;
         if (this.currentHealth - damageTaken >= 1)
         {
             this.currentHealth -= damageTaken;

@@ -33,6 +33,10 @@ public class PlayerScript : MonoBehaviour
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     public float collisionOffset;
 
+    private Vector3 oldpos;
+    private Vector3 newpos;
+    public Vector3 velocity { get; private set; }
+
     private void Awake()
     {
         if (Player != null && Player != this)
@@ -57,9 +61,22 @@ public class PlayerScript : MonoBehaviour
         RefreshUI();
     }
 
+    private void Update()
+    {
+
+    }
+
     private void LateUpdate()
     {
         SkinChoice();
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            anim.SetBool("isWalking", true);
+        }
+        else
+        {
+            anim.SetBool("isWalking", false);
+        }
     }
 
     public void SetPlayerData(Character characterData)
@@ -201,6 +218,7 @@ public class PlayerScript : MonoBehaviour
 
     public bool MovePlayer(Vector2 direction)
     {
+   
         int count = rb.Cast(
             direction,
             movementFilter,
