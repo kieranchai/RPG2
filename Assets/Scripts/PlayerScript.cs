@@ -48,7 +48,10 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         transform.GetChild(0).gameObject.SetActive(false);
+    }
 
+    private void Start()
+    {
         SetPlayerData(GameControllerScript.GameController.selectedCharacter);
 
         slots = new GameObject[inventoryPanel.transform.childCount];
@@ -88,7 +91,7 @@ public class PlayerScript : MonoBehaviour
         characterSprite.sprite = sprite;
 
         transform.GetChild(0).gameObject.SetActive(true);
-        UpdateCash();
+        UpdateCash(this.cash);
         UpdateHealth();
     }
 
@@ -166,9 +169,9 @@ public class PlayerScript : MonoBehaviour
         playerWeaponAmmo.text = "...";
     }
 
-    public void UpdateCash()
+    public void UpdateCash(int value)
     {
-        playerPanelCash.text = "$" + this.cash;
+        playerStatsPanel.GetComponent<SlidingNumber>().AddToNumber(value);
     }
 
     public void UpdateHealth()

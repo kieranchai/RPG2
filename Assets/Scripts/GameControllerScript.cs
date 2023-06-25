@@ -50,18 +50,6 @@ public class GameControllerScript : MonoBehaviour
                 PlayerScript.Player.inventory[0] = PlayerScript.Player.equippedWeapon;
                 PlayerScript.Player.EquipWeapon(temp);
             }
-
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                if (!ShopController.shop.isOpen)
-                {
-                    ShopController.shop.OpenShop();
-                }
-                else
-                {
-                    ShopController.shop.CloseShop();
-                }
-            }
         }
     }
 

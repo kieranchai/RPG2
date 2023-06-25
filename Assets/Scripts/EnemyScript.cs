@@ -235,6 +235,11 @@ public class EnemyScript : MonoBehaviour
         {
             this.currentHealth -= damageTaken;
             Destroy(gameObject);
+
+            //can instantiate money on ground oso then pick up
+            int cashDrop = Random.Range(50, 100);
+            PlayerScript.Player.cash += cashDrop;
+            PlayerScript.Player.UpdateCash(cashDrop);
         }
     }
 

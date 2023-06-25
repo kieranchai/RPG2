@@ -11,7 +11,7 @@ public class ShopController : MonoBehaviour
     public Weapon[] allWeapons;
     private Weapon[] availableWeapons = new Weapon[3];
 
-    public bool isOpen = false;
+    private Collider2D shopArea;
 
     private void Awake()
     {
@@ -22,6 +22,7 @@ public class ShopController : MonoBehaviour
         }
         shop = this;
 
+        shopArea = GetComponent<Collider2D>();
         allWeapons = Resources.LoadAll<Weapon>("ScriptableObjects/Weapons");
         slots = new GameObject[shopPanel.transform.childCount];
         for (int i = 0; i < shopPanel.transform.childCount; i++)
@@ -35,13 +36,11 @@ public class ShopController : MonoBehaviour
     public void OpenShop()
     {
         shopPanel.SetActive(true);
-        isOpen = true;
     }
 
     public void CloseShop()
     {
         shopPanel.SetActive(false);
-        isOpen = false;
     }
 
     public void BuyWeapon(Weapon weaponToBuy)
@@ -50,7 +49,7 @@ public class ShopController : MonoBehaviour
         {
             PlayerScript.Player.EquipWeapon(weaponToBuy);
             PlayerScript.Player.cash -= weaponToBuy.cost;
-            PlayerScript.Player.UpdateCash();
+            PlayerScript.Player.UpdateCash(-weaponToBuy.cost);
         } else
         {
             //not enough money to buy
@@ -81,6 +80,22 @@ public class ShopController : MonoBehaviour
             slots[i].transform.Find("Fire Rate").GetComponent<Text>().text = availableWeapons[i].cooldown.ToString() + "/S";
             slots[i].transform.Find("Range").GetComponent<Text>().text = availableWeapons[i].weaponRange.ToString() + "M";
             slots[i].transform.Find("Ammo Count").GetComponent<Text>().text = availableWeapons[i].ammoCount.ToString();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            OpenShop();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            CloseShop();
         }
     }
 }
