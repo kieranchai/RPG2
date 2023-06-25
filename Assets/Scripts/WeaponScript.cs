@@ -70,6 +70,9 @@ public class WeaponScript : MonoBehaviour
                     case "spread":
                         StartCoroutine(SpreadAttack(this.cooldown, this.weaponRange));
                         break;
+                    case "explosive":
+                        StartCoroutine(ExplosiveAttack(this.cooldown, this.weaponRange));
+                        break;
                     default:
                         break;
                 }
@@ -128,4 +131,24 @@ public class WeaponScript : MonoBehaviour
         limitAttack = false;
         yield return null;
     }
+
+    IEnumerator ExplosiveAttack(float cooldown, float weaponRange)
+    {
+        limitAttack = true;
+        if (this.currentAmmoCount > 0)
+        {
+            GameObject rocket = Instantiate(Resources.Load<GameObject>("Prefabs/Rocket"), transform.position, transform.rotation);
+            rocket.GetComponent<RocketScript>().Initialize(this.attackPower, weaponRange);
+
+            //can add Projectile Speed to CSV (600 here)
+            rocket.GetComponent<Rigidbody2D>().AddForce(transform.right * 600);
+
+            --this.currentAmmoCount;
+            PlayerScript.Player.RefreshUI();
+            yield return new WaitForSeconds(cooldown);
+        }
+        limitAttack = false;
+        yield return null;
+    }
+
 }
