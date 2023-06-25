@@ -66,6 +66,7 @@ public class ShopController : MonoBehaviour
         RefreshUI();
     }
 
+
     public void RefreshUI()
     {
         for (int i = 0; i < slots.Length; i++)
@@ -76,7 +77,13 @@ public class ShopController : MonoBehaviour
             slots[i].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(availableWeapons[i].thumbnailPath);
             slots[i].transform.Find("Name").GetComponent<Text>().text = availableWeapons[i].weaponName.ToUpper();
             slots[i].transform.Find("Cost").GetComponent<Text>().text = "$" + availableWeapons[i].cost.ToString();
-            slots[i].transform.Find("Damage").GetComponent<Text>().text = availableWeapons[i].attackPower.ToString() + "DMG";
+
+            if (availableWeapons[i].weaponType == "spread") {
+                slots[i].transform.Find("Damage").GetComponent<Text>().text = availableWeapons[i].attackPower.ToString() + "X5DMG";
+            }else {
+                slots[i].transform.Find("Damage").GetComponent<Text>().text = availableWeapons[i].attackPower.ToString() + "DMG";
+            }
+
             slots[i].transform.Find("Fire Rate").GetComponent<Text>().text = availableWeapons[i].cooldown.ToString() + "/S";
             slots[i].transform.Find("Range").GetComponent<Text>().text = availableWeapons[i].weaponRange.ToString() + "M";
             slots[i].transform.Find("Ammo Count").GetComponent<Text>().text = availableWeapons[i].ammoCount.ToString();
