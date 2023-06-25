@@ -11,8 +11,6 @@ public class ShopController : MonoBehaviour
     public Weapon[] allWeapons;
     private Weapon[] availableWeapons = new Weapon[3];
 
-    private Collider2D shopArea;
-
     private void Awake()
     {
         if (shop != null && shop != this)
@@ -21,8 +19,6 @@ public class ShopController : MonoBehaviour
             return;
         }
         shop = this;
-
-        shopArea = GetComponent<Collider2D>();
         allWeapons = Resources.LoadAll<Weapon>("ScriptableObjects/Weapons");
         slots = new GameObject[shopPanel.transform.childCount];
         for (int i = 0; i < shopPanel.transform.childCount; i++)
