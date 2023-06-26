@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameControllerScript : MonoBehaviour
 {
     public static GameControllerScript GameController { get; private set; }
-    private bool isPaused;
+    public bool isPaused;
     public Character selectedCharacter;
 
     void Awake()
@@ -24,7 +24,7 @@ public class GameControllerScript : MonoBehaviour
 
     private void Update()
     {
-        if (!isPaused && PlayerScript.Player)
+        if (PlayerScript.Player && !isPaused)
         {
             PlayerScript.Player.LookAtMouse();
             bool success = PlayerScript.Player.MovePlayer(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized);
@@ -51,16 +51,6 @@ public class GameControllerScript : MonoBehaviour
                 PlayerScript.Player.EquipWeapon(temp);
             }
         }
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    public void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
     }
 
     public void LoadSceneWithCharacter(Character characterData)

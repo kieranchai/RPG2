@@ -37,7 +37,6 @@ public class EnemyScript : MonoBehaviour
     private float chaseSpeed;
 
     private Weapon[] allWeapons;
-    private Vector3 previousPosition;
 
     public enum EnemyState
     {
@@ -179,7 +178,6 @@ public class EnemyScript : MonoBehaviour
         {
             if (Vector3.Distance(playerLastSeenPos, transform.position) < 0.05f)
             {
-                Debug.Log("At last seen");
                 //walk around
                 changeDirectionCooldown -= Time.deltaTime;
                 if (changeDirectionCooldown <= 0)
@@ -200,7 +198,6 @@ public class EnemyScript : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Stuck on wall");
                     //walk around
                     changeDirectionCooldown -= Time.deltaTime;
                     if (changeDirectionCooldown <= 0)
@@ -217,7 +214,6 @@ public class EnemyScript : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= duration)
             {
-                Debug.Log("Gave Up");
                 this.currentState = EnemyState.PATROL;
             }
         }
@@ -226,6 +222,7 @@ public class EnemyScript : MonoBehaviour
     public void Attacked(int damageTaken)
     {
         playerLastSeenPos = PlayerScript.Player.transform.position;
+        AnalyticsController.Analytics.damageDealt += damageTaken;
         if (this.currentHealth - damageTaken >= 1)
         {
             this.currentHealth -= damageTaken;
@@ -234,6 +231,7 @@ public class EnemyScript : MonoBehaviour
         else
         {
             this.currentHealth -= damageTaken;
+            AnalyticsController.Analytics.enemiesKilled++;
             Destroy(gameObject);
 
             //can instantiate money on ground oso then pick up

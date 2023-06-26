@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class ShopController : MonoBehaviour
 {
     public static ShopController shop { get; private set; }
+    public bool isOpen;
 
     [SerializeField] private GameObject shopPanel;
     private GameObject[] slots;
@@ -26,7 +27,7 @@ public class ShopController : MonoBehaviour
             slots[i] = shopPanel.transform.GetChild(i).gameObject;
         }
 
-        InvokeRepeating("RefreshShopWeapons", 0.0f, 5.0f);
+        InvokeRepeating("RefreshShopWeapons", 0.0f, 30.0f);
     }
 
     public void OpenShop()
@@ -75,14 +76,14 @@ public class ShopController : MonoBehaviour
             slots[i].transform.Find("Cost").GetComponent<Text>().text = "$" + availableWeapons[i].cost.ToString();
 
             if (availableWeapons[i].weaponType == "spread") {
-                slots[i].transform.Find("Damage").GetComponent<Text>().text = availableWeapons[i].attackPower.ToString() + "X5DMG";
+                slots[i].transform.Find("Damage").GetComponent<Text>().text = availableWeapons[i].attackPower.ToString() + "X5 DMG";
             }else {
-                slots[i].transform.Find("Damage").GetComponent<Text>().text = availableWeapons[i].attackPower.ToString() + "DMG";
+                slots[i].transform.Find("Damage").GetComponent<Text>().text = availableWeapons[i].attackPower.ToString() + " DMG";
             }
 
             slots[i].transform.Find("Fire Rate").GetComponent<Text>().text = availableWeapons[i].cooldown.ToString() + "/S";
             slots[i].transform.Find("Range").GetComponent<Text>().text = availableWeapons[i].weaponRange.ToString() + "M";
-            slots[i].transform.Find("Ammo Count").GetComponent<Text>().text = availableWeapons[i].ammoCount.ToString();
+            slots[i].transform.Find("Ammo Count").GetComponent<Text>().text = availableWeapons[i].ammoCount.ToString() +"X";
         }
     }
 
@@ -91,6 +92,7 @@ public class ShopController : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             OpenShop();
+            isOpen = true;
         }
     }
 
@@ -99,6 +101,7 @@ public class ShopController : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             CloseShop();
+            isOpen = false;
         }
     }
 }

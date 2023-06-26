@@ -4,31 +4,32 @@ using UnityEngine;
 
 public class ExplosionScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public float explosionRadius;
+    private float splashRange;
     public float explosionRate;
     private int attackPower;
+
     void Start()
     {
         transform.localScale = new Vector3 (0,0,0);
     }
 
-    public void Initialize(int attackPower)
+    public void Initialize(int attackPower, float splashRange)
     {
         this.attackPower = attackPower;
+        this.splashRange = splashRange;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (transform.localScale.x < explosionRadius) {
-            transform.localScale += new Vector3(explosionRate,explosionRate,explosionRate)  * Time.deltaTime;
-        }else{
+        if (transform.localScale.x < splashRange) {
+            transform.localScale += new Vector3(explosionRate,explosionRate,explosionRate) * Time.deltaTime;
+        }
+        else {
             Destroy(gameObject); 
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {

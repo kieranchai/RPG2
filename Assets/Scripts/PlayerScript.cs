@@ -188,6 +188,7 @@ public class PlayerScript : MonoBehaviour
     public void takeDamage(int damageTaken)
     {
         currentHealth -= damageTaken;
+        AnalyticsController.Analytics.damageTaken += damageTaken;
         UpdateHealth();
         if (currentHealth <= 0)
         {

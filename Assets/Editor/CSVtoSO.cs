@@ -7,6 +7,8 @@ public class CSVtoSO
     private static string characterCSVPath = "/Editor/CSVs/CharacterCSV.csv";
     private static string enemyCSVPath = "/Editor/CSVs/EnemyCSV.csv";
     private static string weaponCSVPath = "/Editor/CSVs/WeaponCSV.csv";
+    private static string questCSVPath = "/Editor/CSVs/QuestCSV.csv";
+    private static string dialogueCSVPath = "/Editor/CSVs/DialogueCSV.csv";
 
     [MenuItem("Utilities/Generate Characters")]
     public static void GenerateCharacters()
@@ -91,6 +93,65 @@ public class CSVtoSO
             weapon.reloadSpeed = float.Parse(splitData[10]);
 
             AssetDatabase.CreateAsset(weapon, $"Assets/Resources/ScriptableObjects/Weapons/{weapon.weaponName}.asset");
+        }
+
+        AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Utilities/Generate Quests")]
+    public static void GenerateQuests()
+    {
+        string[] allLines = File.ReadAllLines(Application.dataPath + questCSVPath);
+
+        foreach (string s in allLines)
+        {
+            string[] splitData = s.Split(',');
+
+            if (splitData.Length != 5)
+            {
+                return;
+            }
+
+            Quest quest = ScriptableObject.CreateInstance<Quest>();
+            quest.questId = int.Parse(splitData[0]);
+            quest.questType = splitData[1];
+            quest.questAmount = int.Parse(splitData[2]);
+            quest.questObject = splitData[3];
+            quest.questReward = int.Parse(splitData[4]);
+
+
+            AssetDatabase.CreateAsset(quest, $"Assets/Resources/ScriptableObjects/Quests/{quest.questId}.asset");
+        }
+
+        AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Utilities/Generate Dialogue")]
+    public static void GenerateDialogue()
+    {
+        string[] allLines = File.ReadAllLines(Application.dataPath + dialogueCSVPath);
+
+        foreach (string s in allLines)
+        {
+            string[] splitData = s.Split(',');
+
+            if (splitData.Length != 8)
+            {
+                return;
+            }
+
+            Dialogue dialogue = ScriptableObject.CreateInstance<Dialogue>();
+            dialogue.dialogueId = int.Parse(splitData[0]);
+            dialogue.portraitSpritePath = splitData[1];
+            dialogue.speakerName = splitData[2];
+            dialogue.dialogueText = splitData[3];
+            dialogue.action1Name = splitData[4];
+            dialogue.action2Name = splitData[5];
+            dialogue.action1DialogueId = int.Parse(splitData[6]);
+            dialogue.action2DialogueId = int.Parse(splitData[7]);
+
+
+            AssetDatabase.CreateAsset(dialogue, $"Assets/Resources/ScriptableObjects/Dialogue/{dialogue.dialogueId}.asset");
         }
 
         AssetDatabase.SaveAssets();

@@ -14,29 +14,27 @@ public class RocketScript : MonoBehaviour
         this.weaponRange = weaponRange;
         this.initialPosition = transform.localPosition;
     }
+
     private void Explode()
     {
         GameObject explosion = Instantiate(Resources.Load<GameObject>("Prefabs/Explosion"), transform.position, transform.rotation);
-        explosion.GetComponent<ExplosionScript>().Initialize(attackPower);
+        explosion.GetComponent<ExplosionScript>().Initialize(attackPower, splashRange);
         Destroy(gameObject);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if ((transform.position - initialPosition).magnitude >= this.weaponRange)
         {
             Explode();
-
         }
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            // collision.gameObject.GetComponent<EnemyScript>().Attacked(this.attackPower);
             Explode();
         }
 
