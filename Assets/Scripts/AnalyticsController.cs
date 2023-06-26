@@ -7,10 +7,10 @@ public class AnalyticsController : MonoBehaviour
 {
     public static AnalyticsController Analytics { get; private set; }
 
-    public int enemiesKilled;
-    public int damageTaken;
-    public int damageDealt;
-    public int timePlayed;
+    public int enemiesKilled = 0;
+    public int damageTaken = 0;
+    public int damageDealt = 0;
+    public int timePlayed = 0;
 
     private float timer;
 

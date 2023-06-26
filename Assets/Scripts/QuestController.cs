@@ -99,7 +99,7 @@ public class QuestController : MonoBehaviour
         // Can check if halfway or not ... add new if statements
 
         // Finished Quest
-        if (AnalyticsController.Analytics.enemiesKilled - this.killCount == activeQuest.questAmount)
+        if (AnalyticsController.Analytics.enemiesKilled == (activeQuest.questAmount + this.killCount))
         {
             FinishQuest(activeQuest);
         }
