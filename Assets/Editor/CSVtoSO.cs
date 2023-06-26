@@ -9,6 +9,7 @@ public class CSVtoSO
     private static string weaponCSVPath = "/Editor/CSVs/WeaponCSV.csv";
     private static string questCSVPath = "/Editor/CSVs/QuestCSV.csv";
     private static string dialogueCSVPath = "/Editor/CSVs/DialogueCSV.csv";
+    private static string modifierCSVPath = "/Editor/CSVs/ModifierCSV.csv";
 
     [MenuItem("Utilities/Generate Characters")]
     public static void GenerateCharacters()
@@ -152,6 +153,31 @@ public class CSVtoSO
 
 
             AssetDatabase.CreateAsset(dialogue, $"Assets/Resources/ScriptableObjects/Dialogue/{dialogue.dialogueId}.asset");
+        }
+
+        AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Utilities/Generate Modifiers")]
+    public static void GenerateModifiers()
+    {
+        string[] allLines = File.ReadAllLines(Application.dataPath + modifierCSVPath);
+
+        foreach (string s in allLines)
+        {
+            string[] splitData = s.Split(',');
+
+            if (splitData.Length != 3)
+            {
+                return;
+            }
+
+            Modifier modifier = ScriptableObject.CreateInstance<Modifier>();
+            modifier.modId = int.Parse(splitData[0]);
+            modifier.speedMod = float.Parse(splitData[1]);
+            modifier.apMod = float.Parse(splitData[2]);
+
+            AssetDatabase.CreateAsset(modifier, $"Assets/Resources/ScriptableObjects/Modifiers/{modifier.modId}.asset");
         }
 
         AssetDatabase.SaveAssets();

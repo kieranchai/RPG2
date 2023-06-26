@@ -236,8 +236,10 @@ public class EnemyScript : MonoBehaviour
 
             //can instantiate money on ground oso then pick up
             int cashDrop = Random.Range(50, 100);
+            int experienceDrop = 10; // hardcode for now
             PlayerScript.Player.cash += cashDrop;
             PlayerScript.Player.UpdateCash(cashDrop);
+            PlayerScript.Player.UpdateExperience(experienceDrop);
         }
     }
 

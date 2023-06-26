@@ -90,8 +90,10 @@ public class QuestController : MonoBehaviour
         Debug.Log("Finished Quest");
 
         this.activeQuest = null;
+        int experienceReward = 20; //hardcode for now
         PlayerScript.Player.cash += givenQuest.questReward;
         PlayerScript.Player.UpdateCash(givenQuest.questReward);
+        PlayerScript.Player.UpdateExperience(experienceReward);
     }
 
     public void KillQuestProgress()

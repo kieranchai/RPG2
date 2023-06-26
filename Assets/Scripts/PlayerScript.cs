@@ -13,6 +13,8 @@ public class PlayerScript : MonoBehaviour
     public int maxHealth;
     public float speed;
     public string spritePath;
+    public int playerExperience;
+    public int playerLvl;
 
     public Rigidbody2D rb;
     public Animator anim;
@@ -26,6 +28,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject weaponPanel;
     [SerializeField] private GameObject playerStatsPanel;
+    [SerializeField] private GameObject playerExperiencePanel;
     [SerializeField] private TMP_Text playerPanelCash;
     [SerializeField] private TMP_Text playerWeaponAmmo;
 
@@ -74,6 +77,7 @@ public class PlayerScript : MonoBehaviour
         {
             anim.SetBool("isWalking", false);
         }
+        
     }
 
     public void SetPlayerData(Character characterData)
@@ -85,6 +89,8 @@ public class PlayerScript : MonoBehaviour
         this.spritePath = characterData.spritePath;
         this.currentHealth = this.maxHealth;
         this.cash = 800;
+        this.playerExperience = 0;
+        this.playerLvl = 0;
 
         characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
@@ -185,6 +191,17 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void UpdateExperience(int experience) {
+        playerExperience += experience;
+        if (playerExperience >= 100) {
+            playerExperience = playerExperience - 100; // 1lvl = 100
+            playerLvl++;
+            ModifierController.Modifier.UpdateModifiers();
+        }
+        playerExperiencePanel.GetComponent<ExperienceBarScript>().SetExperience(playerExperience); 
+        playerExperiencePanel.GetComponent<ExperienceBarScript>().SetRespect(playerLvl);
+    }
+
     public void takeDamage(int damageTaken)
     {
         currentHealth -= damageTaken;
@@ -221,11 +238,11 @@ public class PlayerScript : MonoBehaviour
             direction,
             movementFilter,
             castCollisions,
-            speed * Time.fixedDeltaTime + collisionOffset);
+            speed * ModifierController.Modifier.speedMod * Time.fixedDeltaTime + collisionOffset);
 
         if (count == 0)
         {
-            Vector2 moveVector = direction * speed * Time.fixedDeltaTime;
+            Vector2 moveVector = direction * speed * ModifierController.Modifier.speedMod * Time.fixedDeltaTime;
 
             rb.MovePosition(rb.position + moveVector);
             return true;
@@ -239,5 +256,6 @@ public class PlayerScript : MonoBehaviour
             return false;
         }
     }
+
 }
 
