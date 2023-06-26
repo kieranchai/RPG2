@@ -4,6 +4,7 @@ using UnityEngine;
 public class Modifier : ScriptableObject
 {
     public int modId;
+    public int xpNeeded;
     public float speedMod;
     public float apMod;
 }

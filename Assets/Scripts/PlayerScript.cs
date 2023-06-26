@@ -90,7 +90,7 @@ public class PlayerScript : MonoBehaviour
         this.currentHealth = this.maxHealth;
         this.cash = 800;
         this.playerExperience = 0;
-        this.playerLvl = 0;
+        this.playerLvl = 1;
 
         characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
@@ -193,8 +193,8 @@ public class PlayerScript : MonoBehaviour
 
     public void UpdateExperience(int experience) {
         playerExperience += experience;
-        if (playerExperience >= 100) {
-            playerExperience = playerExperience - 100; // 1lvl = 100
+        if (playerExperience >= ModifierController.Modifier.xpNeeded) {
+            playerExperience = playerExperience - ModifierController.Modifier.xpNeeded; 
             playerLvl++;
             ModifierController.Modifier.UpdateModifiers();
         }

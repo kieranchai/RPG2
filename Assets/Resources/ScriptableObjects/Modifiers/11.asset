@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 733b1fd0eb42d7043850881f29942c3a, type: 3}
-  m_Name: 2
+  m_Name: 11
   m_EditorClassIdentifier: 
-  modId: 2
-  xpNeeded: 110
-  speedMod: 1.05
-  apMod: 1.05
+  modId: 11
+  respectLvl: 10
+  xpNeeded: 200
+  speedMod: 1.5
+  apMod: 1.5

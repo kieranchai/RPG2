@@ -13,6 +13,7 @@ public class ExperienceBarScript : MonoBehaviour
     public Gradient gradient;
     public TMP_Text respectText;
     public void SetExperience(int experience) {
+        slider.maxValue = ModifierController.Modifier.xpNeeded;
         slider.value = experience;
     } 
     

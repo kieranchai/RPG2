@@ -167,15 +167,16 @@ public class CSVtoSO
         {
             string[] splitData = s.Split(',');
 
-            if (splitData.Length != 3)
+            if (splitData.Length != 4)
             {
                 return;
             }
 
             Modifier modifier = ScriptableObject.CreateInstance<Modifier>();
             modifier.modId = int.Parse(splitData[0]);
-            modifier.speedMod = float.Parse(splitData[1]);
-            modifier.apMod = float.Parse(splitData[2]);
+            modifier.xpNeeded = int.Parse(splitData[1]);
+            modifier.speedMod = float.Parse(splitData[2]);
+            modifier.apMod = float.Parse(splitData[3]);
 
             AssetDatabase.CreateAsset(modifier, $"Assets/Resources/ScriptableObjects/Modifiers/{modifier.modId}.asset");
         }
