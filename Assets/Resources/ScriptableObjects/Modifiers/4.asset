@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 4
   m_EditorClassIdentifier: 
   modId: 4
-  xpNeeded: 130
+  xpNeeded: 133
   speedMod: 1.15
   apMod: 1.15
