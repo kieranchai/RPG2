@@ -53,7 +53,17 @@ public class PauseScreen : MonoBehaviour
 
     public void exportStats()
     {
-        string file = Application.dataPath + "/Editor/CSVs/StatsOutput.csv";
+        string FileName = "StatsOutput"; // This var will be edited to FileName(1), FileName(2) and so on...
+        string BaseFileName = "StatsOutput"; // To prevent cases like "FileName(12345)", we 'reset' it by having a "base name". 
+        int i = 0;
+
+        while (File.Exists($"{Application.dataPath}/Editor/CSVs/Analytics Output/{FileName}.csv"))
+        {
+            i = i + 1;
+            FileName = $"{BaseFileName}({i})";
+        }
+
+        string file = Application.dataPath + $"/Editor/CSVs/Analytics Output/{FileName}.csv";
         TextWriter tw = new StreamWriter(file, false);
         tw.WriteLine("Enemies Killed, Damage Taken, Damage Dealt, Time Played (s)");
         tw.Close();
