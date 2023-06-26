@@ -33,8 +33,6 @@ public class EnemyScript : MonoBehaviour
 
     private Vector3 targetDirection;
     private float changeDirectionCooldown;
-    private float patrolSpeed;
-    private float chaseSpeed;
 
     private Weapon[] allWeapons;
 
@@ -107,9 +105,6 @@ public class EnemyScript : MonoBehaviour
         this.equippedWeaponName = enemyData.equippedWeaponName;
         this.currentHealth = this.maxHealth;
 
-        this.patrolSpeed = this.speed / 3;
-        this.chaseSpeed = this.speed;
-
         enemySprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
         enemySprite.sprite = sprite;
@@ -126,8 +121,6 @@ public class EnemyScript : MonoBehaviour
 
     public void Patrol()
     {
-        //add wandering ai
-        this.speed = this.patrolSpeed;
         bool success = MoveEnemy(targetDirection);
         if (!success)
         {
@@ -157,7 +150,6 @@ public class EnemyScript : MonoBehaviour
 
     public void Chase()
     {
-        this.speed = this.chaseSpeed;
         if (CheckInSight())
         {
             playerLastSeenPos = PlayerScript.Player.transform.position;

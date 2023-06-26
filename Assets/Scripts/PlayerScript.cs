@@ -77,7 +77,6 @@ public class PlayerScript : MonoBehaviour
         {
             anim.SetBool("isWalking", false);
         }
-        
     }
 
     public void SetPlayerData(Character characterData)
@@ -90,7 +89,7 @@ public class PlayerScript : MonoBehaviour
         this.currentHealth = this.maxHealth;
         this.cash = 800;
         this.playerExperience = 0;
-        this.playerLvl = 1;
+        this.playerLvl = 0;
 
         characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
@@ -192,9 +191,10 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void UpdateExperience(int experience) {
+        if (ModifierController.Modifier.isMaxLvl) return;
         playerExperience += experience;
         if (playerExperience >= ModifierController.Modifier.xpNeeded) {
-            playerExperience = playerExperience - ModifierController.Modifier.xpNeeded; 
+            playerExperience -= ModifierController.Modifier.xpNeeded; 
             playerLvl++;
             ModifierController.Modifier.UpdateModifiers();
         }

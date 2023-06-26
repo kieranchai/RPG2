@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class QuestController : MonoBehaviour
 {
@@ -31,6 +33,8 @@ public class QuestController : MonoBehaviour
     private void Start()
     {
         allQuests = Resources.LoadAll<Quest>("ScriptableObjects/Quests");
+        Array.Sort(allQuests, (a, b) => a.questId - b.questId);
+
         InvokeRepeating("GiveQuest", 5f, 10f);
     }
 
@@ -87,7 +91,7 @@ public class QuestController : MonoBehaviour
     public void FinishQuest(Quest givenQuest)
     {
         // Play dialogue
-        Debug.Log("Finished Quest");
+        this.dialogueController.QuestFinishDialogue();
 
         this.activeQuest = null;
         int experienceReward = 20; //hardcode for now

@@ -19,6 +19,7 @@ public class DialogueController : MonoBehaviour
     private void Start()
     {
         allDialogue = Resources.LoadAll<Dialogue>("ScriptableObjects/Dialogue");
+        Array.Sort(allDialogue, (a, b) => a.dialogueId - b.dialogueId);
     }
 
     public void StartDialogue(Quest quest)
@@ -97,5 +98,33 @@ public class DialogueController : MonoBehaviour
 
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(currentDialogue.action1Name, currentDialogue.action1DialogueId));
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(currentDialogue.action2Name, currentDialogue.action2DialogueId));
+    }
+
+    public void QuestFinishDialogue()
+    {
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
+
+        Dialogue currentDialogue = Array.Find(allDialogue, dialogue => dialogue.dialogueId == 4);
+        this.portraitImage.sprite = Resources.Load<Sprite>(currentDialogue.portraitSpritePath);
+        this.portraitName.text = currentDialogue.speakerName;
+        this.action1Name.text = currentDialogue.action1Name;
+        this.action2Name.text = currentDialogue.action2Name;
+        this.dialogueText.text = currentDialogue.dialogueText;
+
+        if (currentDialogue.action2Name == "NULL")
+        {
+            this.action2Name.text = currentDialogue.action2Name;
+            dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).gameObject.SetActive(false);
+        }
+        else
+        {
+            dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).gameObject.SetActive(true);
+            this.action2Name.text = currentDialogue.action2Name;
+        }
+
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(currentDialogue.action1Name, currentDialogue.action1DialogueId));
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(currentDialogue.action2Name, currentDialogue.action2DialogueId));
+        dialoguePanel.SetActive(true);
     }
 }

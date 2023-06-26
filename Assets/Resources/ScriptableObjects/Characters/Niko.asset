@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 733b1fd0eb42d7043850881f29942c3a, type: 3}
-  m_Name: 11
+  m_Script: {fileID: 11500000, guid: 03d45004d2514f344b066517d8b2c31e, type: 3}
+  m_Name: Niko
   m_EditorClassIdentifier: 
-  modId: 11
-  respectLvl: 10
-  xpNeeded: 200
-  speedMod: 1.5
-  apMod: 1.5
+  characterId: 3
+  characterName: Niko
+  maxHealth: 8
+  speed: 2
+  spritePath: Sprites/Niko
