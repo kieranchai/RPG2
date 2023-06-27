@@ -38,6 +38,8 @@ public class PlayerScript : MonoBehaviour
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     public float collisionOffset;
 
+    private float lastHitTime;
+    private float regenTimer = 5f;
 
     private void Awake()
     {
@@ -64,6 +66,16 @@ public class PlayerScript : MonoBehaviour
         }
 
         RefreshUI();
+    }
+
+    private void FixedUpdate()
+    {
+        lastHitTime += Time.fixedDeltaTime;
+        if (this.lastHitTime >= this.regenTimer && this.currentHealth < this.maxHealth)
+        {
+            this.currentHealth += 0.1f * 0.5f; //0.5 speed modifier
+            UpdateHealth();
+        }
     }
 
     private void LateUpdate()
@@ -191,15 +203,17 @@ public class PlayerScript : MonoBehaviour
         playerStatsPanel.GetComponent<HealthBarScript>().updateHealthBar();
     }
 
-    public void UpdateExperience(int experience) {
+    public void UpdateExperience(int experience)
+    {
         if (ModifierController.Modifier.isMaxLvl) return;
         playerExperience += experience;
-        if (playerExperience >= ModifierController.Modifier.xpNeeded) {
-            playerExperience -= ModifierController.Modifier.xpNeeded; 
+        if (playerExperience >= ModifierController.Modifier.xpNeeded)
+        {
+            playerExperience -= ModifierController.Modifier.xpNeeded;
             playerLvl++;
             ModifierController.Modifier.UpdateModifiers();
         }
-        playerExperiencePanel.GetComponent<ExperienceBarScript>().SetExperience(playerExperience); 
+        playerExperiencePanel.GetComponent<ExperienceBarScript>().SetExperience(playerExperience);
         playerExperiencePanel.GetComponent<ExperienceBarScript>().SetRespect(playerLvl);
     }
 
@@ -207,6 +221,7 @@ public class PlayerScript : MonoBehaviour
     {
         currentHealth -= damageTaken;
         AnalyticsController.Analytics.damageTaken += damageTaken;
+        this.lastHitTime = 0;
         UpdateHealth();
         if (currentHealth <= 0)
         {
@@ -234,7 +249,7 @@ public class PlayerScript : MonoBehaviour
 
     public bool MovePlayer(Vector2 direction)
     {
-   
+
         int count = rb.Cast(
             direction,
             movementFilter,
@@ -250,10 +265,10 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-/*            foreach (RaycastHit2D hit in castCollisions)
-            {
-                print(hit.ToString());
-            }*/
+            /*            foreach (RaycastHit2D hit in castCollisions)
+                        {
+                            print(hit.ToString());
+                        }*/
             return false;
         }
     }
