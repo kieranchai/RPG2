@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class EnemyBulletScript : MonoBehaviour
 {
-    private int attackPower;
+    private float attackPower;
     private float weaponRange;
     private Vector3 initialPosition;
 
-    public void Initialize(int attackPower, float weaponRange)
+    public void Initialize(float attackPower, float weaponRange)
     {
         this.attackPower = attackPower;
         this.weaponRange = weaponRange;

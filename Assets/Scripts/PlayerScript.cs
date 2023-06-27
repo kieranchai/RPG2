@@ -10,7 +10,7 @@ public class PlayerScript : MonoBehaviour
 
     public int characterId;
     public string characterName;
-    public int maxHealth;
+    public float maxHealth;
     public float speed;
     public string spritePath;
     public int playerExperience;
@@ -23,7 +23,7 @@ public class PlayerScript : MonoBehaviour
     public Weapon equippedWeapon;
     public List<Weapon> inventory = new List<Weapon>(1);
     public int cash;
-    public int currentHealth;
+    public float currentHealth;
 
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject weaponPanel;
@@ -181,13 +181,14 @@ public class PlayerScript : MonoBehaviour
 
     public void UpdateHealth()
     {
-        for (int i = 0; i < playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts.Length; i++)
-        {
-            if (i >= currentHealth)
-            {
-                playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts[playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts.Length - 1 - i].enabled = false;
-            }
-        }
+        // for (int i = 0; i < playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts.Length; i++)
+        // {
+        //     if (i >= currentHealth)
+        //     {
+        //         playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts[playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts.Length - 1 - i].enabled = false;
+        //     }
+        // }
+        playerStatsPanel.GetComponent<HealthBarScript>().updateHealthBar();
     }
 
     public void UpdateExperience(int experience) {
@@ -202,14 +203,14 @@ public class PlayerScript : MonoBehaviour
         playerExperiencePanel.GetComponent<ExperienceBarScript>().SetRespect(playerLvl);
     }
 
-    public void takeDamage(int damageTaken)
+    public void takeDamage(float damageTaken)
     {
         currentHealth -= damageTaken;
         AnalyticsController.Analytics.damageTaken += damageTaken;
         UpdateHealth();
         if (currentHealth <= 0)
         {
-            //Player Died
+            Debug.Log("player die");
         }
     }
 

@@ -18,3 +18,5 @@ MonoBehaviour:
   speed: 1
   spritePath: Sprites/Boomer
   equippedWeaponName: Mag 7
+  xpDrop: 15
+  cashDrop: 200

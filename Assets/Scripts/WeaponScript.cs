@@ -5,7 +5,7 @@ public class WeaponScript : MonoBehaviour
 {
     public int weaponId;
     public string weaponName;
-    public int attackPower;
+    public float attackPower;
     public string spritePath;
     public string thumbnailPath;
     public string weaponType;
@@ -95,7 +95,7 @@ public class WeaponScript : MonoBehaviour
         if (this.currentAmmoCount > 0)
         {
             GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"), transform.position, transform.rotation);
-            bullet.GetComponent<BulletScript>().Initialize(this.attackPower, weaponRange);
+            bullet.GetComponent<BulletScript>().Initialize(this.attackPower * ModifierController.Modifier.apMod, weaponRange);
 
             //can add Projectile Speed to CSV (600 here)
             bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * 600);

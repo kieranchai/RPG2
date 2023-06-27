@@ -5,7 +5,7 @@ public class EnemyWeaponScript : MonoBehaviour
 {
     public int weaponId;
     public string weaponName;
-    public int attackPower;
+    public float attackPower;
     public string spritePath;
     public string weaponType;
     public float cooldown;

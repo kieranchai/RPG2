@@ -18,3 +18,5 @@ MonoBehaviour:
   speed: 2
   spritePath: Sprites/Merc
   equippedWeaponName: M4 Tactical
+  xpDrop: 5
+  cashDrop: 100

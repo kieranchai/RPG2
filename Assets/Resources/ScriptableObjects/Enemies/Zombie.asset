@@ -18,3 +18,5 @@ MonoBehaviour:
   speed: 5
   spritePath: Sprites/Zombie
   equippedWeaponName: Desert Eagle
+  xpDrop: 10
+  cashDrop: 150

@@ -5,8 +5,10 @@ public class Enemy : ScriptableObject
 {
     public int enemyId;
     public string enemyName;
-    public int maxHealth;
+    public float maxHealth;
     public float speed;
     public string spritePath;
     public string equippedWeaponName;
+    public int xpDrop;
+    public int cashDrop;
 }

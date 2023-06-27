@@ -8,8 +8,8 @@ public class AnalyticsController : MonoBehaviour
     public static AnalyticsController Analytics { get; private set; }
 
     public int enemiesKilled = 0;
-    public int damageTaken = 0;
-    public int damageDealt = 0;
+    public float damageTaken = 0;
+    public float damageDealt = 0;
     public int timePlayed = 0;
 
     private float timer;

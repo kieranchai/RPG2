@@ -6,14 +6,14 @@ public class ExplosionScript : MonoBehaviour
 {
     private float splashRange;
     public float explosionRate;
-    private int attackPower;
+    private float attackPower;
 
     void Start()
     {
         transform.localScale = new Vector3 (0,0,0);
     }
 
-    public void Initialize(int attackPower, float splashRange)
+    public void Initialize(float attackPower, float splashRange)
     {
         this.attackPower = attackPower;
         this.splashRange = splashRange;

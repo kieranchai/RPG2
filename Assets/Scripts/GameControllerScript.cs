@@ -54,6 +54,10 @@ public class GameControllerScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.L)) {
                 PlayerScript.Player.UpdateExperience(10);  //testing only
             }
+            if (Input.GetKeyDown(KeyCode.H)) {
+                Debug.Log(PlayerScript.Player.currentHealth);
+                PlayerScript.Player.takeDamage(0.2f);
+            }
         }
     }
 

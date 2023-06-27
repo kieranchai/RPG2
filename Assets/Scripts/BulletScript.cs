@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    private int attackPower;
+    private float attackPower;
     private float weaponRange;
     private Vector3 initialPosition;
 
-    public void Initialize(int attackPower, float weaponRange)
+    public void Initialize(float attackPower, float weaponRange)
     {
         this.attackPower = attackPower;
         this.weaponRange = weaponRange;
         this.initialPosition = transform.localPosition;
+        Debug.Log("this bullet will do " + ModifierController.Modifier.apMod + "total: " + attackPower);
     }
 
     private void Update()

@@ -28,7 +28,7 @@ public class CSVtoSO
             Character character = ScriptableObject.CreateInstance<Character>();
             character.characterId = int.Parse(splitData[0]);
             character.speed = float.Parse(splitData[1]);
-            character.maxHealth = int.Parse(splitData[2]);
+            character.maxHealth = float.Parse(splitData[2]);
             character.characterName = splitData[3];
             character.spritePath = splitData[4];
 
@@ -47,18 +47,20 @@ public class CSVtoSO
         {
             string[] splitData = s.Split(',');
 
-            if (splitData.Length != 6)
+            if (splitData.Length != 8)
             {
                 return;
             }
 
             Enemy enemy = ScriptableObject.CreateInstance<Enemy>();
             enemy.enemyId = int.Parse(splitData[0]);
-            enemy.speed = float.Parse(splitData[1]);
-            enemy.maxHealth = int.Parse(splitData[2]);
-            enemy.enemyName = splitData[3];
+            enemy.enemyName = splitData[1];
+            enemy.maxHealth = float.Parse(splitData[2]);
+            enemy.speed = float.Parse(splitData[3]);
             enemy.spritePath = splitData[4];
             enemy.equippedWeaponName = splitData[5];
+            enemy.xpDrop = int.Parse(splitData[6]);
+            enemy.cashDrop = int.Parse(splitData[7]);
 
             AssetDatabase.CreateAsset(enemy, $"Assets/Resources/ScriptableObjects/Enemies/{enemy.enemyName}.asset");
         }
@@ -83,7 +85,7 @@ public class CSVtoSO
             Weapon weapon = ScriptableObject.CreateInstance<Weapon>();
             weapon.weaponId = int.Parse(splitData[0]);
             weapon.weaponName = splitData[1];
-            weapon.attackPower = int.Parse(splitData[2]);
+            weapon.attackPower = float.Parse(splitData[2]);
             weapon.spritePath = splitData[3];
             weapon.thumbnailPath = splitData[4];
             weapon.weaponType = splitData[5];

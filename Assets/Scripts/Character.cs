@@ -5,7 +5,7 @@ public class Character : ScriptableObject
 {
     public int characterId;
     public string characterName;
-    public int maxHealth;
+    public float maxHealth;
     public float speed;
     public string spritePath; 
 }

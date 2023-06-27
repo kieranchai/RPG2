@@ -5,7 +5,7 @@ public class Weapon : ScriptableObject
 {
     public int weaponId;
     public string weaponName;
-    public int attackPower;
+    public float attackPower;
     public string spritePath;
     public string thumbnailPath;
     public string weaponType;

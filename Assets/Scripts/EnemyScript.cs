@@ -7,11 +7,13 @@ public class EnemyScript : MonoBehaviour
 {
     public int enemyId;
     public string enemyName;
-    public int maxHealth;
+    public float maxHealth;
     public float speed;
     public string spritePath;
     public string equippedWeaponName;
-    public int currentHealth;
+    public float currentHealth;
+    public int xpDrop;
+    public int cashDrop;
 
     public Weapon equippedWeapon;
 
@@ -103,6 +105,8 @@ public class EnemyScript : MonoBehaviour
         this.speed = enemyData.speed;
         this.spritePath = enemyData.spritePath;
         this.equippedWeaponName = enemyData.equippedWeaponName;
+        this.xpDrop = enemyData.xpDrop;
+        this.cashDrop = enemyData.cashDrop;
         this.currentHealth = this.maxHealth;
 
         enemySprite = gameObject.GetComponent<SpriteRenderer>();
@@ -211,11 +215,11 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    public void Attacked(int damageTaken)
+    public void Attacked(float damageTaken)
     {
         playerLastSeenPos = PlayerScript.Player.transform.position;
         AnalyticsController.Analytics.damageDealt += damageTaken;
-        if (this.currentHealth - damageTaken >= 1)
+        if (this.currentHealth - damageTaken > 0)
         {
             this.currentHealth -= damageTaken;
             this.currentState = EnemyState.CHASE;
@@ -227,11 +231,9 @@ public class EnemyScript : MonoBehaviour
             Destroy(gameObject);
 
             //can instantiate money on ground oso then pick up
-            int cashDrop = Random.Range(50, 100);
-            int experienceDrop = 10; // hardcode for now
-            PlayerScript.Player.cash += cashDrop;
-            PlayerScript.Player.UpdateCash(cashDrop);
-            PlayerScript.Player.UpdateExperience(experienceDrop);
+            PlayerScript.Player.cash += this.cashDrop;
+            PlayerScript.Player.UpdateCash(this.cashDrop);
+            PlayerScript.Player.UpdateExperience(this.xpDrop);
         }
     }
 

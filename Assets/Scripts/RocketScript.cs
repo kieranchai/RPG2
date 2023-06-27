@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class RocketScript : MonoBehaviour
 {
-    private int attackPower;
+    private float attackPower;
     private float weaponRange;
     private Vector3 initialPosition;
     public float splashRange;
 
-    public void Initialize(int attackPower, float weaponRange)
+    public void Initialize(float attackPower, float weaponRange)
     {
         this.attackPower = attackPower;
         this.weaponRange = weaponRange;
