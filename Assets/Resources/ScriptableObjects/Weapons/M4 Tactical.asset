@@ -18,7 +18,7 @@ MonoBehaviour:
   spritePath: Sprites/M4 Tactical
   thumbnailPath: Sprites/UI/M4 Tactical
   weaponType: line
-  cooldown: 0.1
+  cooldown: 0.2
   weaponRange: 10
   ammoCount: 30
   cost: 200

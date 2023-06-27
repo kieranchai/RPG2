@@ -4,17 +4,17 @@ using System.IO;
 
 public class CSVtoSO
 {
-    private static string characterCSVPath = "/Editor/CSVs/CharacterCSV.csv";
-    private static string enemyCSVPath = "/Editor/CSVs/EnemyCSV.csv";
-    private static string weaponCSVPath = "/Editor/CSVs/WeaponCSV.csv";
-    private static string questCSVPath = "/Editor/CSVs/QuestCSV.csv";
-    private static string dialogueCSVPath = "/Editor/CSVs/DialogueCSV.csv";
-    private static string modifierCSVPath = "/Editor/CSVs/ModifierCSV.csv";
+    private static string characterCSVPath = "/Assets/Editor/CSVs/CharacterCSV.csv";
+    private static string enemyCSVPath = "/Assets/Editor/CSVs/EnemyCSV.csv";
+    private static string weaponCSVPath = "/Assets/Editor/CSVs/WeaponCSV.csv";
+    private static string questCSVPath = "/Assets/Editor/CSVs/QuestCSV.csv";
+    private static string dialogueCSVPath = "/Assets/Editor/CSVs/DialogueCSV.csv";
+    private static string modifierCSVPath = "/Assets/Editor/CSVs/ModifierCSV.csv";
 
     [MenuItem("Utilities/Generate Characters")]
     public static void GenerateCharacters()
     {
-        string[] allLines = File.ReadAllLines(Application.dataPath + characterCSVPath);
+        string[] allLines = File.ReadAllLines(System.IO.Directory.GetCurrentDirectory() + characterCSVPath);
 
         foreach (string s in allLines)
         {
@@ -41,7 +41,7 @@ public class CSVtoSO
     [MenuItem("Utilities/Generate Enemies")]
     public static void GenerateEnemies()
     {
-        string[] allLines = File.ReadAllLines(Application.dataPath + enemyCSVPath);
+        string[] allLines = File.ReadAllLines(System.IO.Directory.GetCurrentDirectory() + enemyCSVPath);
 
         foreach (string s in allLines)
         {
@@ -71,7 +71,7 @@ public class CSVtoSO
     [MenuItem("Utilities/Generate Weapons")]
     public static void GenerateWeapons()
     {
-        string[] allLines = File.ReadAllLines(Application.dataPath + weaponCSVPath);
+        string[] allLines = File.ReadAllLines(System.IO.Directory.GetCurrentDirectory() + weaponCSVPath);
 
         foreach (string s in allLines)
         {
@@ -104,7 +104,7 @@ public class CSVtoSO
     [MenuItem("Utilities/Generate Quests")]
     public static void GenerateQuests()
     {
-        string[] allLines = File.ReadAllLines(Application.dataPath + questCSVPath);
+        string[] allLines = File.ReadAllLines(System.IO.Directory.GetCurrentDirectory() + questCSVPath);
 
         foreach (string s in allLines)
         {
@@ -133,7 +133,7 @@ public class CSVtoSO
     [MenuItem("Utilities/Generate Dialogue")]
     public static void GenerateDialogue()
     {
-        string[] allLines = File.ReadAllLines(Application.dataPath + dialogueCSVPath);
+        string[] allLines = File.ReadAllLines(System.IO.Directory.GetCurrentDirectory() + dialogueCSVPath);
 
         foreach (string s in allLines)
         {
@@ -164,7 +164,7 @@ public class CSVtoSO
     [MenuItem("Utilities/Generate Modifiers")]
     public static void GenerateModifiers()
     {
-        string[] allLines = File.ReadAllLines(Application.dataPath + modifierCSVPath);
+        string[] allLines = File.ReadAllLines(System.IO.Directory.GetCurrentDirectory() + modifierCSVPath);
 
         foreach (string s in allLines)
         {
