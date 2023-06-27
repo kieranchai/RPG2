@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36df00f74a29c014aba75e48e8774c0a, type: 3}
-  m_Name: 2
+  m_Name: 6
   m_EditorClassIdentifier: 
-  dialogueId: 2
-  portraitSpritePath: Sprites/Player
-  speakerName: Player Name
-  dialogueText: Aight sure. Better have my money ready when I'm done.
-  action1Name: NEXT
+  dialogueId: 6
+  portraitSpritePath: Sprites/Roman
+  speakerName: Roman
+  dialogueText: Sheesh great job! Here's your money.
+  action1Name: CLOSE
   action2Name: NULL
-  action1DialogueId: 7
+  action1DialogueId: 0
   action2DialogueId: 0
-  dialogueType: ACCEPT
+  dialogueType: THANKS

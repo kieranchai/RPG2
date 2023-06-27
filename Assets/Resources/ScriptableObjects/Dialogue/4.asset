@@ -20,3 +20,4 @@ MonoBehaviour:
   action2Name: NULL
   action1DialogueId: 0
   action2DialogueId: 0
+  dialogueType: THANKS

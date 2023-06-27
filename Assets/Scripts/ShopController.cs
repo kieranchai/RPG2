@@ -31,7 +31,7 @@ public class ShopController : MonoBehaviour
             slots[i] = shopPanel.transform.GetChild(i).gameObject;
         }
 
-        InvokeRepeating("RefreshShopWeapons", 0.0f, 30.0f);
+        InvokeRepeating("RefreshShopWeapons", 0.0f, 20f);
     }
 
     public void OpenShop()

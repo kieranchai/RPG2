@@ -11,4 +11,5 @@ public class Dialogue : ScriptableObject
     public string action2Name;
     public int action1DialogueId;
     public int action2DialogueId;
+    public string dialogueType;
 }

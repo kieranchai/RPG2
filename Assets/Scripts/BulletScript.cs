@@ -11,7 +11,6 @@ public class BulletScript : MonoBehaviour
         this.attackPower = attackPower;
         this.weaponRange = weaponRange;
         this.initialPosition = transform.localPosition;
-        Debug.Log("this bullet will do " + ModifierController.Modifier.apMod + "total: " + attackPower);
     }
 
     private void Update()

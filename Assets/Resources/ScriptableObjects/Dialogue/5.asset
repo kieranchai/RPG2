@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36df00f74a29c014aba75e48e8774c0a, type: 3}
-  m_Name: 2
+  m_Name: 5
   m_EditorClassIdentifier: 
-  dialogueId: 2
-  portraitSpritePath: Sprites/Player
-  speakerName: Player Name
-  dialogueText: Aight sure. Better have my money ready when I'm done.
-  action1Name: NEXT
-  action2Name: NULL
-  action1DialogueId: 7
-  action2DialogueId: 0
-  dialogueType: ACCEPT
+  dialogueId: 5
+  portraitSpritePath: Sprites/Roman
+  speakerName: Roman
+  dialogueText: Yo my bro. QUEST_TYPEQUEST_AMOUNTQUEST_OBJECT. $QUEST_REWARD.
+  action1Name: YES
+  action2Name: NO
+  action1DialogueId: 2
+  action2DialogueId: 3
+  dialogueType: INTRO

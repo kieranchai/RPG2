@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Random = UnityEngine.Random;
 
 public class DialogueController : MonoBehaviour
 {
@@ -26,12 +27,15 @@ public class DialogueController : MonoBehaviour
     {
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
-        this.portraitImage.sprite = Resources.Load<Sprite>(allDialogue[0].portraitSpritePath);
-        this.portraitName.text = allDialogue[0].speakerName;
-        this.action1Name.text = allDialogue[0].action1Name;
-        this.action2Name.text = allDialogue[0].action2Name;
+        Dialogue[] introDialogues = Array.FindAll(allDialogue, d => d.dialogueType == "INTRO");
+        Dialogue introDialogue = introDialogues[Random.Range(0, introDialogues.Length)];
 
-        this.formattedDialogueText = allDialogue[0].dialogueText;
+        this.portraitImage.sprite = Resources.Load<Sprite>(introDialogue.portraitSpritePath);
+        this.portraitName.text = introDialogue.speakerName;
+        this.action1Name.text = introDialogue.action1Name;
+        this.action2Name.text = introDialogue.action2Name;
+
+        this.formattedDialogueText = introDialogue.dialogueText;
         this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_TYPE", "<color=#387182>" + quest.questType + "</color>");
         if (quest.questAmount.Contains("#"))
         {
@@ -46,8 +50,8 @@ public class DialogueController : MonoBehaviour
 
         this.dialogueText.text = this.formattedDialogueText;
 
-        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(allDialogue[0].action1Name, allDialogue[0].action1DialogueId));
-        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(allDialogue[0].action2Name, allDialogue[0].action2DialogueId));
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(introDialogue.action1Name, introDialogue.action1DialogueId));
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(introDialogue.action2Name, introDialogue.action2DialogueId));
 
         dialoguePanel.SetActive(true);
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).gameObject.SetActive(true);
@@ -105,26 +109,28 @@ public class DialogueController : MonoBehaviour
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
 
-        Dialogue currentDialogue = Array.Find(allDialogue, dialogue => dialogue.dialogueId == 4);
-        this.portraitImage.sprite = Resources.Load<Sprite>(currentDialogue.portraitSpritePath);
-        this.portraitName.text = currentDialogue.speakerName;
-        this.action1Name.text = currentDialogue.action1Name;
-        this.action2Name.text = currentDialogue.action2Name;
-        this.dialogueText.text = currentDialogue.dialogueText;
+        Dialogue[] thanksDialogues = Array.FindAll(allDialogue, d => d.dialogueType == "THANKS");
+        Dialogue thanksDialogue = thanksDialogues[Random.Range(0,thanksDialogues.Length)];
 
-        if (currentDialogue.action2Name == "NULL")
+        this.portraitImage.sprite = Resources.Load<Sprite>(thanksDialogue.portraitSpritePath);
+        this.portraitName.text = thanksDialogue.speakerName;
+        this.action1Name.text = thanksDialogue.action1Name;
+        this.action2Name.text = thanksDialogue.action2Name;
+        this.dialogueText.text = thanksDialogue.dialogueText;
+
+        if (thanksDialogue.action2Name == "NULL")
         {
-            this.action2Name.text = currentDialogue.action2Name;
+            this.action2Name.text = thanksDialogue.action2Name;
             dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).gameObject.SetActive(false);
         }
         else
         {
             dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).gameObject.SetActive(true);
-            this.action2Name.text = currentDialogue.action2Name;
+            this.action2Name.text = thanksDialogue.action2Name;
         }
 
-        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(currentDialogue.action1Name, currentDialogue.action1DialogueId));
-        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(currentDialogue.action2Name, currentDialogue.action2DialogueId));
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(thanksDialogue.action1Name, thanksDialogue.action1DialogueId));
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(thanksDialogue.action2Name, thanksDialogue.action2DialogueId));
         dialoguePanel.SetActive(true);
     }
 }

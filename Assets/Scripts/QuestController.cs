@@ -21,6 +21,9 @@ public class QuestController : MonoBehaviour
 
     private string[] currentQuestCoords = new string[2];
 
+    private float timer;
+    private float questInterval = 10f;
+
     private void Awake()
     {
         if (Quest != null && Quest != this)
@@ -35,8 +38,6 @@ public class QuestController : MonoBehaviour
     {
         allQuests = Resources.LoadAll<Quest>("ScriptableObjects/Quests");
         Array.Sort(allQuests, (a, b) => a.questId - b.questId);
-
-        InvokeRepeating("GiveQuest", 5f, 30f);
     }
 
     private void Update()
@@ -55,11 +56,19 @@ public class QuestController : MonoBehaviour
                     break;
             }
         }
+
+        this.timer += Time.deltaTime;
+        if(this.timer >= this.questInterval)
+        {
+            GiveQuest();
+            this.timer = 0;
+        }
+        
     }
 
     public void GiveQuest()
     {
-        if (activeQuest) return;
+        if (activeQuest || givenQuest) return;
         givenQuest = allQuests[Random.Range(0, allQuests.Length)];
 
         // Pass Quest to Dialogue
@@ -83,20 +92,20 @@ public class QuestController : MonoBehaviour
         }
 
         this.activeQuest = givenQuest;
+        this.givenQuest = null;
     }
 
     public void RejectQuest()
     {
         this.givenQuest = null;
+        this.timer = 0;
     }
 
     public void FinishQuest(Quest givenQuest)
     {
-        // Play dialogue
         this.dialogueController.QuestFinishDialogue();
-
         this.activeQuest = null;
-
+        this.timer = 0;
         PlayerScript.Player.cash += givenQuest.cashReward;
         PlayerScript.Player.UpdateCash(givenQuest.cashReward);
         PlayerScript.Player.UpdateExperience(givenQuest.xpReward);
@@ -105,9 +114,13 @@ public class QuestController : MonoBehaviour
     public void KillQuestProgress()
     {
         // Can check if halfway or not ... add new if statements
+        if ((AnalyticsController.Analytics.enemiesKilled - this.killCount) / 2 == int.Parse(activeQuest.questAmount))
+        {
+            Debug.Log("Yo u almost halfway there!");
+        }
 
         // Finished Quest
-        if (AnalyticsController.Analytics.enemiesKilled == (int.Parse(activeQuest.questAmount) + this.killCount))
+        if (AnalyticsController.Analytics.enemiesKilled >= (int.Parse(activeQuest.questAmount) + this.killCount))
         {
             FinishQuest(activeQuest);
         }
@@ -116,6 +129,10 @@ public class QuestController : MonoBehaviour
     public void GotoQuestProgress()
     {
         // Can check if halfway or not ... add new if statements
+        if ((this.questLocation.position - PlayerScript.Player.transform.position).magnitude < 10f)
+        {
+            Debug.Log("Yo u almost halfway there!");
+        }
 
         // Finished Quest
         if ((this.questLocation.position - PlayerScript.Player.transform.position).magnitude < 0.5f) {

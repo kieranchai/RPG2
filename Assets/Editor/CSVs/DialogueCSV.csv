@@ -1,4 +1,8 @@
-1,Sprites/Roman,Roman,Hey QUEST_TYPEQUEST_AMOUNTQUEST_OBJECT for me. I'll transfer you $QUEST_REWARD!,YES,NO,2,3
-2,Sprites/Player,Player Name,Aight sure. Better have my money ready when I'm done.,CLOSE,NULL,0,0
-3,Sprites/Player,Player Name,Nah bro another time.,CLOSE,NULL,0,0
-4,Sprites/Roman,Roman,Ay yo I knew I could count on you bro.,CLOSE,NULL,0,0
+1,Sprites/Roman,Roman,Hey QUEST_TYPEQUEST_AMOUNTQUEST_OBJECT for me. I'll transfer you $QUEST_REWARD!,YES,NO,2,3,INTRO
+2,Sprites/Player,Player Name,Aight sure. Better have my money ready when I'm done.,NEXT,NULL,7,0,ACCEPT
+3,Sprites/Player,Player Name,Nah bro another time.,NEXT,NULL,8,0,DECLINE
+4,Sprites/Roman,Roman,Ay yo I knew I could count on you bro.,CLOSE,NULL,0,0,THANKS
+5,Sprites/Roman,Roman,Yo my bro. QUEST_TYPEQUEST_AMOUNTQUEST_OBJECT. $QUEST_REWARD.,YES,NO,2,3,INTRO
+6,Sprites/Roman,Roman,Sheesh great job! Here's your money.,CLOSE,NULL,0,0,THANKS
+7,Sprites/Roman,Roman,Thanks. U a bro for sure.,CLOSE,NULL,0,0,REACTION
+8,Sprites/Roman,Roman,Next time then...,CLOSE,NULL,0,0,REACTION

@@ -21,3 +21,4 @@ MonoBehaviour:
   action2Name: NO
   action1DialogueId: 2
   action2DialogueId: 3
+  dialogueType: INTRO

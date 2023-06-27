@@ -139,7 +139,7 @@ public class CSVtoSO
         {
             string[] splitData = s.Split(',');
 
-            if (splitData.Length != 8)
+            if (splitData.Length != 9)
             {
                 return;
             }
@@ -153,6 +153,7 @@ public class CSVtoSO
             dialogue.action2Name = splitData[5];
             dialogue.action1DialogueId = int.Parse(splitData[6]);
             dialogue.action2DialogueId = int.Parse(splitData[7]);
+            dialogue.dialogueType = splitData[8];
 
 
             AssetDatabase.CreateAsset(dialogue, $"Assets/Resources/ScriptableObjects/Dialogue/{dialogue.dialogueId}.asset");
