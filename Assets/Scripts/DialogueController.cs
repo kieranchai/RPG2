@@ -102,6 +102,8 @@ public class DialogueController : MonoBehaviour
 
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(currentDialogue.action1Name, currentDialogue.action1DialogueId));
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(currentDialogue.action2Name, currentDialogue.action2DialogueId));
+
+        dialoguePanel.SetActive(true);
     }
 
     public void QuestFinishDialogue()

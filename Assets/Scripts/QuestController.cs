@@ -93,6 +93,7 @@ public class QuestController : MonoBehaviour
 
         this.activeQuest = givenQuest;
         this.givenQuest = null;
+        PopupController.Popup.UpdatePopUp("QUEST START!");
     }
 
     public void RejectQuest()
@@ -106,6 +107,7 @@ public class QuestController : MonoBehaviour
         this.dialogueController.QuestFinishDialogue();
         this.activeQuest = null;
         this.timer = 0;
+        PopupController.Popup.UpdatePopUp("QUEST PASSED!");
         PlayerScript.Player.cash += givenQuest.cashReward;
         PlayerScript.Player.UpdateCash(givenQuest.cashReward);
         PlayerScript.Player.UpdateExperience(givenQuest.xpReward);
@@ -116,7 +118,7 @@ public class QuestController : MonoBehaviour
         // Can check if halfway or not ... add new if statements
         if ((AnalyticsController.Analytics.enemiesKilled - this.killCount) / 2 == int.Parse(activeQuest.questAmount))
         {
-            Debug.Log("Yo u almost halfway there!");
+            this.dialogueController.ContinueDialogue("", 9);
         }
 
         // Finished Quest
@@ -131,7 +133,7 @@ public class QuestController : MonoBehaviour
         // Can check if halfway or not ... add new if statements
         if ((this.questLocation.position - PlayerScript.Player.transform.position).magnitude < 10f)
         {
-            Debug.Log("Yo u almost halfway there!");
+            this.dialogueController.ContinueDialogue("", 9);
         }
 
         // Finished Quest

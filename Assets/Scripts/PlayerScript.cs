@@ -211,6 +211,7 @@ public class PlayerScript : MonoBehaviour
         if (playerExperience >= ModifierController.Modifier.xpNeeded)
         {
             playerExperience -= ModifierController.Modifier.xpNeeded;
+            PopupController.Popup.UpdatePopUp("RESPECT UP!");
             playerLvl++;
             ModifierController.Modifier.UpdateModifiers();
         }
