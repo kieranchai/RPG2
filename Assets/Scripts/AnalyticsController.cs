@@ -11,6 +11,7 @@ public class AnalyticsController : MonoBehaviour
     public float damageTaken = 0;
     public float damageDealt = 0;
     public int timePlayed = 0;
+    public int experienceGained = 0;
 
     private float timer;
 
@@ -39,6 +40,6 @@ public class AnalyticsController : MonoBehaviour
         statisticsDisplay.transform.Find("STATS_DT").GetComponent<Text>().text = this.damageTaken.ToString();
         statisticsDisplay.transform.Find("STATS_DD").GetComponent<Text>().text = this.damageDealt.ToString();
         statisticsDisplay.transform.Find("STATS_TP").GetComponent<Text>().text = this.timePlayed.ToString();
-
+         statisticsDisplay.transform.Find("STATS_XP").GetComponent<Text>().text = this.experienceGained.ToString();
     }
 }

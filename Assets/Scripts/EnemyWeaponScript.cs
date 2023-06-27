@@ -79,11 +79,11 @@ public class EnemyWeaponScript : MonoBehaviour
         limitAttack = true;
         if (this.currentAmmoCount > 0)
         {
-            GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Enemy Bullet"), transform.position, transform.rotation);
+            float spread = Random.Range(-5.0f, 5.0f); // enemy inaccuracy
+            GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Enemy Bullet"), transform.position, Quaternion.Euler(0, 0, spread));
             bullet.GetComponent<EnemyBulletScript>().Initialize(this.attackPower, weaponRange);
-
             //can add Projectile Speed to CSV (600 here)
-            bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * 600);
+            bullet.GetComponent<Rigidbody2D>().AddRelativeForce(transform.right * 600);
 
             --this.currentAmmoCount;
             yield return new WaitForSeconds(cooldown);

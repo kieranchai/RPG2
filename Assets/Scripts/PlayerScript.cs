@@ -206,6 +206,7 @@ public class PlayerScript : MonoBehaviour
     public void UpdateExperience(int experience)
     {
         if (ModifierController.Modifier.isMaxLvl) return;
+        AnalyticsController.Analytics.experienceGained += experience;
         playerExperience += experience;
         if (playerExperience >= ModifierController.Modifier.xpNeeded)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System;
 
 public class GameControllerScript : MonoBehaviour
 {
@@ -57,6 +58,18 @@ public class GameControllerScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.H)) {
                 Debug.Log(PlayerScript.Player.currentHealth);
                 PlayerScript.Player.takeDamage(0.2f);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha1)) {
+                PlayerScript.Player.EquipWeapon(Array.Find(ShopController.shop.allWeapons, weapon => weapon.weaponName == "M4 Tactical"));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2)) {
+                PlayerScript.Player.EquipWeapon(Array.Find(ShopController.shop.allWeapons, weapon => weapon.weaponName == "Desert Eagle"));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3)) {
+                PlayerScript.Player.EquipWeapon(Array.Find(ShopController.shop.allWeapons, weapon => weapon.weaponName == "Mag 7"));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4)) {
+                PlayerScript.Player.EquipWeapon(Array.Find(ShopController.shop.allWeapons, weapon => weapon.weaponName == "RPG 7"));
             }
         }
     }
