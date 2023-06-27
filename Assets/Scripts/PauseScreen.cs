@@ -24,6 +24,7 @@ public class PauseScreen : MonoBehaviour
             case true:
                 Time.timeScale = 0f;
                 ShopController.shop.CloseShop();
+                HospitalController.hospital.CloseShop();
                 buttonPanel.SetActive(true);
                 statsPanel.SetActive(false);
                 break;
@@ -33,6 +34,7 @@ public class PauseScreen : MonoBehaviour
                 statsPanel.SetActive(false);
                 GameControllerScript.GameController.isPaused = false;
                 if (ShopController.shop.isOpen) ShopController.shop.OpenShop();
+                if (HospitalController.hospital.isOpen) HospitalController.hospital.OpenShop();
                 break;
         }
     }
