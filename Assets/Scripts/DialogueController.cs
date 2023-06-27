@@ -35,7 +35,7 @@ public class DialogueController : MonoBehaviour
         this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_TYPE", "<color=#387182>" + quest.questType + "</color>");
         if (quest.questAmount.Contains("#"))
         {
-            this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_AMOUNT", " ");
+            this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_AMOUNT", " THIS ");
         }
         else
         {

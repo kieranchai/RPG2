@@ -36,7 +36,7 @@ public class QuestController : MonoBehaviour
         allQuests = Resources.LoadAll<Quest>("ScriptableObjects/Quests");
         Array.Sort(allQuests, (a, b) => a.questId - b.questId);
 
-        InvokeRepeating("GiveQuest", 5f, 10f);
+        InvokeRepeating("GiveQuest", 5f, 30f);
     }
 
     private void Update()

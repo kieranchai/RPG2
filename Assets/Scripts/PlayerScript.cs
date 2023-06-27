@@ -39,7 +39,7 @@ public class PlayerScript : MonoBehaviour
     public float collisionOffset;
 
     private float lastHitTime;
-    private float regenTimer = 5f;
+    private float regenTimer = 3f;
 
     private void Awake()
     {
@@ -68,9 +68,9 @@ public class PlayerScript : MonoBehaviour
         RefreshUI();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        lastHitTime += Time.fixedDeltaTime;
+        lastHitTime += Time.deltaTime;
         if (this.lastHitTime >= this.regenTimer && this.currentHealth < this.maxHealth)
         {
             this.currentHealth += 0.1f * 0.5f; //0.5 speed modifier
