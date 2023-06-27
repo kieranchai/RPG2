@@ -14,11 +14,12 @@ public class QuestController : MonoBehaviour
     private Quest[] allQuests;
 
     private int killCount;
-    [SerializeField] private GameObject[] gotoLocations;
+    [SerializeField] private GameObject gotoLocation;
     public Transform questLocation;
-    public GameObject randomLocation;
 
     [SerializeField] private DialogueController dialogueController;
+
+    private string[] currentQuestCoords = new string[2];
 
     private void Awake()
     {
@@ -73,9 +74,10 @@ public class QuestController : MonoBehaviour
         }
         else if (givenQuest.questType == "GO TO")
         {
-            this.randomLocation = gotoLocations[Random.Range(0, gotoLocations.Length)];
-            this.questLocation = randomLocation.transform;
-            this.randomLocation.SetActive(true);
+            currentQuestCoords = givenQuest.questAmount.Split('#');
+            gotoLocation.transform.localPosition = new Vector2(float.Parse(currentQuestCoords[0]), float.Parse(currentQuestCoords[1]));
+            this.questLocation = gotoLocation.transform;
+            this.gotoLocation.SetActive(true);
             PlayerScript.Player.transform.Find("Quest Target Indicator").GetComponent<TargetIndicator>().target = this.questLocation;
             PlayerScript.Player.transform.Find("Quest Target Indicator").gameObject.SetActive(true);
         }
@@ -94,10 +96,10 @@ public class QuestController : MonoBehaviour
         this.dialogueController.QuestFinishDialogue();
 
         this.activeQuest = null;
-        int experienceReward = 20; //hardcode for now
-        PlayerScript.Player.cash += givenQuest.questReward;
-        PlayerScript.Player.UpdateCash(givenQuest.questReward);
-        PlayerScript.Player.UpdateExperience(experienceReward);
+
+        PlayerScript.Player.cash += givenQuest.cashReward;
+        PlayerScript.Player.UpdateCash(givenQuest.cashReward);
+        PlayerScript.Player.UpdateExperience(givenQuest.xpReward);
     }
 
     public void KillQuestProgress()
@@ -105,7 +107,7 @@ public class QuestController : MonoBehaviour
         // Can check if halfway or not ... add new if statements
 
         // Finished Quest
-        if (AnalyticsController.Analytics.enemiesKilled == (activeQuest.questAmount + this.killCount))
+        if (AnalyticsController.Analytics.enemiesKilled == (int.Parse(activeQuest.questAmount) + this.killCount))
         {
             FinishQuest(activeQuest);
         }
@@ -119,7 +121,7 @@ public class QuestController : MonoBehaviour
         if ((this.questLocation.position - PlayerScript.Player.transform.position).magnitude < 0.5f) {
             FinishQuest(activeQuest);
             PlayerScript.Player.transform.Find("Quest Target Indicator").gameObject.SetActive(false);
-            this.randomLocation.SetActive(false);
+            this.gotoLocation.SetActive(false);
         }
     }
 }

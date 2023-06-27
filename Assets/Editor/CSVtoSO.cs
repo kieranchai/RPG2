@@ -110,7 +110,7 @@ public class CSVtoSO
         {
             string[] splitData = s.Split(',');
 
-            if (splitData.Length != 5)
+            if (splitData.Length != 6)
             {
                 return;
             }
@@ -118,9 +118,10 @@ public class CSVtoSO
             Quest quest = ScriptableObject.CreateInstance<Quest>();
             quest.questId = int.Parse(splitData[0]);
             quest.questType = splitData[1];
-            quest.questAmount = int.Parse(splitData[2]);
+            quest.questAmount = splitData[2];
             quest.questObject = splitData[3];
-            quest.questReward = int.Parse(splitData[4]);
+            quest.xpReward = int.Parse(splitData[4]);
+            quest.cashReward = int.Parse(splitData[5]);
 
 
             AssetDatabase.CreateAsset(quest, $"Assets/Resources/ScriptableObjects/Quests/{quest.questId}.asset");

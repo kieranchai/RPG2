@@ -5,7 +5,8 @@ public class Quest : ScriptableObject
 {
     public int questId;
     public string questType;
-    public int questAmount;
+    public string questAmount;
     public string questObject;
-    public int questReward;
+    public int xpReward;
+    public int cashReward;
 }

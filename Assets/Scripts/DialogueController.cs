@@ -33,7 +33,7 @@ public class DialogueController : MonoBehaviour
 
         this.formattedDialogueText = allDialogue[0].dialogueText;
         this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_TYPE", "<color=#387182>" + quest.questType + "</color>");
-        if (quest.questAmount == 0)
+        if (quest.questAmount.Contains("#"))
         {
             this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_AMOUNT", " ");
         }
@@ -42,7 +42,7 @@ public class DialogueController : MonoBehaviour
             this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_AMOUNT", "<color=#387182> " + quest.questAmount + " </color>");
         }
         this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_OBJECT", "<color=#387182>" + quest.questObject + "</color>");
-        this.formattedDialogueText = this.formattedDialogueText.Replace("$QUEST_REWARD", "<color=#387182>$" + quest.questReward.ToString() + "</color>");
+        this.formattedDialogueText = this.formattedDialogueText.Replace("$QUEST_REWARD", "<color=#387182>$" + quest.cashReward.ToString() + "</color>");
 
         this.dialogueText.text = this.formattedDialogueText;
 

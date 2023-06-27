@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questId: 2
   questType: GO TO
-  questAmount: 0
-  questObject: THIS AREA
-  questReward: 50
+  questAmount: -15.38#3
+  questObject: AREA
+  xpReward: 10
+  cashReward: 80
