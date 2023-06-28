@@ -9,6 +9,8 @@ public class PopupController: MonoBehaviour
 
     [SerializeField] private TMP_Text popupText;
 
+    private string[] deathTexts;
+
     private void Awake()
     {
         if (Popup != null && Popup != this)
@@ -17,6 +19,8 @@ public class PopupController: MonoBehaviour
             return;
         }
         Popup = this;
+
+        this.deathTexts = new string[] { "WASTED!", "SHOCKING!" };
     }
 
 
@@ -36,7 +40,7 @@ public class PopupController: MonoBehaviour
     public void SetDeathPopUp()
     {
         StopCoroutine(Wait());
-        popupText.text = "WASTED!";
+        popupText.text = this.deathTexts[Random.Range(0,this.deathTexts.Length)];
     }
 
 }

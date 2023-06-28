@@ -110,7 +110,7 @@ public class GameControllerScript : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(5f);
         this.gameOver = true;
     }
 

@@ -70,7 +70,7 @@ public class PauseScreen : MonoBehaviour
         ShopController.shop.CloseShop();
         HospitalController.Hospital.CloseShop();
         buttonPanel.SetActive(true);
-        buttonPanel.transform.GetChild(0).gameObject.SetActive(false);
+        buttonPanel.transform.GetChild(1).gameObject.SetActive(false);
         statsPanel.SetActive(false);
     }
 

@@ -48,6 +48,7 @@ public class CharacterSelection : MonoBehaviour
 
     public void NextCharacter()
     {
+        AudioManager.instance.PlaySFX("Menu Hover");
         selectedCharacter++;
         if (selectedCharacter > allCharacters.Length - 1)
         {
@@ -58,6 +59,7 @@ public class CharacterSelection : MonoBehaviour
 
     public void PrevCharacter()
     {
+        AudioManager.instance.PlaySFX("Menu Hover");
         selectedCharacter--;
         if (selectedCharacter < 0)
         {
