@@ -29,7 +29,7 @@ public class AnalyticsController : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        if (GameControllerScript.GameController.isAlive) timer += Time.deltaTime;
         timePlayed = (int)(timer % 60); //time played in seconds
         UpdateStatDisplay();
     }

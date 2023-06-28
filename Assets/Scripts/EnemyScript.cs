@@ -252,18 +252,17 @@ public class EnemyScript : MonoBehaviour
 
             //can instantiate money on ground oso then pick up
             int randomWeight = Random.Range(0, this.weightedAmt);
-            for (int i = 0; i<availLoot.Count; i++)
+            for (int i = 0; i < availLoot.Count; i++)
             {
                 randomWeight -= availLoot[i].weight;
-                if(randomWeight < 0)
+                if (randomWeight < 0)
                 {
                     PlayerScript.Player.cash += availLoot[i].cashAmt;
                     PlayerScript.Player.UpdateCash(availLoot[i].cashAmt);
-                    PlayerScript.Player.UpdateExperience(this.xpDrop);
-                    return;
+                    break;
                 }
             }
-
+            PlayerScript.Player.UpdateExperience(this.xpDrop);
         }
     }
 

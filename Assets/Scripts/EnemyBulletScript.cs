@@ -25,7 +25,7 @@ public class EnemyBulletScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerScript>().takeDamage(this.attackPower);
+            collision.gameObject.GetComponent<PlayerScript>().TakeDamage(this.attackPower);
             Destroy(gameObject);
         }
 

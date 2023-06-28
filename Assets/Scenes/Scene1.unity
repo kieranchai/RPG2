@@ -18161,7 +18161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00174, y: 0.002380371}
+  m_AnchoredPosition: {x: -0.00174, y: 0.002380371}
   m_SizeDelta: {x: 283.49, y: 22.7073}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &358052972
@@ -24942,7 +24942,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 609483112}
   m_FillRect: {fileID: 609483111}
   m_HandleRect: {fileID: 0}
-  m_Direction: 0
+  m_Direction: 1
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
@@ -29011,7 +29011,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: QUIT GAME
+  m_Text: BACK TO MAIN MENU
 --- !u!222 &1814419843
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30075,8 +30075,8 @@ MonoBehaviour:
   spritePath: 
   playerExperience: 0
   playerLvl: 0
-  healthupgradeLevel: 0
-  speedupgradeLevel: 0
+  healthUpgradeLevel: 0
+  speedUpgradeLevel: 0
   rb: {fileID: 0}
   anim: {fileID: 0}
   characterSprite: {fileID: 0}
@@ -37186,10 +37186,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpen: 0
-  healthupgradeModifier: 0
+  healthUpgradeModifier: 0
   speedUpgradeModifier: 0
-  healthupgradeCost: 0
-  speedupgradeCost: 0
+  healthUpgradeCost: 0
+  speedUpgradeCost: 0
   hospitalPanel: {fileID: 1056779533}
 --- !u!1001 &3967085613777419313
 PrefabInstance:

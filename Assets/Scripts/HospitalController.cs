@@ -4,15 +4,14 @@ using UnityEngine.UI;
 
 public class HospitalController : MonoBehaviour
 {
-    public static HospitalController hospital { get; private set; }
+    public static HospitalController Hospital { get; private set; }
 
     public bool isOpen;
-    // public bool healthUpgraded;
-    // public bool speedUpgraded;
-    public float healthupgradeModifier;
+
+    public float healthUpgradeModifier;
     public float speedUpgradeModifier;
-    public int healthupgradeCost;
-    public int speedupgradeCost;
+    public int healthUpgradeCost;
+    public int speedUpgradeCost;
     private GameObject[] slots;
     private Upgrades[] allUpgrades;
     private Upgrades[] healthUpgrades;
@@ -21,12 +20,12 @@ public class HospitalController : MonoBehaviour
 
     private void Awake()
     {
-        if (hospital != null && hospital != this)
+        if (Hospital != null && Hospital != this)
         {
             Destroy(gameObject);
             return;
         }
-        hospital = this;
+        Hospital = this;
 
         slots = new GameObject[hospitalPanel.transform.childCount];
         for (int i = 0; i < hospitalPanel.transform.childCount; i++)
@@ -46,8 +45,8 @@ public class HospitalController : MonoBehaviour
         speedUpgrades = Array.FindAll(allUpgrades, element => element.upgradeType == "SPEED");
         Array.Sort(allUpgrades, (a, b) => a.upgradeId - b.upgradeId);
 
-        updateModifiers();
-        refreshHospitalUI();
+        UpdateModifiers();
+        RefreshHospitalUI();
     }
     public void OpenShop()
     {
@@ -59,13 +58,13 @@ public class HospitalController : MonoBehaviour
         hospitalPanel.SetActive(false);
     }
 
-    public void refreshHospitalUI()
+    public void RefreshHospitalUI()
     {
-        if (PlayerScript.Player.healthupgradeLevel >= healthUpgrades.Length)
+        if (PlayerScript.Player.healthUpgradeLevel >= healthUpgrades.Length)
         {
             slots[0].transform.GetComponent<Button>().onClick.RemoveAllListeners();
             slots[0].transform.Find("Health Upgrade").GetComponent<Text>().text = "Max Health Upgraded";
-            slots[0].transform.Find("Description").GetComponent<Text>().text = "Max Health Increased To LVL " + (PlayerScript.Player.healthupgradeLevel).ToString();
+            slots[0].transform.Find("Description").GetComponent<Text>().text = "Max Health Increased To LVL " + (PlayerScript.Player.healthUpgradeLevel).ToString();
             slots[0].transform.Find("Health Upgrade").GetComponent<Text>().color = new Color(0.8018f, 0.1021f, 0.1021f, 1f);
             slots[0].transform.Find("Description").GetComponent<Text>().color = new Color(0.8018f, 0.1021f, 0.1021f, 1f);
             slots[0].transform.Find("Cost").gameObject.SetActive(false);
@@ -73,16 +72,16 @@ public class HospitalController : MonoBehaviour
         else
         {
             slots[0].transform.GetComponent<Button>().onClick.RemoveAllListeners();
-            slots[0].transform.GetComponent<Button>().onClick.AddListener(() => upgradeHealth());
-            slots[0].transform.Find("Description").GetComponent<Text>().text = "Increase Max Health to LVL " + (PlayerScript.Player.healthupgradeLevel+1).ToString();
-            slots[0].transform.Find("Cost").GetComponent<Text>().text = "$ " + healthupgradeCost.ToString();
+            slots[0].transform.GetComponent<Button>().onClick.AddListener(() => UpgradeHealth());
+            slots[0].transform.Find("Description").GetComponent<Text>().text = "Increase Max Health to LVL " + (PlayerScript.Player.healthUpgradeLevel+1).ToString();
+            slots[0].transform.Find("Cost").GetComponent<Text>().text = "$ " + healthUpgradeCost.ToString();
         }
 
-        if (PlayerScript.Player.speedupgradeLevel >= speedUpgrades.Length)
+        if (PlayerScript.Player.speedUpgradeLevel >= speedUpgrades.Length)
         {
             slots[1].transform.GetComponent<Button>().onClick.RemoveAllListeners();
             slots[1].transform.Find("Speed Upgrade").GetComponent<Text>().text = "Max Speed Upgraded";
-            slots[1].transform.Find("Description").GetComponent<Text>().text = "Max Speed Increased To LVL " + (PlayerScript.Player.speedupgradeLevel).ToString();
+            slots[1].transform.Find("Description").GetComponent<Text>().text = "Max Speed Increased To LVL " + (PlayerScript.Player.speedUpgradeLevel).ToString();
             slots[1].transform.Find("Speed Upgrade").GetComponent<Text>().color = new Color(0.8018f, 0.1021f, 0.1021f, 1f);
             slots[1].transform.Find("Description").GetComponent<Text>().color = new Color(0.8018f, 0.1021f, 0.1021f, 1f);
             slots[1].transform.Find("Cost").gameObject.SetActive(false);
@@ -91,25 +90,25 @@ public class HospitalController : MonoBehaviour
         else
         {
             slots[1].transform.GetComponent<Button>().onClick.RemoveAllListeners();
-            slots[1].transform.GetComponent<Button>().onClick.AddListener(() => upgradeSpeed(speedUpgradeModifier, speedupgradeCost));
-            slots[1].transform.Find("Description").GetComponent<Text>().text = "Increase Speed to LVL " + (PlayerScript.Player.speedupgradeLevel+1).ToString();
-            slots[1].transform.Find("Cost").GetComponent<Text>().text = "$ " + speedupgradeCost.ToString();
+            slots[1].transform.GetComponent<Button>().onClick.AddListener(() => UpgradeSpeed(speedUpgradeModifier, speedUpgradeCost));
+            slots[1].transform.Find("Description").GetComponent<Text>().text = "Increase Speed to LVL " + (PlayerScript.Player.speedUpgradeLevel+1).ToString();
+            slots[1].transform.Find("Cost").GetComponent<Text>().text = "$ " + speedUpgradeCost.ToString();
         }
 
 
     }
 
-    public void upgradeHealth()
+    public void UpgradeHealth()
     {
-        if (PlayerScript.Player.cash >= healthupgradeCost)
+        if (PlayerScript.Player.cash >= healthUpgradeCost)
         {
-            PlayerScript.Player.maxHealth += healthupgradeModifier;
-            PlayerScript.Player.cash -= healthupgradeCost;
-            PlayerScript.Player.UpdateCash(-healthupgradeCost);
+            PlayerScript.Player.maxHealth += healthUpgradeModifier;
+            PlayerScript.Player.cash -= healthUpgradeCost;
+            PlayerScript.Player.UpdateCash(-healthUpgradeCost);
             PlayerScript.Player.UpdateHealth();
-            PlayerScript.Player.healthupgradeLevel++;
-            updateModifiers();
-            refreshHospitalUI();
+            PlayerScript.Player.healthUpgradeLevel++;
+            UpdateModifiers();
+            RefreshHospitalUI();
         }
         else
         {
@@ -118,32 +117,32 @@ public class HospitalController : MonoBehaviour
 
     }
 
-    public void upgradeSpeed(float amount, int cost)
+    public void UpgradeSpeed(float amount, int cost)
     {
-        if (PlayerScript.Player.cash >= speedupgradeCost)
+        if (PlayerScript.Player.cash >= speedUpgradeCost)
         {
             PlayerScript.Player.speed += amount;
             PlayerScript.Player.cash -= cost;
             PlayerScript.Player.UpdateCash(-cost);
-            PlayerScript.Player.speedupgradeLevel++;
+            PlayerScript.Player.speedUpgradeLevel++;
         }
-        updateModifiers();
-        refreshHospitalUI();
+        UpdateModifiers();
+        RefreshHospitalUI();
 
     }
 
-    public void updateModifiers()
+    public void UpdateModifiers()
     {
-        if (PlayerScript.Player.healthupgradeLevel < healthUpgrades.Length)
+        if (PlayerScript.Player.healthUpgradeLevel < healthUpgrades.Length)
         {
-            healthupgradeModifier = Array.Find(healthUpgrades, element => element.upgradeLevel == PlayerScript.Player.healthupgradeLevel + 1).upgradeModifier;
-            healthupgradeCost = Array.Find(healthUpgrades, element => element.upgradeLevel == PlayerScript.Player.healthupgradeLevel + 1).upgradeCost;
+            healthUpgradeModifier = Array.Find(healthUpgrades, element => element.upgradeLevel == PlayerScript.Player.healthUpgradeLevel + 1).upgradeModifier;
+            healthUpgradeCost = Array.Find(healthUpgrades, element => element.upgradeLevel == PlayerScript.Player.healthUpgradeLevel + 1).upgradeCost;
         }
 
-        if (PlayerScript.Player.speedupgradeLevel < speedUpgrades.Length)
+        if (PlayerScript.Player.speedUpgradeLevel < speedUpgrades.Length)
         {
-            speedUpgradeModifier = Array.Find(speedUpgrades, element => element.upgradeLevel == PlayerScript.Player.speedupgradeLevel + 1).upgradeModifier;
-            speedupgradeCost = Array.Find(speedUpgrades, element => element.upgradeLevel == PlayerScript.Player.speedupgradeLevel + 1).upgradeCost;
+            speedUpgradeModifier = Array.Find(speedUpgrades, element => element.upgradeLevel == PlayerScript.Player.speedUpgradeLevel + 1).upgradeModifier;
+            speedUpgradeCost = Array.Find(speedUpgrades, element => element.upgradeLevel == PlayerScript.Player.speedUpgradeLevel + 1).upgradeCost;
         }
     }
 

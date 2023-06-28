@@ -7,14 +7,24 @@ public class PauseScreen : MonoBehaviour
 {
     [SerializeField] private GameObject buttonPanel;
     [SerializeField] private GameObject statsPanel;
+    private bool deathScreenDisplayed;
+
+    private void Start()
+    {
+        this.deathScreenDisplayed = false;
+        buttonPanel.transform.GetChild(0).gameObject.SetActive(true);
+        PauseGame(false);
+        GameControllerScript.GameController.gameOver = false;
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && GameControllerScript.GameController.isAlive)
         {
             GameControllerScript.GameController.isPaused = !GameControllerScript.GameController.isPaused;
             PauseGame(GameControllerScript.GameController.isPaused);
         }
+        if (GameControllerScript.GameController.gameOver && !deathScreenDisplayed) DeathScreen();
     }
 
     public void PauseGame(bool isPaused)
@@ -24,7 +34,7 @@ public class PauseScreen : MonoBehaviour
             case true:
                 Time.timeScale = 0f;
                 ShopController.shop.CloseShop();
-                HospitalController.hospital.CloseShop();
+                HospitalController.Hospital.CloseShop();
                 buttonPanel.SetActive(true);
                 statsPanel.SetActive(false);
                 break;
@@ -34,7 +44,7 @@ public class PauseScreen : MonoBehaviour
                 statsPanel.SetActive(false);
                 GameControllerScript.GameController.isPaused = false;
                 if (ShopController.shop.isOpen) ShopController.shop.OpenShop();
-                if (HospitalController.hospital.isOpen) HospitalController.hospital.OpenShop();
+                if (HospitalController.Hospital.isOpen) HospitalController.Hospital.OpenShop();
                 break;
         }
     }
@@ -51,6 +61,17 @@ public class PauseScreen : MonoBehaviour
         GameControllerScript.GameController.isPaused = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void DeathScreen()
+    {
+        this.deathScreenDisplayed = true;
+        Time.timeScale = 0f;
+        ShopController.shop.CloseShop();
+        HospitalController.Hospital.CloseShop();
+        buttonPanel.SetActive(true);
+        buttonPanel.transform.GetChild(0).gameObject.SetActive(false);
+        statsPanel.SetActive(false);
     }
 
     public void exportStats()

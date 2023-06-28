@@ -15,8 +15,8 @@ public class PlayerScript : MonoBehaviour
     public string spritePath;
     public int playerExperience;
     public int playerLvl;
-    public int healthupgradeLevel;
-    public int speedupgradeLevel;
+    public int healthUpgradeLevel;
+    public int speedUpgradeLevel;
 
     public Rigidbody2D rb;
     public Animator anim;
@@ -73,7 +73,7 @@ public class PlayerScript : MonoBehaviour
     private void Update()
     {
         lastHitTime += Time.deltaTime;
-        if (this.lastHitTime >= this.regenTimer && this.currentHealth < this.maxHealth)
+        if (this.lastHitTime >= this.regenTimer && this.currentHealth < this.maxHealth && GameControllerScript.GameController.isAlive)
         {
             this.currentHealth += 0.1f * 0.5f; //0.5 speed modifier
             UpdateHealth();
@@ -104,8 +104,8 @@ public class PlayerScript : MonoBehaviour
         this.cash = 800;
         this.playerExperience = 0;
         this.playerLvl = 0;
-        this.healthupgradeLevel = 0;
-        this.speedupgradeLevel = 0;
+        this.healthUpgradeLevel = 0;
+        this.speedUpgradeLevel = 0;
 
         characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
@@ -114,6 +114,7 @@ public class PlayerScript : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(true);
         UpdateCash(this.cash);
         UpdateHealth();
+        GameControllerScript.GameController.isAlive = true;
     }
 
     public void EquipWeapon(Weapon weaponData)
@@ -223,15 +224,16 @@ public class PlayerScript : MonoBehaviour
         playerExperiencePanel.GetComponent<ExperienceBarScript>().SetRespect(playerLvl);
     }
 
-    public void takeDamage(float damageTaken)
+    public void TakeDamage(float damageTaken)
     {
+        if (!GameControllerScript.GameController.isAlive) return;
         currentHealth -= damageTaken;
         AnalyticsController.Analytics.damageTaken += damageTaken;
         this.lastHitTime = 0;
         UpdateHealth();
         if (currentHealth <= 0)
         {
-            Debug.Log("player die");
+            GameControllerScript.GameController.PlayerDied();
         }
     }
 

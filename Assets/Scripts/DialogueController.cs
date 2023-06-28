@@ -23,6 +23,11 @@ public class DialogueController : MonoBehaviour
         Array.Sort(allDialogue, (a, b) => a.dialogueId - b.dialogueId);
     }
 
+    private void Update()
+    {
+        if(!GameControllerScript.GameController.isAlive) dialoguePanel.SetActive(false);
+    }
+
     public void StartDialogue(Quest quest)
     {
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();

@@ -33,4 +33,10 @@ public class PopupController: MonoBehaviour
         popupText.text = "";
     }
 
+    public void SetDeathPopUp()
+    {
+        StopCoroutine(Wait());
+        popupText.text = "WASTED!";
+    }
+
 }
