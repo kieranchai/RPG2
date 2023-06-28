@@ -259,11 +259,11 @@ public class EnemyScript : MonoBehaviour
                 {
                     PlayerScript.Player.cash += availLoot[i].cashAmt;
                     PlayerScript.Player.UpdateCash(availLoot[i].cashAmt);
+                    PlayerScript.Player.UpdateExperience(this.xpDrop);
                     return;
                 }
             }
 
-            PlayerScript.Player.UpdateExperience(this.xpDrop);
         }
     }
 

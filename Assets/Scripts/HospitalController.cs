@@ -134,7 +134,6 @@ public class HospitalController : MonoBehaviour
 
     public void updateModifiers()
     {
-        Debug.Log("updating mods");
         if (PlayerScript.Player.healthupgradeLevel < healthUpgrades.Length)
         {
             healthupgradeModifier = Array.Find(healthUpgrades, element => element.upgradeLevel == PlayerScript.Player.healthupgradeLevel + 1).upgradeModifier;
