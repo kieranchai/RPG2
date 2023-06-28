@@ -18445,7 +18445,7 @@ GameObject:
   - component: {fileID: 434871382}
   - component: {fileID: 434871383}
   m_Layer: 6
-  m_Name: Hostpital Target Indicator
+  m_Name: Hospital Target Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26051,7 +26051,7 @@ MonoBehaviour:
     m_Right: 10
     m_Top: 10
     m_Bottom: 10
-  m_ChildAlignment: 4
+  m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 387.1, y: 84.6}

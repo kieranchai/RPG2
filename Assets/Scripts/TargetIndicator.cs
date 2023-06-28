@@ -5,11 +5,12 @@ using UnityEngine;
 public class TargetIndicator : MonoBehaviour
 {
     public Transform target;
-    private float hideDistance = 0.5f;
+    private float hideDistance = 9.5f;
 
     private void Update()
     {
         var dir = target.position - transform.position;
+        Debug.Log(dir.magnitude);
         if (dir.magnitude < hideDistance)
         {
             SetChildrenActive(false);
