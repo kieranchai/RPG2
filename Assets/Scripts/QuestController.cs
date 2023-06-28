@@ -24,6 +24,8 @@ public class QuestController : MonoBehaviour
     private float timer;
     private float questInterval = 10f;
 
+    private bool hasMentionedHalf = false;
+
     private void Awake()
     {
         if (Quest != null && Quest != this)
@@ -107,6 +109,8 @@ public class QuestController : MonoBehaviour
         this.dialogueController.QuestFinishDialogue();
         this.activeQuest = null;
         this.timer = 0;
+        this.hasMentionedHalf = false;
+        this.questLocation = null;
         PopupController.Popup.UpdatePopUp("QUEST PASSED!");
         PlayerScript.Player.cash += givenQuest.cashReward;
         PlayerScript.Player.UpdateCash(givenQuest.cashReward);
@@ -116,9 +120,10 @@ public class QuestController : MonoBehaviour
     public void KillQuestProgress()
     {
         // Can check if halfway or not ... add new if statements
-        if ((AnalyticsController.Analytics.enemiesKilled - this.killCount) / 2 == int.Parse(activeQuest.questAmount))
+        if ((AnalyticsController.Analytics.enemiesKilled - this.killCount) / 2 == int.Parse(activeQuest.questAmount) && !this.hasMentionedHalf)
         {
             this.dialogueController.ContinueDialogue("", 9);
+            this.hasMentionedHalf = true;
         }
 
         // Finished Quest
@@ -131,9 +136,10 @@ public class QuestController : MonoBehaviour
     public void GotoQuestProgress()
     {
         // Can check if halfway or not ... add new if statements
-        if ((this.questLocation.position - PlayerScript.Player.transform.position).magnitude < 10f)
+        if ((this.questLocation.position - PlayerScript.Player.transform.position).magnitude < 10f && !this.hasMentionedHalf)
         {
             this.dialogueController.ContinueDialogue("", 9);
+            this.hasMentionedHalf = true;
         }
 
         // Finished Quest

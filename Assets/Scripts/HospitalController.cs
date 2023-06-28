@@ -34,7 +34,6 @@ public class HospitalController : MonoBehaviour
         for (int i = 0; i < hospitalPanel.transform.childCount; i++)
         {
             slots[i] = hospitalPanel.transform.GetChild(i).gameObject;
-            Debug.Log(i + "hopsital");
         }
         setHospitalData();
     }
