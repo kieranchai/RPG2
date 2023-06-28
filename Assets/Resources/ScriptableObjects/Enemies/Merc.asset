@@ -19,4 +19,4 @@ MonoBehaviour:
   spritePath: Sprites/Merc
   equippedWeaponName: M4 Tactical
   xpDrop: 5
-  cashDrop: 100
+  cashDrop: 50@70#150@50#400@15

@@ -60,7 +60,7 @@ public class CSVtoSO
             enemy.spritePath = splitData[4];
             enemy.equippedWeaponName = splitData[5];
             enemy.xpDrop = int.Parse(splitData[6]);
-            enemy.cashDrop = int.Parse(splitData[7]);
+            enemy.cashDrop = splitData[7];
 
             AssetDatabase.CreateAsset(enemy, $"Assets/Resources/ScriptableObjects/Enemies/{enemy.enemyName}.asset");
         }

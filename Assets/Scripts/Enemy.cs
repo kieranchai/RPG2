@@ -10,5 +10,5 @@ public class Enemy : ScriptableObject
     public string spritePath;
     public string equippedWeaponName;
     public int xpDrop;
-    public int cashDrop;
+    public string cashDrop;
 }

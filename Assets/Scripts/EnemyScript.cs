@@ -13,7 +13,6 @@ public class EnemyScript : MonoBehaviour
     public string equippedWeaponName;
     public float currentHealth;
     public int xpDrop;
-    public int cashDrop;
 
     public Weapon equippedWeapon;
 
@@ -46,6 +45,20 @@ public class EnemyScript : MonoBehaviour
     };
 
     EnemyState currentState = EnemyState.PATROL;
+
+    private int weightedAmt = 0;
+    public class Loot
+    {
+        public int cashAmt;
+        public int weight;
+        public Loot(int cashAmt, int weight)
+        {
+            this.cashAmt = cashAmt;
+            this.weight = weight;
+        }
+    }
+    List<Loot> availLoot = new List<Loot>();
+    private string[] availLootString;
 
     private void Awake()
     {
@@ -106,9 +119,16 @@ public class EnemyScript : MonoBehaviour
         this.spritePath = enemyData.spritePath;
         this.equippedWeaponName = enemyData.equippedWeaponName;
         this.xpDrop = enemyData.xpDrop;
-        this.cashDrop = enemyData.cashDrop;
+
         this.currentHealth = this.maxHealth;
 
+        this.availLootString = enemyData.cashDrop.Split('#');
+        for (int i = 0; i < this.availLootString.Length; i++)
+        {
+            string[] formattedAvailLootString = this.availLootString[i].Split('@');
+            this.availLoot.Add(new Loot(int.Parse(formattedAvailLootString[0]), int.Parse(formattedAvailLootString[1])));
+            this.weightedAmt += int.Parse(formattedAvailLootString[1]);
+        }
         enemySprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
         enemySprite.sprite = sprite;
@@ -137,7 +157,7 @@ public class EnemyScript : MonoBehaviour
         changeDirectionCooldown -= Time.deltaTime;
         if (changeDirectionCooldown <= 0)
         {
-            float angleChange = Random.Range(-90f,90f);
+            float angleChange = Random.Range(-90f, 90f);
             Quaternion rotation = Quaternion.AngleAxis(angleChange, transform.forward);
             targetDirection = rotation * targetDirection;
             transform.up = targetDirection;
@@ -231,8 +251,18 @@ public class EnemyScript : MonoBehaviour
             Destroy(gameObject);
 
             //can instantiate money on ground oso then pick up
-            PlayerScript.Player.cash += this.cashDrop;
-            PlayerScript.Player.UpdateCash(this.cashDrop);
+            int randomWeight = Random.Range(0, this.weightedAmt);
+            for (int i = 0; i<availLoot.Count; i++)
+            {
+                randomWeight -= availLoot[i].weight;
+                if(randomWeight < 0)
+                {
+                    PlayerScript.Player.cash += availLoot[i].cashAmt;
+                    PlayerScript.Player.UpdateCash(availLoot[i].cashAmt);
+                    return;
+                }
+            }
+
             PlayerScript.Player.UpdateExperience(this.xpDrop);
         }
     }

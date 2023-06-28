@@ -10,7 +10,6 @@ public class TargetIndicator : MonoBehaviour
     private void Update()
     {
         var dir = target.position - transform.position;
-        Debug.Log(dir.magnitude);
         if (dir.magnitude < hideDistance)
         {
             SetChildrenActive(false);
