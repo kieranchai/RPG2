@@ -19881,8 +19881,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -42.81356, y: -19.400013}
-  m_SizeDelta: {x: 149.3371, y: 14.238}
+  m_AnchoredPosition: {x: -26.4, y: -19.400013}
+  m_SizeDelta: {x: 182.16, y: 14.238}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &582346033
 MonoBehaviour:
@@ -20782,7 +20782,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -200.99501}
+  m_AnchoredPosition: {x: 200, y: -177.90001}
   m_SizeDelta: {x: 387.1, y: 84.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &780674231
@@ -25653,8 +25653,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -42.81356, y: -19.4}
-  m_SizeDelta: {x: 149.3371, y: 14.238}
+  m_AnchoredPosition: {x: -26.4, y: -19.4}
+  m_SizeDelta: {x: 182.16, y: 14.238}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010947561
 MonoBehaviour:
@@ -25739,7 +25739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -75.395004}
+  m_AnchoredPosition: {x: 200, y: -52.3}
   m_SizeDelta: {x: 387.1, y: 84.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1020753469
@@ -30075,6 +30075,8 @@ MonoBehaviour:
   spritePath: 
   playerExperience: 0
   playerLvl: 0
+  healthupgradeLevel: 0
+  speedupgradeLevel: 0
   rb: {fileID: 0}
   anim: {fileID: 0}
   characterSprite: {fileID: 0}
@@ -37184,10 +37186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpen: 0
-  healthUpgraded: 0
-  speedUpgraded: 0
-  healthupgradeAmount: 0
-  speedupgradeAmount: 0
+  healthupgradeModifier: 0
+  speedUpgradeModifier: 0
   healthupgradeCost: 0
   speedupgradeCost: 0
   hospitalPanel: {fileID: 1056779533}

@@ -10,6 +10,7 @@ public class CSVtoSO
     private static string questCSVPath = "/Assets/Editor/CSVs/QuestCSV.csv";
     private static string dialogueCSVPath = "/Assets/Editor/CSVs/DialogueCSV.csv";
     private static string modifierCSVPath = "/Assets/Editor/CSVs/ModifierCSV.csv";
+    private static string upgradesCSVPath = "/Assets/Editor/CSVs/UpgradesCSV.csv";
 
     [MenuItem("Utilities/Generate Characters")]
     public static void GenerateCharacters()
@@ -183,6 +184,33 @@ public class CSVtoSO
             modifier.apMod = float.Parse(splitData[3]);
 
             AssetDatabase.CreateAsset(modifier, $"Assets/Resources/ScriptableObjects/Modifiers/{modifier.modId}.asset");
+        }
+
+        AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Utilities/Generate Upgrades")]
+    public static void GenerateUpgrades()
+    {
+        string[] allLines = File.ReadAllLines(System.IO.Directory.GetCurrentDirectory() + upgradesCSVPath);
+
+        foreach (string s in allLines)
+        {
+            string[] splitData = s.Split(',');
+
+            if (splitData.Length != 5)
+            {
+                return;
+            }
+
+            Upgrades upgrades = ScriptableObject.CreateInstance<Upgrades>();
+            upgrades.upgradeId = int.Parse(splitData[0]);
+            upgrades.upgradeType = splitData[1];
+            upgrades.upgradeLevel = int.Parse(splitData[2]);
+            upgrades.upgradeModifier = float.Parse(splitData[3]);
+            upgrades.upgradeCost = int.Parse(splitData[4]);
+
+            AssetDatabase.CreateAsset(upgrades, $"Assets/Resources/ScriptableObjects/Upgrades/{upgrades.upgradeId}.asset");
         }
 
         AssetDatabase.SaveAssets();

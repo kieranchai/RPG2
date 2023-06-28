@@ -15,6 +15,8 @@ public class PlayerScript : MonoBehaviour
     public string spritePath;
     public int playerExperience;
     public int playerLvl;
+    public int healthupgradeLevel;
+    public int speedupgradeLevel;
 
     public Rigidbody2D rb;
     public Animator anim;
@@ -102,6 +104,8 @@ public class PlayerScript : MonoBehaviour
         this.cash = 800;
         this.playerExperience = 0;
         this.playerLvl = 0;
+        this.healthupgradeLevel = 0;
+        this.speedupgradeLevel = 0;
 
         characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
