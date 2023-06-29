@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36df00f74a29c014aba75e48e8774c0a, type: 3}
+  m_Name: 11
+  m_EditorClassIdentifier: 
+  dialogueId: 11
+  portraitSpritePath: Sprites/Roman
+  speakerName: Roman
+  dialogueText: Your duty in Los Santos is to become the most respected homie on
+    the block.
+  action1Name: NEXT
+  action2Name: NULL
+  action1DialogueId: 12
+  action2DialogueId: 0
+  dialogueType: TUTORIAL

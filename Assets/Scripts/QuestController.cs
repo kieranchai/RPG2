@@ -70,7 +70,7 @@ public class QuestController : MonoBehaviour
 
     public void GiveQuest()
     {
-        if (activeQuest || givenQuest) return;
+        if (activeQuest || givenQuest || !GameControllerScript.GameController.hasPlayedTutorial) return;
         givenQuest = allQuests[Random.Range(0, allQuests.Length)];
 
         // Pass Quest to Dialogue

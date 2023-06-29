@@ -12,6 +12,7 @@ public class GameControllerScript : MonoBehaviour
     public Character selectedCharacter;
     public bool isAlive = true;
     public bool gameOver = false;
+    public bool hasPlayedTutorial = false;
 
     void Awake()
     {

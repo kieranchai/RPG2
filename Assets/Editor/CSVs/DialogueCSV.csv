@@ -7,3 +7,8 @@
 7,Sprites/Roman,Roman,Thanks. U a bro for sure.,CLOSE,NULL,0,0,REACTION
 8,Sprites/Roman,Roman,Next time then...,CLOSE,NULL,0,0,REACTION
 9,Sprites/Roman,Roman,You're almost halfway there! Keep it up!,CLOSE,NULL,0,0,REACTION
+10,Sprites/Roman,Roman,Welcome to Los Santos CHARACTER_NAME!,NEXT,NULL,11,0,TUTORIAL
+11,Sprites/Roman,Roman,Your duty in Los Santos is to become the most respected homie on the block.,NEXT,NULL,12,0,TUTORIAL
+12,Sprites/Roman,Roman,You can earn RESPECT and CASH by completing quests or killing enemies.,NEXT,NULL,13,0,TUTORIAL
+13,Sprites/Roman,Roman,Use the CASH you earned to buy new weapons and upgrade your stats.,NEXT,NULL,14,0,TUTORIAL
+14,Sprites/Roman,Roman,Have fun and remember RESPECT is EVERYTHING!,DONE,NULL,0,0,TUTORIAL

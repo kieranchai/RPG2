@@ -21,11 +21,13 @@ public class DialogueController : MonoBehaviour
     {
         allDialogue = Resources.LoadAll<Dialogue>("ScriptableObjects/Dialogue");
         Array.Sort(allDialogue, (a, b) => a.dialogueId - b.dialogueId);
+        GameControllerScript.GameController.hasPlayedTutorial = false;
+        IntroDialogue();
     }
 
     private void Update()
     {
-        if(!GameControllerScript.GameController.isAlive) dialoguePanel.SetActive(false);
+        if (!GameControllerScript.GameController.isAlive) dialoguePanel.SetActive(false);
     }
 
     public void StartDialogue(Quest quest)
@@ -79,6 +81,10 @@ public class DialogueController : MonoBehaviour
                 //close dialogue, dialogueId most likely 0 so don't run code below
                 dialoguePanel.SetActive(false);
                 return;
+            case "DONE":
+                GameControllerScript.GameController.hasPlayedTutorial = true;
+                dialoguePanel.SetActive(false);
+                return;
             default:
                 break;
         }
@@ -117,7 +123,7 @@ public class DialogueController : MonoBehaviour
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
 
         Dialogue[] thanksDialogues = Array.FindAll(allDialogue, d => d.dialogueType == "THANKS");
-        Dialogue thanksDialogue = thanksDialogues[Random.Range(0,thanksDialogues.Length)];
+        Dialogue thanksDialogue = thanksDialogues[Random.Range(0, thanksDialogues.Length)];
 
         this.portraitImage.sprite = Resources.Load<Sprite>(thanksDialogue.portraitSpritePath);
         this.portraitName.text = thanksDialogue.speakerName;
@@ -138,6 +144,37 @@ public class DialogueController : MonoBehaviour
 
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(thanksDialogue.action1Name, thanksDialogue.action1DialogueId));
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(thanksDialogue.action2Name, thanksDialogue.action2DialogueId));
+        dialoguePanel.SetActive(true);
+    }
+
+    public void IntroDialogue()
+    {
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
+
+        Dialogue[] introDialogues = Array.FindAll(allDialogue, d => d.dialogueType == "TUTORIAL");
+        Dialogue introDialogue = introDialogues[0];
+
+        this.portraitImage.sprite = Resources.Load<Sprite>(introDialogue.portraitSpritePath);
+        this.portraitName.text = introDialogue.speakerName;
+        this.action1Name.text = introDialogue.action1Name;
+        this.action2Name.text = introDialogue.action2Name;
+        if (introDialogue.dialogueText.Contains("CHARACTER_NAME")) introDialogue.dialogueText = introDialogue.dialogueText.Replace("CHARACTER_NAME", PlayerScript.Player.characterName);
+        this.dialogueText.text = introDialogue.dialogueText;
+
+        if (introDialogue.action2Name == "NULL")
+        {
+            this.action2Name.text = introDialogue.action2Name;
+            dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).gameObject.SetActive(false);
+        }
+        else
+        {
+            dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).gameObject.SetActive(true);
+            this.action2Name.text = introDialogue.action2Name;
+        }
+
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(introDialogue.action1Name, introDialogue.action1DialogueId));
+        dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(introDialogue.action2Name, introDialogue.action2DialogueId));
         dialoguePanel.SetActive(true);
     }
 }
