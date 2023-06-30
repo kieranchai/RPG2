@@ -43,17 +43,17 @@ public class DialogueController : MonoBehaviour
         this.action2Name.text = introDialogue.action2Name;
 
         this.formattedDialogueText = introDialogue.dialogueText;
-        this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_TYPE", "<color=#387182>" + quest.questType + "</color>");
+        this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_TYPE", "<color=#90ee90>" + quest.questType + "</color>");
         if (quest.questAmount.Contains("#"))
         {
             this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_AMOUNT", " THIS ");
         }
         else
         {
-            this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_AMOUNT", "<color=#387182> " + quest.questAmount + " </color>");
+            this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_AMOUNT", "<color=#90ee90> " + quest.questAmount + " </color>");
         }
-        this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_OBJECT", "<color=#387182>" + quest.questObject + "</color>");
-        this.formattedDialogueText = this.formattedDialogueText.Replace("$QUEST_REWARD", "<color=#387182>$" + quest.cashReward.ToString() + "</color>");
+        this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_OBJECT", "<color=#90ee90>" + quest.questObject + "</color>");
+        this.formattedDialogueText = this.formattedDialogueText.Replace("$QUEST_REWARD", "<color=#90ee90>$" + quest.cashReward.ToString() + "</color>");
 
         this.dialogueText.text = this.formattedDialogueText;
 

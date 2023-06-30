@@ -20,8 +20,6 @@ public class EnemyScript : MonoBehaviour
     public Rigidbody2D rb;
     public SpriteRenderer enemySprite;
 
-    [SerializeField] private Enemy testEnemy;
-
     public ContactFilter2D movementFilter;
 
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
@@ -247,23 +245,29 @@ public class EnemyScript : MonoBehaviour
         else
         {
             this.currentHealth -= damageTaken;
-            AnalyticsController.Analytics.enemiesKilled++;
-            Destroy(gameObject);
-
-            //can instantiate money on ground oso then pick up
-            int randomWeight = Random.Range(0, this.weightedAmt);
-            for (int i = 0; i < availLoot.Count; i++)
-            {
-                randomWeight -= availLoot[i].weight;
-                if (randomWeight < 0)
-                {
-                    PlayerScript.Player.cash += availLoot[i].cashAmt;
-                    PlayerScript.Player.UpdateCash(availLoot[i].cashAmt);
-                    break;
-                }
-            }
-            PlayerScript.Player.UpdateExperience(this.xpDrop);
+            EnemyDeath();
         }
+    }
+
+    public void EnemyDeath()
+    {
+        AnalyticsController.Analytics.enemiesKilled++;
+        Spawner.currentEnemies--;
+        Destroy(gameObject);
+
+        //can instantiate money on ground oso then pick up
+        int randomWeight = Random.Range(0, this.weightedAmt);
+        for (int i = 0; i < availLoot.Count; i++)
+        {
+            randomWeight -= availLoot[i].weight;
+            if (randomWeight < 0)
+            {
+                PlayerScript.Player.cash += availLoot[i].cashAmt;
+                PlayerScript.Player.UpdateCash(availLoot[i].cashAmt);
+                break;
+            }
+        }
+        PlayerScript.Player.UpdateExperience(this.xpDrop);
     }
 
     public void Attack()
