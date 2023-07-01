@@ -17,6 +17,7 @@ public class PlayerScript : MonoBehaviour
     public int playerLvl;
     public int healthUpgradeLevel;
     public int speedUpgradeLevel;
+
     public Rigidbody2D rb;
     public Animator anim;
     public SpriteRenderer characterSprite;
@@ -105,7 +106,7 @@ public class PlayerScript : MonoBehaviour
         this.playerLvl = 0;
         this.healthUpgradeLevel = 0;
         this.speedUpgradeLevel = 0;
-        
+
         characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
         characterSprite.sprite = sprite;
@@ -256,6 +257,7 @@ public class PlayerScript : MonoBehaviour
 
     public bool MovePlayer(Vector2 direction)
     {
+
         int count = rb.Cast(
             direction,
             movementFilter,
