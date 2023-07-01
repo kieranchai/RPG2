@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Tilemap Colliders
   - Shop
+  - Safe Area
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Tilemap Colliders
   - Enemy
   - Shop
-  - 
+  - Safe Area
   - 
   - 
   - 

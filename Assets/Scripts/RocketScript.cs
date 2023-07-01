@@ -42,6 +42,11 @@ public class RocketScript : MonoBehaviour
         {
             Explode();
         }
+        
+        if (collision.gameObject.tag == "Safe Area")
+        {
+            Destroy(gameObject);
+        }
     }
 }
 
