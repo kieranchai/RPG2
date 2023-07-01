@@ -146,22 +146,20 @@ MonoBehaviour:
   equippedWeaponName: 
   currentHealth: 0
   xpDrop: 0
-  cashDrop: 0
   equippedWeapon: {fileID: 0}
   anim: {fileID: 0}
   rb: {fileID: 0}
   enemySprite: {fileID: 0}
-  testEnemy: {fileID: 11400000, guid: 4f1e3df4d6d287940bb38533e8f4815a, type: 2}
   movementFilter:
     useTriggers: 0
-    useLayerMask: 0
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 448
+      m_Bits: 1472
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0

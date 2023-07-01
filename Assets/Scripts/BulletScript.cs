@@ -33,5 +33,11 @@ public class BulletScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+        if (collision.gameObject.tag == "Safe Area")
+        {
+            Destroy(gameObject);
+        }
+        
     }
 }
