@@ -33,6 +33,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject playerExperiencePanel;
     [SerializeField] private TMP_Text playerPanelCash;
     [SerializeField] private TMP_Text playerWeaponAmmo;
+    [SerializeField] private ParticleSystem bloodParticles;
 
     private GameObject[] slots;
 
@@ -228,6 +229,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (!GameControllerScript.GameController.isAlive) return;
         currentHealth -= damageTaken;
+        bloodParticles.Play();
         AnalyticsController.Analytics.damageTaken += damageTaken;
         this.lastHitTime = 0;
         UpdateHealth();

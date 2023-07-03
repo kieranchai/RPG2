@@ -22,7 +22,7 @@ public class QuestController : MonoBehaviour
     private string[] currentQuestCoords = new string[2];
 
     private float timer;
-    private float questInterval = 10f;
+    private float questInterval = 30f;
 
     private bool hasMentionedHalf = false;
 

@@ -19,6 +19,7 @@ public class EnemyScript : MonoBehaviour
     public Animator anim;
     public Rigidbody2D rb;
     public SpriteRenderer enemySprite;
+    [SerializeField] private ParticleSystem bloodParticles;
 
     public ContactFilter2D movementFilter;
 
@@ -237,6 +238,7 @@ public class EnemyScript : MonoBehaviour
     {
         playerLastSeenPos = PlayerScript.Player.transform.position;
         AnalyticsController.Analytics.damageDealt += damageTaken;
+        bloodParticles.Play();
         if (this.currentHealth - damageTaken > 0)
         {
             this.currentHealth -= damageTaken;
