@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,6 +19,7 @@ public class QuestController : MonoBehaviour
     public Transform questLocation;
 
     [SerializeField] private DialogueController dialogueController;
+    [SerializeField] private GameObject questLog;
 
     private string[] currentQuestCoords = new string[2];
 
@@ -46,6 +48,7 @@ public class QuestController : MonoBehaviour
     {
         if (activeQuest != null)
         {
+            UpdateQuestLog();
             switch (activeQuest.questType)
             {
                 case "KILL":
@@ -96,6 +99,7 @@ public class QuestController : MonoBehaviour
         this.activeQuest = givenQuest;
         this.givenQuest = null;
         PopupController.Popup.UpdatePopUp("QUEST START!");
+        questLog.SetActive(true);
     }
 
     public void RejectQuest()
@@ -104,9 +108,28 @@ public class QuestController : MonoBehaviour
         this.timer = 0;
     }
 
+    public void UpdateQuestLog()
+    {
+        if (!this.activeQuest) return;
+
+        switch(this.activeQuest.questType) {
+            case "KILL":
+                questLog.transform.Find("Quest Desc").GetComponent<TMP_Text>().text = $"{this.activeQuest.questType} {this.activeQuest.questAmount} {this.activeQuest.questObject}";
+                questLog.transform.Find("Tracker").GetComponent<TMP_Text>().text = $"{AnalyticsController.Analytics.enemiesKilled - this.killCount}/{this.activeQuest.questAmount}";
+                break;
+            case "GO TO":
+                questLog.transform.Find("Quest Desc").GetComponent<TMP_Text>().text = $"{this.activeQuest.questType} THE {this.activeQuest.questObject}";
+                questLog.transform.Find("Tracker").GetComponent<TMP_Text>().text = $"FOLLOW THE YELLOW MARKER";
+                break;
+            default:
+                break;
+        }
+    }
+
     public void FinishQuest(Quest givenQuest)
     {
         this.dialogueController.QuestFinishDialogue();
+        questLog.SetActive(false);
         this.activeQuest = null;
         this.timer = 0;
         this.hasMentionedHalf = false;
@@ -125,7 +148,7 @@ public class QuestController : MonoBehaviour
             this.dialogueController.ContinueDialogue("", 9);
             this.hasMentionedHalf = true;
         }
-
+        
         // Finished Quest
         if (AnalyticsController.Analytics.enemiesKilled >= (int.Parse(activeQuest.questAmount) + this.killCount))
         {
