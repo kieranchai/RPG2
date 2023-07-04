@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -23,6 +24,7 @@ public class ShopController : MonoBehaviour
         }
         shop = this;
         allWeapons = Resources.LoadAll<Weapon>("ScriptableObjects/Weapons");
+        allWeapons = allWeapons.Where(e => e.weaponName != "Training Glock").ToArray();
         Array.Sort(allWeapons, (a, b) => a.weaponId - b.weaponId);
 
         slots = new GameObject[shopPanel.transform.childCount];

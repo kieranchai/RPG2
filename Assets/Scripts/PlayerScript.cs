@@ -34,6 +34,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private TMP_Text playerPanelCash;
     [SerializeField] private TMP_Text playerWeaponAmmo;
     [SerializeField] private ParticleSystem bloodParticles;
+    [SerializeField] private Weapon starterWeapon;
 
     private GameObject[] slots;
 
@@ -68,6 +69,7 @@ public class PlayerScript : MonoBehaviour
             slots[i] = inventoryPanel.transform.GetChild(i).gameObject;
         }
 
+        EquipWeapon(this.starterWeapon);
         RefreshUI();
     }
 
@@ -102,7 +104,7 @@ public class PlayerScript : MonoBehaviour
         this.speed = characterData.speed;
         this.spritePath = characterData.spritePath;
         this.currentHealth = this.maxHealth;
-        this.cash = 800;
+        this.cash = 0;
         this.playerExperience = 0;
         this.playerLvl = 0;
         this.healthUpgradeLevel = 0;

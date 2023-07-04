@@ -5065,6 +5065,7 @@ MonoBehaviour:
   playerPanelCash: {fileID: 0}
   playerWeaponAmmo: {fileID: 0}
   bloodParticles: {fileID: 5297345434296869277}
+  starterWeapon: {fileID: 11400000, guid: faaa5982f1fc08a4896582d4148cc91f, type: 2}
   movementFilter:
     useTriggers: 0
     useLayerMask: 1
