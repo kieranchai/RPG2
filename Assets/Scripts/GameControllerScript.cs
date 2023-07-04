@@ -13,6 +13,7 @@ public class GameControllerScript : MonoBehaviour
     public bool isAlive = true;
     public bool gameOver = false;
     public bool hasPlayedTutorial = false;
+    public bool canAttack = true;
 
     void Awake()
     {
@@ -25,6 +26,7 @@ public class GameControllerScript : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         isPaused = false;
+        canAttack = true;
     }
 
     private void Update()
@@ -44,7 +46,7 @@ public class GameControllerScript : MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && canAttack)
             {
                 PlayerScript.Player.transform.GetChild(0).GetComponentInChildren<WeaponScript>().TryAttack();
             }

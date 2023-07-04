@@ -285,5 +285,9 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void EnableAttacking(bool canAttack)
+    {
+        GameControllerScript.GameController.canAttack = canAttack;
+    }
 }
 

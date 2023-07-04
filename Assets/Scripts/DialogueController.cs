@@ -79,9 +79,11 @@ public class DialogueController : MonoBehaviour
                 break;
             case "CLOSE":
                 //close dialogue, dialogueId most likely 0 so don't run code below
+                GameControllerScript.GameController.canAttack = true;
                 dialoguePanel.SetActive(false);
                 return;
             case "DONE":
+                GameControllerScript.GameController.canAttack = true;
                 GameControllerScript.GameController.hasPlayedTutorial = true;
                 dialoguePanel.SetActive(false);
                 return;

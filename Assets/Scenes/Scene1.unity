@@ -39552,6 +39552,7 @@ GameObject:
   - component: {fileID: 1844578630}
   - component: {fileID: 1844578629}
   - component: {fileID: 1844578628}
+  - component: {fileID: 1844578631}
   m_Layer: 5
   m_Name: Shop Panel
   m_TagString: Untagged
@@ -39644,6 +39645,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844578626}
   m_CullTransparentMesh: 1
+--- !u!114 &1844578631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844578626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2015672517}
+          m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+          m_MethodName: EnableAttacking
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2015672517}
+          m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+          m_MethodName: EnableAttacking
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1 &1876428816
 GameObject:
   m_ObjectHideFlags: 0
@@ -40065,6 +40111,7 @@ GameObject:
   - component: {fileID: 1935984691}
   - component: {fileID: 1935984693}
   - component: {fileID: 1935984692}
+  - component: {fileID: 1935984694}
   m_Layer: 5
   m_Name: Dialogue Panel
   m_TagString: Untagged
@@ -40158,6 +40205,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935984689}
   m_CullTransparentMesh: 1
+--- !u!114 &1935984694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935984689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2015672517}
+          m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+          m_MethodName: EnableAttacking
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2015672517}
+          m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
+          m_MethodName: EnableAttacking
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1 &1943051776
 GameObject:
   m_ObjectHideFlags: 0
@@ -40446,6 +40538,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5297345434556263172, guid: c17d4e8e4e47763429b331d04e4c61e7, type: 3}
   m_PrefabInstance: {fileID: 5297345435229737926}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2015672517 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5297345434556263171, guid: c17d4e8e4e47763429b331d04e4c61e7, type: 3}
+  m_PrefabInstance: {fileID: 5297345435229737926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55cc6eb54048374ba63fefda9522321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2016117702
 GameObject:
   m_ObjectHideFlags: 0

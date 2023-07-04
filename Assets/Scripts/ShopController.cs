@@ -43,6 +43,7 @@ public class ShopController : MonoBehaviour
 
     public void CloseShop()
     {
+        GameControllerScript.GameController.canAttack = true;
         shopPanel.SetActive(false);
     }
 
@@ -53,7 +54,8 @@ public class ShopController : MonoBehaviour
             PlayerScript.Player.EquipWeapon(weaponToBuy);
             PlayerScript.Player.cash -= weaponToBuy.cost;
             PlayerScript.Player.UpdateCash(-weaponToBuy.cost);
-        } else
+        }
+        else
         {
             //not enough money to buy
             return;
@@ -81,21 +83,24 @@ public class ShopController : MonoBehaviour
             slots[i].transform.Find("Name").GetComponent<Text>().text = availableWeapons[i].weaponName.ToUpper();
             slots[i].transform.Find("Cost").GetComponent<Text>().text = "$" + availableWeapons[i].cost.ToString();
 
-            if (availableWeapons[i].weaponType == "spread") {
+            if (availableWeapons[i].weaponType == "spread")
+            {
                 slots[i].transform.Find("Damage").GetComponent<Text>().text = availableWeapons[i].attackPower.ToString() + "X5 DMG";
-            }else {
+            }
+            else
+            {
                 slots[i].transform.Find("Damage").GetComponent<Text>().text = availableWeapons[i].attackPower.ToString() + " DMG";
             }
 
             slots[i].transform.Find("Fire Rate").GetComponent<Text>().text = availableWeapons[i].cooldown.ToString() + "/S";
             slots[i].transform.Find("Range").GetComponent<Text>().text = availableWeapons[i].weaponRange.ToString() + "M";
-            slots[i].transform.Find("Ammo Count").GetComponent<Text>().text = availableWeapons[i].ammoCount.ToString() +"X";
+            slots[i].transform.Find("Ammo Count").GetComponent<Text>().text = availableWeapons[i].ammoCount.ToString() + "X";
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             OpenShop();
             isOpen = true;
