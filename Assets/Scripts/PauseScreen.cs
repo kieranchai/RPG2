@@ -88,12 +88,12 @@ public class PauseScreen : MonoBehaviour
 
         string file = Application.persistentDataPath + $"/{FileName}.csv";
         TextWriter tw = new StreamWriter(file, false);
-        tw.WriteLine("Enemies Killed, Damage Taken, Damage Dealt, Time Played (s), Experience Gained");
+        tw.WriteLine("Enemies Killed, Damage Taken, Damage Dealt, Time Played (s), Experience Gained, Quest Completed");
         tw.Close();
 
         tw = new StreamWriter(file, true);
 
-        tw.WriteLine(AnalyticsController.Analytics.enemiesKilled.ToString() + "," + AnalyticsController.Analytics.damageTaken.ToString() + "," + AnalyticsController.Analytics.damageDealt.ToString() + "," + AnalyticsController.Analytics.timePlayed.ToString() + "," + AnalyticsController.Analytics.experienceGained.ToString());
+        tw.WriteLine(AnalyticsController.Analytics.enemiesKilled.ToString() + "," + AnalyticsController.Analytics.damageTaken.ToString() + "," + AnalyticsController.Analytics.damageDealt.ToString() + "," + AnalyticsController.Analytics.timePlayed.ToString() + "," + AnalyticsController.Analytics.experienceGained.ToString() + "," + AnalyticsController.Analytics.questCompleted.ToString());
         tw.Close();
     }
 

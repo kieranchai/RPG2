@@ -270,6 +270,7 @@ public class EnemyScript : MonoBehaviour
             }
         }
         PlayerScript.Player.UpdateExperience(this.xpDrop);
+        AnalyticsController.Analytics.CheckAchievements("KILL");
     }
 
     public void Attack()
@@ -337,4 +338,5 @@ public class EnemyScript : MonoBehaviour
             return false;
         }
     }
+
 }

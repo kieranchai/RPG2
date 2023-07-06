@@ -11,6 +11,7 @@ public class CSVtoSO
     private static string dialogueCSVPath = "/Assets/Editor/CSVs/DialogueCSV.csv";
     private static string modifierCSVPath = "/Assets/Editor/CSVs/ModifierCSV.csv";
     private static string upgradesCSVPath = "/Assets/Editor/CSVs/UpgradesCSV.csv";
+    private static string achievementCSVPath = "/Assets/Editor/CSVs/AchievementCSV.csv";
 
     [MenuItem("Utilities/Generate Characters")]
     public static void GenerateCharacters()
@@ -213,6 +214,33 @@ public class CSVtoSO
             AssetDatabase.CreateAsset(upgrades, $"Assets/Resources/ScriptableObjects/Upgrades/{upgrades.upgradeId}.asset");
         }
 
+        AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Utilities/Generate Achievments")]
+    public static void GenerateAchievements()
+    {
+
+        string[] allLines = File.ReadAllLines(System.IO.Directory.GetCurrentDirectory() + achievementCSVPath);
+
+        foreach (string s in allLines)
+        {
+            string[] splitData = s.Split(',');
+
+            if (splitData.Length != 5)
+            {
+                return;
+            }
+
+            Achievement achievement = ScriptableObject.CreateInstance<Achievement>();
+            achievement.achId = int.Parse(splitData[0]);
+            achievement.achName = splitData[1];
+            achievement.achDesc = splitData[2];
+            achievement.achType = splitData[3];
+            achievement.achValue = splitData[4];
+            achievement.isCompleted = false;
+            AssetDatabase.CreateAsset(achievement, $"Assets/Resources/ScriptableObjects/Achievement/{achievement.achId}.asset");
+        }
         AssetDatabase.SaveAssets();
     }
 }

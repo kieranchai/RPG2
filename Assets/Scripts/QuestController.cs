@@ -138,6 +138,8 @@ public class QuestController : MonoBehaviour
         PlayerScript.Player.cash += givenQuest.cashReward;
         PlayerScript.Player.UpdateCash(givenQuest.cashReward);
         PlayerScript.Player.UpdateExperience(givenQuest.xpReward);
+        AnalyticsController.Analytics.questCompleted++;
+        AnalyticsController.Analytics.CheckAchievements("QUEST");
     }
 
     public void KillQuestProgress()

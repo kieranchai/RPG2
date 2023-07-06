@@ -139,6 +139,7 @@ public class PlayerScript : MonoBehaviour
             transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().SetWeaponData(weaponData);
         }
         RefreshUI();
+        AnalyticsController.Analytics.CheckAchievements("WEAPON");
     }
 
     public void AddToInventory(Weapon weaponData)
