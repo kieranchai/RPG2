@@ -40,7 +40,8 @@ public class EnemyScript : MonoBehaviour
     {
         CHASE,
         PATROL,
-        ATTACK
+        ATTACK,
+        DIED
     };
 
     EnemyState currentState = EnemyState.PATROL;
@@ -71,7 +72,7 @@ public class EnemyScript : MonoBehaviour
         SetEnemyData(Resources.LoadAll<Enemy>("ScriptableObjects/Enemies")[Random.Range(0, Resources.LoadAll<Enemy>("ScriptableObjects/Enemies").Length)]);
         this.currentState = EnemyState.PATROL;
         targetDirection = transform.up;
-        changeDirectionCooldown = 1f;
+        changeDirectionCooldown = 0.5f;
         anim.SetBool("isWalking", true);
     }
 
@@ -88,6 +89,9 @@ public class EnemyScript : MonoBehaviour
                 break;
             case EnemyState.ATTACK:
                 Attack();
+                break;
+            case EnemyState.DIED:
+                Died();
                 break;
             default:
                 break;
@@ -160,7 +164,7 @@ public class EnemyScript : MonoBehaviour
             Quaternion rotation = Quaternion.AngleAxis(angleChange, transform.forward);
             targetDirection = rotation * targetDirection;
             transform.up = targetDirection;
-            changeDirectionCooldown = Random.Range(1, 5);
+            changeDirectionCooldown = Random.Range(1, 2);
         }
 
         //if sees player switch to chase
@@ -201,7 +205,7 @@ public class EnemyScript : MonoBehaviour
                     Quaternion rotation = Quaternion.AngleAxis(angleChange, transform.forward);
                     targetDirection = rotation * targetDirection;
                     transform.up = targetDirection;
-                    changeDirectionCooldown = Random.Range(1, 5);
+                    changeDirectionCooldown = Random.Range(1, 2);
                 }
             }
             else
@@ -221,7 +225,7 @@ public class EnemyScript : MonoBehaviour
                         Quaternion rotation = Quaternion.AngleAxis(angleChange, transform.forward);
                         targetDirection = rotation * targetDirection;
                         transform.up = targetDirection;
-                        changeDirectionCooldown = Random.Range(1, 5);
+                        changeDirectionCooldown = Random.Range(1, 2);
                     }
 
                 }
@@ -255,7 +259,6 @@ public class EnemyScript : MonoBehaviour
     {
         AnalyticsController.Analytics.enemiesKilled++;
         Spawner.currentEnemies--;
-        Destroy(gameObject);
 
         //can instantiate money on ground oso then pick up
         int randomWeight = Random.Range(0, this.weightedAmt);
@@ -271,6 +274,16 @@ public class EnemyScript : MonoBehaviour
         }
         PlayerScript.Player.UpdateExperience(this.xpDrop);
         AnalyticsController.Analytics.CheckAchievements("KILL");
+
+        this.currentState = EnemyState.DIED;
+    }
+
+    public void Died()
+    {
+        anim.enabled = false;
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>($"Sprites/{this.enemyName}_Death");
+        Destroy(gameObject, 1f);
     }
 
     public void Attack()
