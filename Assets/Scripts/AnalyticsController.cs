@@ -84,60 +84,51 @@ public class AnalyticsController : MonoBehaviour
     {
         switch (type)
         {
-            case ("KILL"):
+            case "KILL":
                 foreach (Achievement ach in killAchievements)
                 {
-                    if (!ach.isCompleted)
+                    if (ach.isCompleted) break;
+                    if (enemiesKilled >= int.Parse(ach.achValue))
                     {
-                        if (enemiesKilled >= int.Parse(ach.achValue))
-                        {
-                            ach.isCompleted = true;
-                            PopUpNotif(ach);
-                        }
+                        ach.isCompleted = true;
+                        PopUpNotif(ach);
                     }
                 }
                 break;
-            case ("QUEST"):
+            case "QUEST":
                 foreach (Achievement ach in questAchievements)
                 {
-                    if (!ach.isCompleted)
+                    if (ach.isCompleted) break;
+                    if (questCompleted >= int.Parse(ach.achValue))
                     {
-                        if (questCompleted >= int.Parse(ach.achValue))
-                        {
-                            ach.isCompleted = true;
-                            PopUpNotif(ach);
-                        }
-
+                        ach.isCompleted = true;
+                        PopUpNotif(ach);
                     }
                 }
                 break;
-            case ("TIME"):
+            case "TIME":
                 foreach (Achievement ach in timeAchievements)
                 {
-                    if (!ach.isCompleted)
+                    if (ach.isCompleted) break;
+                    if (this.timePlayed >= int.Parse(ach.achValue))
                     {
-                        if (this.timePlayed >= int.Parse(ach.achValue))
-                        {
-                            ach.isCompleted = true;
-                            PopUpNotif(ach);
-                        }
+                        ach.isCompleted = true;
+                        PopUpNotif(ach);
                     }
                 }
                 break;
-            case ("WEAPON"):
+            case "WEAPON":
                 foreach (Achievement ach in weaponAchievements)
                 {
-                    if (!ach.isCompleted)
+                    if (ach.isCompleted) break;
+                    if (PlayerScript.Player.equippedWeapon.weaponName.ToString() == ach.achValue)
                     {
-                        if (PlayerScript.Player.equippedWeapon.weaponName.ToString() == ach.achValue)
-                        {
-                            ach.isCompleted = true;
-                            PopUpNotif(ach);
-                        }
+                        ach.isCompleted = true;
+                        PopUpNotif(ach);
                     }
                 }
                 break;
-            default: 
+            default:
                 break;
         }
     }
