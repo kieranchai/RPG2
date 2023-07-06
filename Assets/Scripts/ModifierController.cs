@@ -6,7 +6,6 @@ public class ModifierController : MonoBehaviour
     public static ModifierController Modifier { get; private set; }
     public float apMod;
     public float speedMod;
-    public int respectLvl;
     public int xpNeeded;
     public Modifier[] allMods;
 
@@ -24,12 +23,11 @@ public class ModifierController : MonoBehaviour
 
     private void Start()
     {
-        apMod = 1;
-        speedMod = 1;
-        respectLvl = 1;
-        xpNeeded = 100;
         allMods = Resources.LoadAll<Modifier>("ScriptableObjects/Modifiers");
         Array.Sort(allMods, (a,b)=>a.modId-b.modId);
+        this.apMod = allMods[0].apMod;
+        this.speedMod = allMods[0].speedMod;
+        this.xpNeeded = allMods[0].xpNeeded;
     }
 
     public void UpdateModifiers()

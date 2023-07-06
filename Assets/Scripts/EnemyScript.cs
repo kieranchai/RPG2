@@ -27,7 +27,7 @@ public class EnemyScript : MonoBehaviour
     public float collisionOffset;
 
     private float timer = 0;
-    private float duration = 3f;
+    private float duration = 2f;
 
     private Vector3 playerLastSeenPos;
 

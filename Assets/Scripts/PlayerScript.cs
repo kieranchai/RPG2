@@ -106,7 +106,7 @@ public class PlayerScript : MonoBehaviour
         this.currentHealth = this.maxHealth;
         this.cash = 0;
         this.playerExperience = 0;
-        this.playerLvl = 0;
+        this.playerLvl = 1;
         this.healthUpgradeLevel = 0;
         this.speedUpgradeLevel = 0;
 
@@ -117,6 +117,7 @@ public class PlayerScript : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(true);
         UpdateCash(this.cash);
         UpdateHealth();
+        UpdateExperience(this.playerExperience);
         GameControllerScript.GameController.isAlive = true;
     }
 
