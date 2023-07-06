@@ -14,15 +14,17 @@ public class AnalyticsController : MonoBehaviour
     public int timePlayed = 0;
     public int experienceGained = 0;
     public int questCompleted = 0;
-    public Achievement[] allAchievement;
-    public Achievement[] questAchievement;
-    public Achievement[] killAchievement;
-    public Achievement[] timeAchievment;
-    public Achievement[] weaponAchievment;
+    public Achievement[] allAchievements;
+    public Achievement[] questAchievements;
+    public Achievement[] killAchievements;
+    public Achievement[] timeAchievements;
+    public Achievement[] weaponAchievements;
 
     private float timer;
 
     [SerializeField] private GameObject statisticsDisplay;
+    [SerializeField] private GameObject notifPanel;
+    [SerializeField] private GameObject notifPrefab;
 
     private void Awake()
     {
@@ -33,24 +35,25 @@ public class AnalyticsController : MonoBehaviour
         }
         Analytics = this;
 
-        allAchievement = Resources.LoadAll<Achievement>("ScriptableObjects/Achievement");
-        Array.Sort(allAchievement, (a, b) => a.achId - b.achId);
+        allAchievements = Resources.LoadAll<Achievement>("ScriptableObjects/Achievement");
+        Array.Sort(allAchievements, (a, b) => a.achId - b.achId);
 
-        foreach (Achievement ach in allAchievement) {
+        foreach (Achievement ach in allAchievements)
+        {
             ach.isCompleted = false;
         }
 
-        questAchievement = Array.FindAll(allAchievement, element => element.achType == "QUEST");
-        Array.Sort(questAchievement, (a, b) => a.achId - b.achId);
+        questAchievements = Array.FindAll(allAchievements, element => element.achType == "QUEST");
+        Array.Sort(questAchievements, (a, b) => a.achId - b.achId);
 
-        killAchievement = Array.FindAll(allAchievement, element => element.achType == "KILL");
-        Array.Sort(killAchievement, (a, b) => a.achId - b.achId);
+        killAchievements = Array.FindAll(allAchievements, element => element.achType == "KILL");
+        Array.Sort(killAchievements, (a, b) => a.achId - b.achId);
 
-        timeAchievment = Array.FindAll(allAchievement, element => element.achType == "TIMEPLAYED");
-        Array.Sort(timeAchievment, (a, b) => a.achId - b.achId);
+        timeAchievements = Array.FindAll(allAchievements, element => element.achType == "TIMEPLAYED");
+        Array.Sort(timeAchievements, (a, b) => a.achId - b.achId);
 
-        weaponAchievment = Array.FindAll(allAchievement, element => element.achType == "WEAPON");
-        Array.Sort(weaponAchievment, (a, b) => a.achId - b.achId);
+        weaponAchievements = Array.FindAll(allAchievements, element => element.achType == "WEAPON");
+        Array.Sort(weaponAchievements, (a, b) => a.achId - b.achId);
     }
 
     private void Update()
@@ -71,62 +74,71 @@ public class AnalyticsController : MonoBehaviour
         statisticsDisplay.transform.Find("STATS_QC").GetComponent<Text>().text = this.questCompleted.ToString();
     }
 
+    public void PopUpNotif(Achievement ach)
+    {
+        GameObject notif = Instantiate(notifPrefab, notifPanel.transform);
+        notif.GetComponent<Notification>().Initialise(ach.achName, ach.achDesc);
+    }
+
     public void CheckAchievements(string type)
     {
         switch (type)
         {
             case ("KILL"):
-                Debug.Log("Check achkill");
-                foreach (Achievement ach in killAchievement)
+                foreach (Achievement ach in killAchievements)
                 {
-                    // Debug.Log(ach.achName);
                     if (!ach.isCompleted)
                     {
                         if (enemiesKilled >= int.Parse(ach.achValue))
                         {
                             ach.isCompleted = true;
-                            Debug.Log(ach.achName + " IS COMPLETED");
-                            //display popup
+                            PopUpNotif(ach);
                         }
                     }
                 }
                 break;
             case ("QUEST"):
-                foreach (Achievement ach in questAchievement)
+                foreach (Achievement ach in questAchievements)
                 {
                     if (!ach.isCompleted)
                     {
                         if (questCompleted >= int.Parse(ach.achValue))
                         {
                             ach.isCompleted = true;
-                            Debug.Log(ach.achName + " IS COMPLETED");
+                            PopUpNotif(ach);
                         }
 
                     }
                 }
                 break;
             case ("TIME"):
-                foreach (Achievement ach in timeAchievment) {
-                    if (!ach.isCompleted) {
-                        if (this.timePlayed >= int.Parse(ach.achValue)) {
+                foreach (Achievement ach in timeAchievements)
+                {
+                    if (!ach.isCompleted)
+                    {
+                        if (this.timePlayed >= int.Parse(ach.achValue))
+                        {
                             ach.isCompleted = true;
-                            Debug.Log(ach.achName + " IS COMPLETED");
+                            PopUpNotif(ach);
                         }
                     }
                 }
                 break;
             case ("WEAPON"):
-                foreach (Achievement ach in weaponAchievment) {
-                    if (!ach.isCompleted) {
-                        Debug.Log("equipped weapon is " + PlayerScript.Player.equippedWeapon.ToString() + " " + ach.achValue);
-                        if (PlayerScript.Player.equippedWeapon.weaponName.ToString() == ach.achValue) {
+                foreach (Achievement ach in weaponAchievements)
+                {
+                    if (!ach.isCompleted)
+                    {
+                        if (PlayerScript.Player.equippedWeapon.weaponName.ToString() == ach.achValue)
+                        {
                             ach.isCompleted = true;
-                            Debug.Log(ach.achName + " IS COMPLETED");
+                            PopUpNotif(ach);
                         }
                     }
                 }
                 break;
-            default: break;
+            default: 
+                break;
         }
     }
 }
