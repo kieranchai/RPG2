@@ -19,7 +19,7 @@ MonoBehaviour:
   thumbnailPath: Sprites/UI/RPG 7
   weaponType: explosive
   cooldown: 0.5
-  weaponRange: 5
+  weaponRange: 10
   ammoCount: 4
-  cost: 400
+  cost: 1000
   reloadSpeed: 5

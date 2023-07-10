@@ -7,6 +7,7 @@ public class ExplosionScript : MonoBehaviour
     private float splashRange;
     public float explosionRate;
     private float attackPower;
+    [SerializeField] private AudioSource audioSource;
 
     void Start()
     {
@@ -17,6 +18,8 @@ public class ExplosionScript : MonoBehaviour
     {
         this.attackPower = attackPower;
         this.splashRange = splashRange;
+        audioSource.volume = AudioManager.sfxVol;
+        AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
     }
 
     void Update()

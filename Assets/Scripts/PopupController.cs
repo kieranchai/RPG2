@@ -40,7 +40,9 @@ public class PopupController: MonoBehaviour
     public void SetDeathPopUp()
     {
         StopCoroutine(Wait());
-        popupText.text = this.deathTexts[Random.Range(0,this.deathTexts.Length)];
+        string deathText = this.deathTexts[Random.Range(0,this.deathTexts.Length)];
+        AudioManager.instance.PlaySFX(deathText);
+        popupText.text = deathText;
     }
 
 }

@@ -176,4 +176,16 @@ MonoBehaviour:
   sfxSounds:
   - name: Menu Hover
     clip: {fileID: 8300000, guid: 6bf855329007b564b980380e89ae876c, type: 3}
+  - name: Shop Purchase
+    clip: {fileID: 8300000, guid: 4e704e658c88a934cb5ec9e68e5f2d52, type: 3}
+  - name: WASTED!
+    clip: {fileID: 0}
+  - name: SHOCKING!
+    clip: {fileID: 0}
+  - name: Quest Pop Up
+    clip: {fileID: 0}
+  - name: Quest Accept
+    clip: {fileID: 0}
+  - name: Quest Finish
+    clip: {fileID: 0}
   sfxSource: {fileID: 4948283453890244656}

@@ -60,6 +60,8 @@ public class EnemyScript : MonoBehaviour
     List<Loot> availLoot = new List<Loot>();
     private string[] availLootString;
 
+    [SerializeField] private AudioSource audioSource;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -70,6 +72,7 @@ public class EnemyScript : MonoBehaviour
     {
         allWeapons = ShopController.shop.allWeapons;
         SetEnemyData(Resources.LoadAll<Enemy>("ScriptableObjects/Enemies")[Random.Range(0, Resources.LoadAll<Enemy>("ScriptableObjects/Enemies").Length)]);
+        audioSource.volume = AudioManager.sfxVol;
         this.currentState = EnemyState.PATROL;
         targetDirection = transform.up;
         changeDirectionCooldown = 0.5f;
@@ -246,11 +249,19 @@ public class EnemyScript : MonoBehaviour
         if (this.currentHealth - damageTaken > 0)
         {
             this.currentHealth -= damageTaken;
+
+            /*        audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyName}_Hit");
+audioSource.Play();*/
+
             this.currentState = EnemyState.CHASE;
         }
         else
         {
             this.currentHealth -= damageTaken;
+
+            /*        audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyDeath}_Hit");
+audioSource.Play();*/
+
             EnemyDeath();
         }
     }

@@ -17,6 +17,6 @@ MonoBehaviour:
   maxHealth: 50
   speed: 1
   spritePath: Sprites/Boomer
-  equippedWeaponName: Mag 7
+  equippedWeaponName: Desert Eagle
   xpDrop: 15
   cashDrop: 100@70#250@50#500@15

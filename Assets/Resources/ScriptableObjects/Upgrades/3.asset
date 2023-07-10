@@ -15,5 +15,5 @@ MonoBehaviour:
   upgradeId: 3
   upgradeType: HEALTH
   upgradeLevel: 3
-  upgradeModifier: 5
-  upgradeCost: 300
+  upgradeModifier: 20
+  upgradeCost: 350

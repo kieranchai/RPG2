@@ -54,6 +54,7 @@ public class ShopController : MonoBehaviour
             PlayerScript.Player.EquipWeapon(weaponToBuy);
             PlayerScript.Player.cash -= weaponToBuy.cost;
             PlayerScript.Player.UpdateCash(-weaponToBuy.cost);
+            AudioManager.instance.PlaySFX("Shop Purchase");
         }
         else
         {

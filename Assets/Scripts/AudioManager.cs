@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource sfxSource;
 
     public static AudioManager instance;
-    public static float sfxVol = 0.5f;
+    public static float sfxVol = 0.2f;
 
     private void Awake()
     {
@@ -38,6 +38,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             sfxSource.clip = s.clip;
+            sfxSource.volume = sfxVol;
             sfxSource.Play();
         }
     }

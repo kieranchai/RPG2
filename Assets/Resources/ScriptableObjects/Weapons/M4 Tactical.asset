@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponId: 1
   weaponName: M4 Tactical
-  attackPower: 5
+  attackPower: 3
   spritePath: Sprites/M4 Tactical
   thumbnailPath: Sprites/UI/M4 Tactical
   weaponType: line
   cooldown: 0.2
-  weaponRange: 10
-  ammoCount: 30
-  cost: 200
-  reloadSpeed: 2.5
+  weaponRange: 8
+  ammoCount: 25
+  cost: 600
+  reloadSpeed: 2

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponId: 2
   weaponName: Desert Eagle
-  attackPower: 10
+  attackPower: 5
   spritePath: Sprites/Desert Eagle
   thumbnailPath: Sprites/UI/Desert Eagle
   weaponType: line
-  cooldown: 0.5
-  weaponRange: 5
+  cooldown: 0.7
+  weaponRange: 6
   ammoCount: 6
-  cost: 60
-  reloadSpeed: 1
+  cost: 200
+  reloadSpeed: 2

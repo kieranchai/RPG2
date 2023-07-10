@@ -45,6 +45,8 @@ public class PlayerScript : MonoBehaviour
     private float lastHitTime;
     private float regenTimer = 3f;
 
+    [SerializeField] private AudioSource audioSource;
+
     private void Awake()
     {
         if (Player != null && Player != this)
@@ -62,7 +64,7 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         SetPlayerData(GameControllerScript.GameController.selectedCharacter);
-
+        audioSource.volume = AudioManager.sfxVol;
         slots = new GameObject[inventoryPanel.transform.childCount];
         for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {
@@ -233,6 +235,10 @@ public class PlayerScript : MonoBehaviour
     {
         if (!GameControllerScript.GameController.isAlive) return;
         currentHealth -= damageTaken;
+
+/*        audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.characterName}_Hit");
+        audioSource.Play();*/
+
         bloodParticles.Play();
         AnalyticsController.Analytics.damageTaken += damageTaken;
         this.lastHitTime = 0;

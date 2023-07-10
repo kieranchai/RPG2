@@ -20,6 +20,6 @@ MonoBehaviour:
   weaponType: spread
   cooldown: 0.5
   weaponRange: 5
-  ammoCount: 11
-  cost: 200
-  reloadSpeed: 3
+  ammoCount: 5
+  cost: 350
+  reloadSpeed: 2.4

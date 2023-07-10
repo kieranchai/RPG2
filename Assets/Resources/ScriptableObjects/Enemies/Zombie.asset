@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyId: 2
   enemyName: Zombie
-  maxHealth: 15
-  speed: 5
+  maxHealth: 20
+  speed: 3.5
   spritePath: Sprites/Zombie
-  equippedWeaponName: Desert Eagle
-  xpDrop: 10
+  equippedWeaponName: Mag 7
+  xpDrop: 5
   cashDrop: 20@70#120@50#370@15
