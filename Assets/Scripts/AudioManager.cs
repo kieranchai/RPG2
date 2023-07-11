@@ -7,11 +7,12 @@ public class AudioManager : MonoBehaviour
 {
 
     //Array to store audio files
-    public Sound[] sfxSounds;
-    public AudioSource sfxSource;
+    public Sound[] sfxSounds, bgmSounds;
+    public AudioSource sfxSource, bgmSource;
 
     public static AudioManager instance;
     public static float sfxVol = 0.2f;
+    public static float bgmVol = 0.2f;
 
     private void Awake()
     {
@@ -26,6 +27,36 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+
+    private void Start()
+    {
+        PlayBGM("City Ambience");
+    }
+
+    public void PlayBGM(string name)
+    {
+        Sound s = Array.Find(bgmSounds, x => x.name == name);
+
+        if (s == null)
+        {
+            Debug.Log("Audio Not Found");
+        }
+        else
+        {
+            bgmSource.clip = s.clip;
+            bgmSource.volume = bgmVol;
+            bgmSource.Play();
+        }
+    }
+
+    public void StopBGM()
+    {
+        if (gameObject != null)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void PlaySFX(string name)
     {
         Sound s = Array.Find(sfxSounds, x => x.name == name);
@@ -34,7 +65,6 @@ public class AudioManager : MonoBehaviour
         {
             Debug.Log("Audio Not Found");
         }
-
         else
         {
             sfxSource.clip = s.clip;
