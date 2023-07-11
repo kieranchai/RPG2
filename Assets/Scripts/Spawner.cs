@@ -5,8 +5,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private Transform[] spawnLocations;
     [SerializeField] float spawnerOverlapRadius;
+    private EnemySpawn[] allSpawners;
 
     private int totalEnemies;
     public static int currentEnemies;
@@ -15,6 +15,8 @@ public class Spawner : MonoBehaviour
     {
         this.totalEnemies = 10;
         currentEnemies = 0;
+
+        allSpawners = Resources.LoadAll<EnemySpawn>("ScriptableObjects/Enemy Spawn");
     }
 
     private void Update()
@@ -25,7 +27,8 @@ public class Spawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        Vector3 spawnPos = spawnLocations[Random.Range(0, spawnLocations.Length)].position;
+        string[] selectedSpawnLocation = allSpawners[Random.Range(0, allSpawners.Length)].spawnLocation.Split('#');
+        Vector3 spawnPos = new Vector2(float.Parse(selectedSpawnLocation[0]), float.Parse(selectedSpawnLocation[1]));
         Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, spawnerOverlapRadius);
         foreach (Collider2D collider in colliders)
         {

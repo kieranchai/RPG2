@@ -77,11 +77,10 @@ public class QuestController : MonoBehaviour
         givenQuest = allQuests[Random.Range(0, allQuests.Length)];
 
         AudioManager.instance.PlaySFX("Quest Ringing");
-        StartCoroutine("QuestwaitForSeconds");
-        // Pass Quest to Dialogue
+        StartCoroutine("QuestWaitForSeconds");
     }
 
-    IEnumerator QuestwaitForSeconds() {
+    IEnumerator QuestWaitForSeconds() {
         yield return new WaitForSeconds(2f);
         AudioManager.instance.sfxSource.Stop();
         this.dialogueController.StartDialogue(givenQuest);

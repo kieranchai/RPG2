@@ -333,7 +333,11 @@ audioSource.Play();*/
         bool inRange = Vector3.Distance(PlayerScript.Player.transform.position, transform.position) <= equippedWeapon.weaponRange;
         float sightAngle = Vector2.Angle(PlayerScript.Player.transform.position - transform.position, transform.up);
 
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, PlayerScript.Player.transform.position, 1 << LayerMask.NameToLayer("Tilemap Colliders"));
+        int mask1 = 1 << LayerMask.NameToLayer("Tilemap Colliders");
+        int mask2 = 1 << LayerMask.NameToLayer("Safe Area");
+        int combinedMask = mask1 | mask2;
+
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, PlayerScript.Player.transform.position, combinedMask);
         if (hit.collider != null)
         {
             return false;

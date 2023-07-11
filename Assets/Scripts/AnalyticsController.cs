@@ -93,10 +93,8 @@ public class AnalyticsController : MonoBehaviour
         switch (type)
         {
             case "KILL":
-                Debug.Log("enemiese killed is " + enemiesKilled);
                 foreach (Achievement ach in killAchievements)
                 {
-                    Debug.Log("ach value is " + ach.achValue);
                     if (ach.isCompleted) continue;
                     if (enemiesKilled >= int.Parse(ach.achValue))
                     {

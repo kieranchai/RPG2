@@ -12,6 +12,7 @@ public class CSVtoSO
     private static string modifierCSVPath = "/Assets/Editor/CSVs/ModifierCSV.csv";
     private static string upgradesCSVPath = "/Assets/Editor/CSVs/UpgradesCSV.csv";
     private static string achievementCSVPath = "/Assets/Editor/CSVs/AchievementCSV.csv";
+    private static string enemySpawnCSVPath = "/Assets/Editor/CSVs/EnemySpawnCSV.csv";
 
     [MenuItem("Utilities/Generate Characters")]
     public static void GenerateCharacters()
@@ -240,6 +241,29 @@ public class CSVtoSO
             achievement.achValue = splitData[4];
             achievement.isCompleted = false;
             AssetDatabase.CreateAsset(achievement, $"Assets/Resources/ScriptableObjects/Achievement/{achievement.achId}.asset");
+        }
+        AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Utilities/Generate Enemy Spawn")]
+    public static void GenerateEnemySpawn()
+    {
+
+        string[] allLines = File.ReadAllLines(System.IO.Directory.GetCurrentDirectory() + enemySpawnCSVPath);
+
+        foreach (string s in allLines)
+        {
+            string[] splitData = s.Split(',');
+
+            if (splitData.Length != 2)
+            {
+                return;
+            }
+
+            EnemySpawn enemySpawn = ScriptableObject.CreateInstance<EnemySpawn>();
+            enemySpawn.enemySpawnId = int.Parse(splitData[0]);
+            enemySpawn.spawnLocation = splitData[1];
+            AssetDatabase.CreateAsset(enemySpawn, $"Assets/Resources/ScriptableObjects/Enemy Spawn/{enemySpawn.enemySpawnId}.asset");
         }
         AssetDatabase.SaveAssets();
     }

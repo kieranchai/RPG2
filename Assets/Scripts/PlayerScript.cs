@@ -205,13 +205,6 @@ public class PlayerScript : MonoBehaviour
 
     public void UpdateHealth()
     {
-        // for (int i = 0; i < playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts.Length; i++)
-        // {
-        //     if (i >= currentHealth)
-        //     {
-        //         playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts[playerStatsPanel.transform.Find("Health").GetComponent<HealthUI>().hearts.Length - 1 - i].enabled = false;
-        //     }
-        // }
         playerStatsPanel.GetComponent<HealthBarScript>().updateHealthBar();
     }
 
@@ -286,10 +279,6 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            /*            foreach (RaycastHit2D hit in castCollisions)
-                        {
-                            print(hit.ToString());
-                        }*/
             return false;
         }
     }
