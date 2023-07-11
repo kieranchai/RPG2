@@ -121,6 +121,8 @@ public class PlayerScript : MonoBehaviour
         UpdateHealth();
         UpdateExperience(this.playerExperience);
         GameControllerScript.GameController.isAlive = true;
+
+        AudioManager.instance.PlayBGM("City Ambience");
     }
 
     public void EquipWeapon(Weapon weaponData)

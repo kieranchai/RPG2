@@ -27,12 +27,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
-    private void Start()
-    {
-        PlayBGM("City Ambience");
-    }
-
     public void PlayBGM(string name)
     {
         Sound s = Array.Find(bgmSounds, x => x.name == name);

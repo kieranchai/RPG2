@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3967085613358676701, guid: a86b10fe79569694caaad3fc70a14851, type: 3}
-  spawnerOverlapRadius: 0.5
+  spawnerOverlapRadius: 0.7
 --- !u!4 &29331882
 Transform:
   m_ObjectHideFlags: 0
@@ -41114,7 +41114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 225.87318, y: 177.22578}
+  m_AnchoredPosition: {x: 225.87317, y: 177.22578}
   m_SizeDelta: {x: -451.7463, y: -354.4516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &210012708
