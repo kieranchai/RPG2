@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5
   m_EditorClassIdentifier: 
   achId: 5
-  achName: Addicted
+  achName: ADDICTED
   achDesc: Obtain a total of achValue minutes in playtime
   achType: TIMEPLAYED
   achValue: 300

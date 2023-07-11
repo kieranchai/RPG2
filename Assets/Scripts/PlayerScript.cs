@@ -241,6 +241,7 @@ public class PlayerScript : MonoBehaviour
 
         bloodParticles.Play();
         AnalyticsController.Analytics.damageTaken += damageTaken;
+        AnalyticsController.Analytics.CheckAchievements("DAMAGETAKEN");
         this.lastHitTime = 0;
         UpdateHealth();
         if (currentHealth <= 0)

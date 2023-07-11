@@ -245,6 +245,7 @@ public class EnemyScript : MonoBehaviour
     {
         playerLastSeenPos = PlayerScript.Player.transform.position;
         AnalyticsController.Analytics.damageDealt += damageTaken;
+        AnalyticsController.Analytics.CheckAchievements("DAMAGEDEALT");
         bloodParticles.Play();
         if (this.currentHealth - damageTaken > 0)
         {

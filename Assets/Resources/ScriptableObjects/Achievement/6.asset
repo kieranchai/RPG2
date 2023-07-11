@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 6
   m_EditorClassIdentifier: 
   achId: 6
-  achName: BOOM
+  achName: BOOM!!!
   achDesc: Obtain the achValue
   achType: WEAPON
   achValue: RPG 7

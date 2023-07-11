@@ -1,6 +1,13 @@
-1,Quest Lover I,Complete achValue quests,QUEST,3
-2,Quest Lover II,Complete achValue quests,QUEST,5
-3,Murder Lover,Kill achValue enemies,KILL,3
-4,Murder Lover II,Kill achValue enemies,KILL,5
-5,Addicted,Obtain a total of achValue minutes in playtime,TIMEPLAYED,300
-6,BOOM,Obtain the achValue,WEAPON,RPG 7
+1,QUEST LOVER,Complete achValue quests,QUEST,3
+2,QUEST LOVER II,Complete achValue quests,QUEST,5
+3,YOU THINK YOU'RE THE KING?,Kill achValue enemies,KILL,3
+4,YOU AND WHAT ARMY?,Kill achValue enemies,KILL,5
+5,ADDICTED,Obtain a total of achValue minutes in playtime,TIMEPLAYED,300
+6,BOOM!!!,Obtain the achValue,WEAPON,RPG 7
+7,IM THE KING,Kill achValue enemies,KILL,10
+8,YOU CANT TOUCH ME!,Deal achValue damage,DAMAGEDEALT,100
+9,WANT SOME MORE?,Deal achValue damage,DAMAGEDEALT,200
+10,GRIMACE SHAKED,Deal achValue damage,DAMAGEDEALT,300
+11,IS THAT ALL YOU GOT?,Take achValue damage,DAMAGETAKEN,100
+12,IM STILL STANDING,Take achValue damage,DAMAGETAKEN,200
+13,I CAN DO THIS ALL DAY,Take achValue damage,DAMAGETAKEN,300

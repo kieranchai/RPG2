@@ -19,6 +19,8 @@ public class AnalyticsController : MonoBehaviour
     public Achievement[] killAchievements;
     public Achievement[] timeAchievements;
     public Achievement[] weaponAchievements;
+    public Achievement[] damageDealtAchievements;
+    public Achievement[] damageTakenAchievements;
 
     private float timer;
 
@@ -54,6 +56,12 @@ public class AnalyticsController : MonoBehaviour
 
         weaponAchievements = Array.FindAll(allAchievements, element => element.achType == "WEAPON");
         Array.Sort(weaponAchievements, (a, b) => a.achId - b.achId);
+
+        damageDealtAchievements = Array.FindAll(allAchievements, element => element.achType == "DAMAGEDEALT");
+        Array.Sort(damageDealtAchievements, (a, b) => a.achId - b.achId);
+
+        damageTakenAchievements = Array.FindAll(allAchievements, element => element.achType == "DAMAGETAKE");
+        Array.Sort(damageTakenAchievements, (a, b) => a.achId - b.achId);
     }
 
     private void Update()
@@ -85,9 +93,11 @@ public class AnalyticsController : MonoBehaviour
         switch (type)
         {
             case "KILL":
+                Debug.Log("enemiese killed is " + enemiesKilled);
                 foreach (Achievement ach in killAchievements)
                 {
-                    if (ach.isCompleted) break;
+                    Debug.Log("ach value is " + ach.achValue);
+                    if (ach.isCompleted) continue;
                     if (enemiesKilled >= int.Parse(ach.achValue))
                     {
                         ach.isCompleted = true;
@@ -98,7 +108,7 @@ public class AnalyticsController : MonoBehaviour
             case "QUEST":
                 foreach (Achievement ach in questAchievements)
                 {
-                    if (ach.isCompleted) break;
+                    if (ach.isCompleted) continue;
                     if (questCompleted >= int.Parse(ach.achValue))
                     {
                         ach.isCompleted = true;
@@ -109,7 +119,7 @@ public class AnalyticsController : MonoBehaviour
             case "TIME":
                 foreach (Achievement ach in timeAchievements)
                 {
-                    if (ach.isCompleted) break;
+                    if (ach.isCompleted) continue;
                     if (this.timePlayed >= int.Parse(ach.achValue))
                     {
                         ach.isCompleted = true;
@@ -120,8 +130,30 @@ public class AnalyticsController : MonoBehaviour
             case "WEAPON":
                 foreach (Achievement ach in weaponAchievements)
                 {
-                    if (ach.isCompleted) break;
+                    if (ach.isCompleted) continue;
                     if (PlayerScript.Player.equippedWeapon.weaponName.ToString() == ach.achValue)
+                    {
+                        ach.isCompleted = true;
+                        PopUpNotif(ach);
+                    }
+                }
+                break;
+            case "DAMAGEDEALT":
+                foreach (Achievement ach in damageDealtAchievements)
+                {
+                    if (ach.isCompleted) continue;
+                    if (this.damageDealt >= float.Parse(ach.achValue))
+                    {
+                        ach.isCompleted = true;
+                        PopUpNotif(ach);
+                    }
+                }
+                break;
+            case "DAMAGETAKEN":
+                foreach (Achievement ach in damageTakenAchievements)
+                {
+                    if (ach.isCompleted) continue;
+                    if (this.damageTaken >= float.Parse(ach.achValue))
                     {
                         ach.isCompleted = true;
                         PopUpNotif(ach);

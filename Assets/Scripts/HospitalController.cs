@@ -55,6 +55,7 @@ public class HospitalController : MonoBehaviour
 
     public void CloseShop()
     {
+        GameControllerScript.GameController.canAttack = true;
         hospitalPanel.SetActive(false);
     }
 
