@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -10,10 +11,13 @@ public class ShopController : MonoBehaviour
     public bool isOpen;
 
     [SerializeField] private GameObject shopPanel;
+    [SerializeField] private TMP_Text shopTimer;
     private GameObject[] slots;
 
     public Weapon[] allWeapons;
     private Weapon[] availableWeapons = new Weapon[3];
+
+    private float refreshTimer = 15f;
 
     private void Awake()
     {
@@ -32,19 +36,31 @@ public class ShopController : MonoBehaviour
         {
             slots[i] = shopPanel.transform.GetChild(i).gameObject;
         }
+        RefreshShopWeapons();
+    }
 
-        InvokeRepeating("RefreshShopWeapons", 0.0f, 20f);
+    private void Update()
+    {
+        shopTimer.text = $"Refreshing in {refreshTimer:N0}";
+        refreshTimer -= Time.deltaTime;
+        if(refreshTimer <= 0f)
+        {
+            RefreshShopWeapons();
+            refreshTimer = 15f;
+        }
     }
 
     public void OpenShop()
     {
         shopPanel.SetActive(true);
+        shopTimer.gameObject.SetActive(true);
     }
 
     public void CloseShop()
     {
         GameControllerScript.GameController.canAttack = true;
         shopPanel.SetActive(false);
+        shopTimer.gameObject.SetActive(false);
     }
 
     public void BuyWeapon(Weapon weaponToBuy)

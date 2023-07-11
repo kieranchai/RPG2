@@ -59,14 +59,15 @@ public class GameControllerScript : MonoBehaviour
             }
 
 
+            //Cheats
             if (Input.GetKeyDown(KeyCode.L))
             {
-                PlayerScript.Player.UpdateExperience(10);  //testing only
+                PlayerScript.Player.UpdateExperience(10);
             }
-            if (Input.GetKeyDown(KeyCode.H))
+            if (Input.GetKeyDown(KeyCode.M))
             {
-                Debug.Log(PlayerScript.Player.currentHealth);
-                PlayerScript.Player.TakeDamage(0.2f);
+                PlayerScript.Player.cash += 500;
+                PlayerScript.Player.UpdateCash(500);
             }
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {

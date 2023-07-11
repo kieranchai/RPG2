@@ -19,7 +19,7 @@ MonoBehaviour:
   thumbnailPath: Sprites/UI/Desert Eagle
   weaponType: line
   cooldown: 0.7
-  weaponRange: 6
+  weaponRange: 8
   ammoCount: 6
   cost: 200
   reloadSpeed: 2

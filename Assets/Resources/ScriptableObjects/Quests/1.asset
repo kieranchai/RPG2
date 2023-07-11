@@ -16,5 +16,5 @@ MonoBehaviour:
   questType: KILL
   questAmount: 5
   questObject: ENEMIES
-  xpReward: 50
-  cashReward: 200
+  xpReward: 150
+  cashReward: 240

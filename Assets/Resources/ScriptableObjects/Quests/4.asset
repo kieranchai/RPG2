@@ -16,5 +16,5 @@ MonoBehaviour:
   questType: GO TO
   questAmount: 14.41#6.79
   questObject: AREA
-  xpReward: 10
-  cashReward: 80
+  xpReward: 50
+  cashReward: 150

@@ -18,8 +18,8 @@ MonoBehaviour:
   spritePath: Sprites/Training Glock
   thumbnailPath: Sprites/UI/Training Glock
   weaponType: line
-  cooldown: 0.4
-  weaponRange: 5
-  ammoCount: 12
+  cooldown: 0.2
+  weaponRange: 4
+  ammoCount: 6
   cost: 0
   reloadSpeed: 1.5

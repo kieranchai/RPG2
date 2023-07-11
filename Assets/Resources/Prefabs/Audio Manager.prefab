@@ -180,12 +180,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4e704e658c88a934cb5ec9e68e5f2d52, type: 3}
   - name: WASTED!
     clip: {fileID: 8300000, guid: 2a3da7ab9b9143e43aa2f21c1c5e9977, type: 3}
-  - name: SHOCKING!
-    clip: {fileID: 0}
   - name: Quest Accept
     clip: {fileID: 0}
   - name: Quest Finish
     clip: {fileID: 0}
+  - name: Shop Denied
+    clip: {fileID: 8300000, guid: 6c5b42968ddac6b4c9278ee22818ff08, type: 3}
   - name: Shop Denied
     clip: {fileID: 8300000, guid: 6c5b42968ddac6b4c9278ee22818ff08, type: 3}
   - name: Quest Ringing

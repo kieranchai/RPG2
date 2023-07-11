@@ -17,9 +17,6 @@ public class Notification : MonoBehaviour
     public void Initialise(string achName, string achDesc, string achValue, string achType)
     {
         this.Name.text = achName;
-        Debug.Log(achValue);
-        Debug.Log(achType);
-
         if (achType == "TIMEPLAYED")
         {
             int value;

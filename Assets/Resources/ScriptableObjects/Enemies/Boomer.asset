@@ -19,4 +19,4 @@ MonoBehaviour:
   spritePath: Sprites/Boomer
   equippedWeaponName: Desert Eagle
   xpDrop: 15
-  cashDrop: 100@70#250@50#500@15
+  cashDrop: 60@70#80@50#1100@15
