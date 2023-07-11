@@ -76,10 +76,17 @@ public class QuestController : MonoBehaviour
         if (activeQuest || givenQuest || !GameControllerScript.GameController.hasPlayedTutorial) return;
         givenQuest = allQuests[Random.Range(0, allQuests.Length)];
 
+        AudioManager.instance.PlaySFX("Quest Ringing");
+        StartCoroutine("QuestwaitForSeconds");
         // Pass Quest to Dialogue
-        this.dialogueController.StartDialogue(givenQuest);
     }
 
+    IEnumerator QuestwaitForSeconds() {
+        yield return new WaitForSeconds(2f);
+        AudioManager.instance.sfxSource.Stop();
+        this.dialogueController.StartDialogue(givenQuest);
+        yield break;
+    }
     public void AcceptQuest(Quest givenQuest)
     {
         if (givenQuest.questType == "KILL")

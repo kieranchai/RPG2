@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achId: 3
   achName: Murder Lover
-  achDesc: Kill three enemies
+  achDesc: Kill achValue enemies
   achType: KILL
   achValue: 3
   isCompleted: 0

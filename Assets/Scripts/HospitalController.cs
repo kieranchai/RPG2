@@ -102,6 +102,7 @@ public class HospitalController : MonoBehaviour
     {
         if (PlayerScript.Player.cash >= healthUpgradeCost)
         {
+            AudioManager.instance.PlaySFX("Shop Purchase");
             PlayerScript.Player.maxHealth += healthUpgradeModifier;
             PlayerScript.Player.cash -= healthUpgradeCost;
             PlayerScript.Player.UpdateCash(-healthUpgradeCost);
@@ -112,6 +113,7 @@ public class HospitalController : MonoBehaviour
         }
         else
         {
+            AudioManager.instance.PlaySFX("Shop Denied");
             return;
         }
 
@@ -121,14 +123,18 @@ public class HospitalController : MonoBehaviour
     {
         if (PlayerScript.Player.cash >= speedUpgradeCost)
         {
+            AudioManager.instance.PlaySFX("Shop Purchase");
             PlayerScript.Player.speed += amount;
             PlayerScript.Player.cash -= cost;
             PlayerScript.Player.UpdateCash(-cost);
             PlayerScript.Player.speedUpgradeLevel++;
+            UpdateModifiers();
+            RefreshHospitalUI();
+        }else
+        {
+            AudioManager.instance.PlaySFX("Shop Denied");
+            return;
         }
-        UpdateModifiers();
-        RefreshHospitalUI();
-
     }
 
     public void UpdateModifiers()

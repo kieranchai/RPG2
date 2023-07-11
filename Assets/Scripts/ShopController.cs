@@ -59,6 +59,7 @@ public class ShopController : MonoBehaviour
         else
         {
             //not enough money to buy
+            AudioManager.instance.PlaySFX("Shop Denied");
             return;
         }
     }

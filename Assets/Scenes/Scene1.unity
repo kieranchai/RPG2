@@ -41763,6 +41763,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 4948283454613704333, guid: f876c9accb8365948adddbb238e937a3, type: 3}
+      propertyPath: sfxSounds.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948283454613704333, guid: f876c9accb8365948adddbb238e937a3, type: 3}
+      propertyPath: sfxSounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2a3da7ab9b9143e43aa2f21c1c5e9977, type: 3}
+    - target: {fileID: 4948283454613704333, guid: f876c9accb8365948adddbb238e937a3, type: 3}
+      propertyPath: sfxSounds.Array.data[3].name
+      value: Quest Accept
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948283454613704333, guid: f876c9accb8365948adddbb238e937a3, type: 3}
+      propertyPath: sfxSounds.Array.data[4].name
+      value: Quest Finish
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948283454613704333, guid: f876c9accb8365948adddbb238e937a3, type: 3}
+      propertyPath: sfxSounds.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c5b42968ddac6b4c9278ee22818ff08, type: 3}
+    - target: {fileID: 4948283454613704333, guid: f876c9accb8365948adddbb238e937a3, type: 3}
+      propertyPath: sfxSounds.Array.data[5].name
+      value: Shop Denied
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948283454613704333, guid: f876c9accb8365948adddbb238e937a3, type: 3}
+      propertyPath: sfxSounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 17a59680d5895d84fb4c0cfe073e0d1b, type: 3}
+    - target: {fileID: 4948283454613704333, guid: f876c9accb8365948adddbb238e937a3, type: 3}
+      propertyPath: sfxSounds.Array.data[7].name
+      value: Quest Ringing
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948283454613704333, guid: f876c9accb8365948adddbb238e937a3, type: 3}
+      propertyPath: sfxSounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 17a59680d5895d84fb4c0cfe073e0d1b, type: 3}
+    - target: {fileID: 4948283454613704333, guid: f876c9accb8365948adddbb238e937a3, type: 3}
+      propertyPath: sfxSounds.Array.data[8].name
+      value: Quest Ringing
+      objectReference: {fileID: 0}
     - target: {fileID: 4948283454613704334, guid: f876c9accb8365948adddbb238e937a3, type: 3}
       propertyPath: m_RootOrder
       value: 13

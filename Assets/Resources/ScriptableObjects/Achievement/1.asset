@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achId: 1
   achName: Quest Lover I
-  achDesc: Complete three quests
+  achDesc: Complete achValue quests
   achType: QUEST
   achValue: 3
   isCompleted: 0

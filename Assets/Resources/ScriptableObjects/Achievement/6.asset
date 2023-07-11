@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achId: 6
   achName: BOOM
-  achDesc: Obtain the RPG-7
+  achDesc: Obtain the achValue
   achType: WEAPON
   achValue: RPG 7
   isCompleted: 0

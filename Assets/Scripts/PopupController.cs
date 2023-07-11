@@ -41,7 +41,7 @@ public class PopupController: MonoBehaviour
     {
         StopCoroutine(Wait());
         string deathText = this.deathTexts[Random.Range(0,this.deathTexts.Length)];
-        AudioManager.instance.PlaySFX(deathText);
+        AudioManager.instance.PlaySFX("WASTED!");
         popupText.text = deathText;
     }
 
