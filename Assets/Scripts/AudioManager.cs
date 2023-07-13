@@ -27,6 +27,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void Start(){
+        PlayBGM("Main Menu");
+    }
     public void PlayBGM(string name)
     {
         Sound s = Array.Find(bgmSounds, x => x.name == name);

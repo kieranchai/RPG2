@@ -224,6 +224,7 @@ public class PlayerScript : MonoBehaviour
             PopupController.Popup.UpdatePopUp("RESPECT UP!");
             playerLvl++;
             ModifierController.Modifier.UpdateModifiers();
+            AudioManager.instance.PlaySFX("Respect");
         }
         playerExperiencePanel.GetComponent<ExperienceBarScript>().SetExperience(playerExperience);
         playerExperiencePanel.GetComponent<ExperienceBarScript>().SetRespect(playerLvl);
@@ -234,17 +235,20 @@ public class PlayerScript : MonoBehaviour
         if (!GameControllerScript.GameController.isAlive) return;
         currentHealth -= damageTaken;
 
-/*        audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.characterName}_Hit");
-        audioSource.Play();*/
+        audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.characterName}_Hit_{Random.Range(1, 4)}");
+        audioSource.Play();
 
         bloodParticles.Play();
         AnalyticsController.Analytics.damageTaken += damageTaken;
         AnalyticsController.Analytics.CheckAchievements("DAMAGETAKEN");
         this.lastHitTime = 0;
         UpdateHealth();
+
         if (currentHealth <= 0)
         {
             GameControllerScript.GameController.PlayerDied();
+            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.characterName}_Death");
+            audioSource.Play();
         }
     }
 

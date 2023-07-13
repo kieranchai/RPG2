@@ -84,6 +84,7 @@ public class AnalyticsController : MonoBehaviour
 
     public void PopUpNotif(Achievement ach)
     {
+        AudioManager.instance.PlaySFX("Achievement");
         GameObject notif = Instantiate(notifPrefab, notifPanel.transform);
         notif.GetComponent<Notification>().Initialise(ach.achName, ach.achDesc, ach.achValue, ach.achType);
     }
