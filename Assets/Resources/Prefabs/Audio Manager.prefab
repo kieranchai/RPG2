@@ -196,11 +196,11 @@ MonoBehaviour:
   - name: Respect
     clip: {fileID: 8300000, guid: ca5516b99854e974381c63bdc44b3b08, type: 3}
   - name: SHOCKING!
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 68067f213d6a82e4baed9c93b004514a, type: 3}
   - name: OH NO YOU DIED!
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: c784da6c3c51c1b4dbc11826cc83831d, type: 3}
   - name: TRY HARDER!
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 72e8f2fd4ce4d834b8499c9f62b37c52, type: 3}
   bgmSounds:
   - name: City Ambience
     clip: {fileID: 8300000, guid: d0b1cf1a74599414f8ca5cafb6c051f9, type: 3}

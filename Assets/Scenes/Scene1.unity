@@ -67464,7 +67464,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -301.0895, y: -109.9375}
+  m_AnchoredPosition: {x: -301.08948, y: -109.937515}
   m_SizeDelta: {x: -602.1789, y: -219.875}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &408806336
@@ -77972,6 +77972,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209912754}
   m_CullTransparentMesh: 1
+--- !u!224 &1257281376 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4545547594941582095, guid: e3f267348d449eb40b815f85f485d23a, type: 3}
+  m_PrefabInstance: {fileID: 4545547595496084256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1271283734
 GameObject:
   m_ObjectHideFlags: 0
@@ -79613,7 +79618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -304.84268, y: 90.237}
+  m_AnchoredPosition: {x: -304.84265, y: 90.237}
   m_SizeDelta: {x: -637.5352, y: -354.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1610854504
@@ -80676,7 +80681,7 @@ PrefabInstance:
     - target: {fileID: 5184747398669388816, guid: 62cc24506e9cfcc419429a86e1e5a598, type: 3}
       propertyPath: selectedCharacter
       value: 
-      objectReference: {fileID: 11400000, guid: 40a89ac8ede81e945ac4f732bc18dee8, type: 2}
+      objectReference: {fileID: 11400000, guid: d8f5d0e9e98e15f4fb76593b68dbec52, type: 2}
     - target: {fileID: 5184747398669388817, guid: 62cc24506e9cfcc419429a86e1e5a598, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -107428,6 +107433,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5297345433951248644, guid: c17d4e8e4e47763429b331d04e4c61e7, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1257281376}
     - target: {fileID: 5297345434556263171, guid: c17d4e8e4e47763429b331d04e4c61e7, type: 3}
       propertyPath: weaponPanel
       value: 

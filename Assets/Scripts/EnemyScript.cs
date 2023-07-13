@@ -78,7 +78,7 @@ public class EnemyScript : MonoBehaviour
         allWeapons = ShopController.shop.allWeapons;
         currWeapon = transform.GetChild(0).GetChild(0).GetComponent<EnemyWeaponScript>();
         SetEnemyData(Resources.LoadAll<Enemy>("ScriptableObjects/Enemies")[Random.Range(0, Resources.LoadAll<Enemy>("ScriptableObjects/Enemies").Length)]);
-        audioSource.volume = 0.1f;
+        audioSource.volume = 0.15f;
         this.currentState = EnemyState.PATROL;
         targetDirection = transform.up;
         changeDirectionCooldown = 0.5f;
@@ -305,7 +305,7 @@ public class EnemyScript : MonoBehaviour
         anim.enabled = false;
         enemyColl.enabled = false;
         enemySprite.sprite = Resources.Load<Sprite>($"Sprites/{this.enemyName}_Death");
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 4f);
     }
 
     public void Attack()
