@@ -15,7 +15,8 @@ MonoBehaviour:
   dialogueId: 12
   portraitSpritePath: Sprites/Roman
   speakerName: Roman
-  dialogueText: You can earn RESPECT and CASH by completing quests or killing enemies.
+  dialogueText: You can earn [COLOR]RESPECT[!COLOR] and [COLOR]CASH[!COLOR] by completing
+    quests or killing enemies.
   action1Name: NEXT
   action2Name: NULL
   action1DialogueId: 13

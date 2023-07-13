@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36df00f74a29c014aba75e48e8774c0a, type: 3}
-  m_Name: 13
+  m_Name: 15
   m_EditorClassIdentifier: 
-  dialogueId: 13
+  dialogueId: 15
   portraitSpritePath: Sprites/Roman
   speakerName: Roman
-  dialogueText: Use the [COLOR]CASH[!COLOR] you earned to buy new weapons and upgrade
-    your stats.
+  dialogueText: The [RED]red[!RED] marker beside you points to the [COLOR]HOSPITAL[!COLOR]
+    where you can upgrade yourself.
   action1Name: NEXT
   action2Name: NULL
-  action1DialogueId: 14
+  action1DialogueId: 16
   action2DialogueId: 0
   dialogueType: TUTORIAL

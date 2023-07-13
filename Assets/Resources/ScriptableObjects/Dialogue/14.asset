@@ -15,9 +15,10 @@ MonoBehaviour:
   dialogueId: 14
   portraitSpritePath: Sprites/Roman
   speakerName: Roman
-  dialogueText: Have fun and remember RESPECT is EVERYTHING!
-  action1Name: DONE
+  dialogueText: The [GREEN]green[!GREEN] marker beside you points to the [COLOR]GUN
+    SHOP[!COLOR] where you can buy weapons.
+  action1Name: NEXT
   action2Name: NULL
-  action1DialogueId: 0
+  action1DialogueId: 15
   action2DialogueId: 0
   dialogueType: TUTORIAL

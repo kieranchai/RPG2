@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogueId: 10
   portraitSpritePath: Sprites/Roman
   speakerName: Roman
-  dialogueText: Welcome to Los Santos CHARACTER_NAME!
+  dialogueText: Welcome to Los Santos#CHARACTER_NAME!
   action1Name: NEXT
   action2Name: NULL
   action1DialogueId: 11

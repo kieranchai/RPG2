@@ -15,8 +15,8 @@ MonoBehaviour:
   dialogueId: 1
   portraitSpritePath: Sprites/Roman
   speakerName: Roman
-  dialogueText: Hey QUEST_TYPEQUEST_AMOUNTQUEST_OBJECT for me. I'll transfer you
-    $QUEST_REWARD!
+  dialogueText: Hey [COLOR]QUEST_TYPE[!COLOR] [COLOR]QUEST_AMOUNT[!COLOR] [COLOR]QUEST_OBJECT[!COLOR]
+    for me. I'll transfer you [COLOR]$QUEST_REWARD![!COLOR]
   action1Name: YES
   action2Name: NO
   action1DialogueId: 2

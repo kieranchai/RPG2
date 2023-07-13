@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogueId: 3
   portraitSpritePath: Sprites/Player
   speakerName: Player Name
-  dialogueText: Nah bro another time.
+  dialogueText: Nah bro#another time.
   action1Name: NEXT
   action2Name: NULL
   action1DialogueId: 8

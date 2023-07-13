@@ -32,7 +32,7 @@ public class GameControllerScript : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerScript.Player && !isPaused && this.isAlive)
+        if (PlayerScript.Player && !isPaused && this.isAlive && hasPlayedTutorial)
         {
             PlayerScript.Player.LookAtMouse();
             bool success = PlayerScript.Player.MovePlayer(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized);

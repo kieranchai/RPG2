@@ -15,7 +15,8 @@ MonoBehaviour:
   dialogueId: 5
   portraitSpritePath: Sprites/Roman
   speakerName: Roman
-  dialogueText: Yo my bro. QUEST_TYPEQUEST_AMOUNTQUEST_OBJECT. $QUEST_REWARD.
+  dialogueText: Yo my bro. [COLOR]QUEST_TYPE[!COLOR] [COLOR]QUEST_AMOUNT[!COLOR]
+    [COLOR]QUEST_OBJECT[!COLOR]. [COLOR]$QUEST_REWARD.[!COLOR]
   action1Name: YES
   action2Name: NO
   action1DialogueId: 2
