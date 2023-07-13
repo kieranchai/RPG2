@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 13
   m_EditorClassIdentifier: 
   achId: 13
-  achName: I CAN DO THIS ALL DAY
+  achName: NEVER GIVE UP
   achDesc: Take achValue damage
   achType: DAMAGETAKEN
   achValue: 300
