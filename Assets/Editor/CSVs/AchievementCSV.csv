@@ -11,3 +11,6 @@
 11,EHMAZING,Take achValue damage,DAMAGETAKEN,100
 12,NEVER BACK DOWN,Take achValue damage,DAMAGETAKEN,200
 13,NEVER GIVE UP,Take achValue damage,DAMAGETAKEN,300
+14,GET DEAGED,Obtain the achValue,WEAPON,Desert Eagle
+15,PUMPED UP KICKS,Obtain the achValue,WEAPON,M4 Tactical
+16,SWAG-7,Obtain the achValue,WEAPON,Mag 7
