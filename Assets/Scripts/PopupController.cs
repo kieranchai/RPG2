@@ -10,6 +10,7 @@ public class PopupController: MonoBehaviour
     [SerializeField] private TMP_Text popupText;
 
     private string[] deathTexts;
+    private string[] deathSounds;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class PopupController: MonoBehaviour
         Popup = this;
 
         this.deathTexts = new string[] { "WASTED!", "SHOCKING!" };
+        this.deathSounds = new string[] { "WASTED!", "SHOCKING!", "OH NO YOU DIED!", "TRY HARDER!" };
     }
 
 
@@ -41,7 +43,7 @@ public class PopupController: MonoBehaviour
     {
         StopCoroutine(Wait());
         string deathText = this.deathTexts[Random.Range(0,this.deathTexts.Length)];
-        AudioManager.instance.PlaySFX("WASTED!");
+        AudioManager.instance.PlaySFX(this.deathSounds[Random.Range(0,this.deathSounds.Length)]);
         popupText.text = deathText;
     }
 

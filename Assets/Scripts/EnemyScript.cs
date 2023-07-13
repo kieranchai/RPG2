@@ -78,7 +78,7 @@ public class EnemyScript : MonoBehaviour
         allWeapons = ShopController.shop.allWeapons;
         currWeapon = transform.GetChild(0).GetChild(0).GetComponent<EnemyWeaponScript>();
         SetEnemyData(Resources.LoadAll<Enemy>("ScriptableObjects/Enemies")[Random.Range(0, Resources.LoadAll<Enemy>("ScriptableObjects/Enemies").Length)]);
-        audioSource.volume = AudioManager.sfxVol;
+        audioSource.volume = 0.1f;
         this.currentState = EnemyState.PATROL;
         targetDirection = transform.up;
         changeDirectionCooldown = 0.5f;
@@ -179,6 +179,8 @@ public class EnemyScript : MonoBehaviour
         if (CheckInSight())
         {
             playerLastSeenPos = PlayerScript.Player.transform.position;
+            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyName}_Chase");
+            audioSource.Play();
             this.currentState = EnemyState.CHASE;
         }
     }
@@ -241,6 +243,9 @@ public class EnemyScript : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= duration)
             {
+                audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyName}_Patrol");
+                audioSource.Play();
+
                 this.currentState = EnemyState.PATROL;
             }
         }
@@ -256,8 +261,8 @@ public class EnemyScript : MonoBehaviour
         {
             this.currentHealth -= damageTaken;
 
-            /*        audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyName}_Hit");
-audioSource.Play();*/
+            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyName}_Hit");
+            audioSource.Play();
 
             this.currentState = EnemyState.CHASE;
         }
@@ -265,8 +270,8 @@ audioSource.Play();*/
         {
             this.currentHealth -= damageTaken;
 
-            /*        audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyDeath}_Hit");
-audioSource.Play();*/
+            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyName}_Death");
+            audioSource.Play();
 
             EnemyDeath();
         }
