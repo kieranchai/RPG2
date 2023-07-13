@@ -47,6 +47,8 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField] private AudioSource audioSource;
 
+    private WeaponScript currWeapon;
+
     private void Awake()
     {
         if (Player != null && Player != this)
@@ -58,6 +60,8 @@ public class PlayerScript : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        characterSprite = GetComponent<SpriteRenderer>();
+        currWeapon = transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>();
         transform.GetChild(0).gameObject.SetActive(false);
     }
 
@@ -112,7 +116,6 @@ public class PlayerScript : MonoBehaviour
         this.healthUpgradeLevel = 0;
         this.speedUpgradeLevel = 0;
 
-        characterSprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
         characterSprite.sprite = sprite;
 
@@ -134,13 +137,13 @@ public class PlayerScript : MonoBehaviour
                 AddToInventory(this.equippedWeapon);
             }
             this.equippedWeapon = weaponData;
-            transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().SetWeaponData(weaponData);
+            currWeapon.SetWeaponData(weaponData);
         }
         else
         {
             //inven full, replace equipped weapon
             this.equippedWeapon = weaponData;
-            transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().SetWeaponData(weaponData);
+            currWeapon.SetWeaponData(weaponData);
         }
         RefreshUI();
         AnalyticsController.Analytics.CheckAchievements("WEAPON");

@@ -36,6 +36,9 @@ public class EnemyScript : MonoBehaviour
 
     private Weapon[] allWeapons;
 
+    private EnemyWeaponScript currWeapon;
+    private Collider2D enemyColl;
+
     public enum EnemyState
     {
         CHASE,
@@ -66,11 +69,14 @@ public class EnemyScript : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        enemyColl = GetComponent<Collider2D>();
+        enemySprite = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
         allWeapons = ShopController.shop.allWeapons;
+        currWeapon = transform.GetChild(0).GetChild(0).GetComponent<EnemyWeaponScript>();
         SetEnemyData(Resources.LoadAll<Enemy>("ScriptableObjects/Enemies")[Random.Range(0, Resources.LoadAll<Enemy>("ScriptableObjects/Enemies").Length)]);
         audioSource.volume = AudioManager.sfxVol;
         this.currentState = EnemyState.PATROL;
@@ -135,7 +141,6 @@ public class EnemyScript : MonoBehaviour
             this.availLoot.Add(new Loot(int.Parse(formattedAvailLootString[0]), int.Parse(formattedAvailLootString[1])));
             this.weightedAmt += int.Parse(formattedAvailLootString[1]);
         }
-        enemySprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Resources.Load<Sprite>(this.spritePath);
         enemySprite.sprite = sprite;
 
@@ -146,7 +151,7 @@ public class EnemyScript : MonoBehaviour
     public void EquipWeapon(Weapon weaponData)
     {
         this.equippedWeapon = weaponData;
-        transform.GetChild(0).GetChild(0).GetComponent<EnemyWeaponScript>().SetWeaponData(weaponData);
+        currWeapon.SetWeaponData(weaponData);
     }
 
     public void Patrol()
@@ -293,8 +298,8 @@ audioSource.Play();*/
     public void Died()
     {
         anim.enabled = false;
-        gameObject.GetComponent<Collider2D>().enabled = false;
-        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>($"Sprites/{this.enemyName}_Death");
+        enemyColl.enabled = false;
+        enemySprite.sprite = Resources.Load<Sprite>($"Sprites/{this.enemyName}_Death");
         Destroy(gameObject, 1f);
     }
 

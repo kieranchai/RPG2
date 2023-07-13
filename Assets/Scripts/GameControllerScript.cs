@@ -15,6 +15,7 @@ public class GameControllerScript : MonoBehaviour
     public bool hasPlayedTutorial = false;
     public bool canAttack = true;
 
+
     void Awake()
     {
         if (GameController != null && GameController != this)
@@ -105,7 +106,6 @@ public class GameControllerScript : MonoBehaviour
 
     private IEnumerator ZoomIn()
     {
-        Camera camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         {
             while (Camera.main.orthographicSize > 2.5)
             {

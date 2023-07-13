@@ -92,8 +92,13 @@ public class PauseScreen : MonoBehaviour
         tw.Close();
 
         tw = new StreamWriter(file, true);
+        tw.WriteLine($"{AnalyticsController.Analytics.enemiesKilled}," +
+            $"{AnalyticsController.Analytics.damageTaken}," +
+            $"{AnalyticsController.Analytics.damageDealt}," +
+            $"{AnalyticsController.Analytics.timePlayed}," +
+            $"{AnalyticsController.Analytics.experienceGained}," +
+            $"{AnalyticsController.Analytics.questCompleted}");
 
-        tw.WriteLine(AnalyticsController.Analytics.enemiesKilled.ToString() + "," + AnalyticsController.Analytics.damageTaken.ToString() + "," + AnalyticsController.Analytics.damageDealt.ToString() + "," + AnalyticsController.Analytics.timePlayed.ToString() + "," + AnalyticsController.Analytics.experienceGained.ToString() + "," + AnalyticsController.Analytics.questCompleted.ToString());
         tw.Close();
     }
 

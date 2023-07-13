@@ -28,6 +28,9 @@ public class QuestController : MonoBehaviour
 
     private bool hasMentionedHalf = false;
 
+    private Transform playerTarget;
+    private GameObject targetIndicator;
+
     private void Awake()
     {
         if (Quest != null && Quest != this)
@@ -42,6 +45,8 @@ public class QuestController : MonoBehaviour
     {
         allQuests = Resources.LoadAll<Quest>("ScriptableObjects/Quests");
         Array.Sort(allQuests, (a, b) => a.questId - b.questId);
+        playerTarget = PlayerScript.Player.transform.Find("Quest Target Indicator").GetComponent<TargetIndicator>().target;
+        targetIndicator = PlayerScript.Player.transform.Find("Quest Target Indicator").gameObject;
     }
 
     private void Update()
@@ -98,8 +103,8 @@ public class QuestController : MonoBehaviour
             gotoLocation.transform.localPosition = new Vector2(float.Parse(currentQuestCoords[0]), float.Parse(currentQuestCoords[1]));
             this.questLocation = gotoLocation.transform;
             this.gotoLocation.SetActive(true);
-            PlayerScript.Player.transform.Find("Quest Target Indicator").GetComponent<TargetIndicator>().target = this.questLocation;
-            PlayerScript.Player.transform.Find("Quest Target Indicator").gameObject.SetActive(true);
+            playerTarget = this.questLocation;
+            targetIndicator.SetActive(true);
         }
 
         this.activeQuest = givenQuest;
@@ -176,7 +181,7 @@ public class QuestController : MonoBehaviour
         // Finished Quest
         if ((this.questLocation.position - PlayerScript.Player.transform.position).magnitude < 0.5f) {
             FinishQuest(activeQuest);
-            PlayerScript.Player.transform.Find("Quest Target Indicator").gameObject.SetActive(false);
+            targetIndicator.SetActive(false);
             this.gotoLocation.SetActive(false);
         }
     }
