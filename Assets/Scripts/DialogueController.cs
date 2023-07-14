@@ -53,7 +53,7 @@ public class DialogueController : MonoBehaviour
             this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_AMOUNT", quest.questAmount);
         }
         this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_OBJECT", quest.questObject);
-        this.formattedDialogueText = this.formattedDialogueText.Replace("$QUEST_REWARD", quest.cashReward.ToString());
+        this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_REWARD", quest.cashReward.ToString());
 
         if (this.formattedDialogueText.Contains("#")) this.formattedDialogueText = this.formattedDialogueText.Replace("#", ", ");
         if (this.formattedDialogueText.Contains("[COLOR]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[COLOR]", "<color=#90ee90>");
