@@ -14,6 +14,9 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private TMP_Text action2Name;
 
     private Dialogue[] allDialogue;
+    private Dialogue[] introDialogues;
+    private Dialogue[] thanksDialogues;
+    private Dialogue[] tutorialDialogues;
 
     private string formattedDialogueText;
 
@@ -21,6 +24,11 @@ public class DialogueController : MonoBehaviour
     {
         allDialogue = AssetManager.Assets.allDialogue.ToArray();
         Array.Sort(allDialogue, (a, b) => a.dialogueId - b.dialogueId);
+
+        introDialogues = Array.FindAll(allDialogue, d => d.dialogueType == "INTRO");
+        thanksDialogues = Array.FindAll(allDialogue, d => d.dialogueType == "THANKS");
+        tutorialDialogues = Array.FindAll(allDialogue, d => d.dialogueType == "TUTORIAL");
+
         GameControllerScript.GameController.hasPlayedTutorial = false;
         IntroDialogue();
     }
@@ -34,7 +42,6 @@ public class DialogueController : MonoBehaviour
     {
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
-        Dialogue[] introDialogues = Array.FindAll(allDialogue, d => d.dialogueType == "INTRO");
         Dialogue introDialogue = introDialogues[Random.Range(0, introDialogues.Length)];
 
         this.portraitImage.sprite = Resources.Load<Sprite>(introDialogue.portraitSpritePath);
@@ -42,27 +49,7 @@ public class DialogueController : MonoBehaviour
         this.action1Name.text = introDialogue.action1Name;
         this.action2Name.text = introDialogue.action2Name;
 
-        this.formattedDialogueText = introDialogue.dialogueText;
-        this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_TYPE", quest.questType);
-        if (quest.questAmount.Contains("#"))
-        {
-            this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_AMOUNT", "THIS");
-        }
-        else
-        {
-            this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_AMOUNT", quest.questAmount);
-        }
-        this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_OBJECT", quest.questObject);
-        this.formattedDialogueText = this.formattedDialogueText.Replace("QUEST_REWARD", quest.cashReward.ToString());
-
-        if (this.formattedDialogueText.Contains("#")) this.formattedDialogueText = this.formattedDialogueText.Replace("#", ", ");
-        if (this.formattedDialogueText.Contains("[COLOR]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[COLOR]", "<color=#90ee90>");
-        if (this.formattedDialogueText.Contains("[!COLOR]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!COLOR]", "</color>");
-        if (this.formattedDialogueText.Contains("[GREEN]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[GREEN]", "<color=#2fd454>");
-        if (this.formattedDialogueText.Contains("[!GREEN]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!GREEN]", "</color>");
-        if (this.formattedDialogueText.Contains("[RED]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[RED]", "<color=#d62000>");
-        if (this.formattedDialogueText.Contains("[!RED]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!RED]", "</color>");
-
+        this.formattedDialogueText = FormatDialogueText(introDialogue.dialogueText, quest);
         this.dialogueText.text = this.formattedDialogueText;
 
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(introDialogue.action1Name, introDialogue.action1DialogueId));
@@ -86,7 +73,6 @@ public class DialogueController : MonoBehaviour
                 QuestController.Quest.RejectQuest();
                 break;
             case "CLOSE":
-                //close dialogue, dialogueId most likely 0 so don't run code below
                 GameControllerScript.GameController.canAttack = true;
                 dialoguePanel.SetActive(false);
                 return;
@@ -105,15 +91,8 @@ public class DialogueController : MonoBehaviour
             currentDialogue.portraitSpritePath = currentDialogue.portraitSpritePath.Replace("Player", GameControllerScript.GameController.selectedCharacter.characterName);
             currentDialogue.speakerName = currentDialogue.speakerName.Replace("Player Name", GameControllerScript.GameController.selectedCharacter.characterName);
         }
-        this.formattedDialogueText = currentDialogue.dialogueText;
 
-        if (this.formattedDialogueText.Contains("#")) this.formattedDialogueText = this.formattedDialogueText.Replace("#", ", ");
-        if (this.formattedDialogueText.Contains("[COLOR]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[COLOR]", "<color=#90ee90>");
-        if (this.formattedDialogueText.Contains("[!COLOR]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!COLOR]", "</color>");
-        if (this.formattedDialogueText.Contains("[GREEN]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[GREEN]", "<color=#2fd454>");
-        if (this.formattedDialogueText.Contains("[!GREEN]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!GREEN]", "</color>");
-        if (this.formattedDialogueText.Contains("[RED]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[RED]", "<color=#d62000>");
-        if (this.formattedDialogueText.Contains("[!RED]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!RED]", "</color>");
+        this.formattedDialogueText = FormatDialogueText(currentDialogue.dialogueText, null);
         this.dialogueText.text = this.formattedDialogueText;
 
         this.portraitImage.sprite = Resources.Load<Sprite>(currentDialogue.portraitSpritePath);
@@ -142,22 +121,14 @@ public class DialogueController : MonoBehaviour
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
 
-        Dialogue[] thanksDialogues = Array.FindAll(allDialogue, d => d.dialogueType == "THANKS");
         Dialogue thanksDialogue = thanksDialogues[Random.Range(0, thanksDialogues.Length)];
 
         this.portraitImage.sprite = Resources.Load<Sprite>(thanksDialogue.portraitSpritePath);
         this.portraitName.text = thanksDialogue.speakerName;
         this.action1Name.text = thanksDialogue.action1Name;
         this.action2Name.text = thanksDialogue.action2Name;
-        this.formattedDialogueText = thanksDialogue.dialogueText;
 
-        if (this.formattedDialogueText.Contains("#")) this.formattedDialogueText = this.formattedDialogueText.Replace("#", ", ");
-        if (this.formattedDialogueText.Contains("[COLOR]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[COLOR]", "<color=#90ee90>");
-        if (this.formattedDialogueText.Contains("[!COLOR]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!COLOR]", "</color>");
-        if (this.formattedDialogueText.Contains("[GREEN]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[GREEN]", "<color=#2fd454>");
-        if (this.formattedDialogueText.Contains("[!GREEN]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!GREEN]", "</color>");
-        if (this.formattedDialogueText.Contains("[RED]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[RED]", "<color=#d62000>");
-        if (this.formattedDialogueText.Contains("[!RED]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!RED]", "</color>");
+        this.formattedDialogueText = FormatDialogueText(thanksDialogue.dialogueText, null);
         this.dialogueText.text = this.formattedDialogueText;
 
         if (thanksDialogue.action2Name == "NULL")
@@ -181,24 +152,14 @@ public class DialogueController : MonoBehaviour
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
 
-        Dialogue[] introDialogues = Array.FindAll(allDialogue, d => d.dialogueType == "TUTORIAL");
-        Dialogue introDialogue = introDialogues[0];
+        Dialogue introDialogue = tutorialDialogues[0];
 
         this.portraitImage.sprite = Resources.Load<Sprite>(introDialogue.portraitSpritePath);
         this.portraitName.text = introDialogue.speakerName;
         this.action1Name.text = introDialogue.action1Name;
         this.action2Name.text = introDialogue.action2Name;
 
-        this.formattedDialogueText = introDialogue.dialogueText;
-        if (this.formattedDialogueText.Contains("CHARACTER_NAME")) this.formattedDialogueText = this.formattedDialogueText.Replace("CHARACTER_NAME", GameControllerScript.GameController.selectedCharacter.characterName);
-        if (this.formattedDialogueText.Contains("#")) this.formattedDialogueText = this.formattedDialogueText.Replace("#", ", ");
-        if (this.formattedDialogueText.Contains("[COLOR]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[COLOR]", "<color=#90ee90>");
-        if (this.formattedDialogueText.Contains("[!COLOR]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!COLOR]", "</color>");
-        if (this.formattedDialogueText.Contains("[GREEN]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[GREEN]", "<color=#2fd454>");
-        if (this.formattedDialogueText.Contains("[!GREEN]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!GREEN]", "</color>");
-        if (this.formattedDialogueText.Contains("[RED]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[RED]", "<color=#d62000>");
-        if (this.formattedDialogueText.Contains("[!RED]")) this.formattedDialogueText = this.formattedDialogueText.Replace("[!RED]", "</color>");
-
+        this.formattedDialogueText = FormatDialogueText(introDialogue.dialogueText, null);
         this.dialogueText.text = this.formattedDialogueText;
 
         if (introDialogue.action2Name == "NULL")
@@ -215,5 +176,38 @@ public class DialogueController : MonoBehaviour
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(introDialogue.action1Name, introDialogue.action1DialogueId));
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ContinueDialogue(introDialogue.action2Name, introDialogue.action2DialogueId));
         dialoguePanel.SetActive(true);
+    }
+
+    #nullable enable
+    public string FormatDialogueText(string text, Quest? quest)
+    {
+        if (quest)
+        {
+            #pragma warning disable CS8602 // Dereference of a possibly null reference.
+            text = text.Replace("QUEST_TYPE", quest.questType);
+            #pragma warning restore CS8602 // Dereference of a possibly null reference.
+            if (quest.questAmount.Contains("#"))
+            {
+                text = text.Replace("QUEST_AMOUNT", "THIS");
+            }
+            else
+            {
+                text = text.Replace("QUEST_AMOUNT", quest.questAmount);
+            }
+            text = text.Replace("QUEST_OBJECT", quest.questObject);
+            text = text.Replace("QUEST_REWARD", quest.cashReward.ToString());
+        }
+
+
+        if (text.Contains("CHARACTER_NAME")) text = text.Replace("CHARACTER_NAME", GameControllerScript.GameController.selectedCharacter.characterName);
+        if (text.Contains("#")) text = text.Replace("#", ", ");
+        if (text.Contains("[COLOR]")) text = text.Replace("[COLOR]", "<color=#90ee90>");
+        if (text.Contains("[!COLOR]")) text = text.Replace("[!COLOR]", "</color>");
+        if (text.Contains("[GREEN]")) text = text.Replace("[GREEN]", "<color=#2fd454>");
+        if (text.Contains("[!GREEN]")) text = text.Replace("[!GREEN]", "</color>");
+        if (text.Contains("[RED]")) text = text.Replace("[RED]", "<color=#d62000>");
+        if (text.Contains("[!RED]")) text = text.Replace("[!RED]", "</color>");
+
+        return text;
     }
 }

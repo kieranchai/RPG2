@@ -158,7 +158,7 @@ public class QuestController : MonoBehaviour
         // Can check if halfway or not ... add new if statements
         if ((AnalyticsController.Analytics.enemiesKilled - this.killCount) / 2 == int.Parse(activeQuest.questAmount) && !this.hasMentionedHalf)
         {
-            this.dialogueController.ContinueDialogue("", 9);
+            this.dialogueController.ContinueDialogue("", AssetManager.Assets.allDialogue.Find(e=>e.dialogueType=="HALFWAY").dialogueId);
             this.hasMentionedHalf = true;
         }
         
@@ -174,7 +174,7 @@ public class QuestController : MonoBehaviour
         // Can check if halfway or not ... add new if statements
         if ((this.questLocation.position - PlayerScript.Player.transform.position).magnitude < 10f && !this.hasMentionedHalf)
         {
-            this.dialogueController.ContinueDialogue("", 9);
+            this.dialogueController.ContinueDialogue("", AssetManager.Assets.allDialogue.Find(e => e.dialogueType == "HALFWAY").dialogueId);
             this.hasMentionedHalf = true;
         }
 
