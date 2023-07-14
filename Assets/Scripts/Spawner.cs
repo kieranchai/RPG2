@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
         this.totalEnemies = 10;
         currentEnemies = 0;
 
-        allSpawners = Resources.LoadAll<EnemySpawn>("ScriptableObjects/Enemy Spawn");
+        allSpawners = AssetManager.Assets.allEnemySpawns.ToArray();
     }
 
     private void Update()

@@ -36,7 +36,7 @@ public class HospitalController : MonoBehaviour
 
     private void Start()
     {
-        allUpgrades = Resources.LoadAll<Upgrades>("ScriptableObjects/Upgrades");
+        allUpgrades = AssetManager.Assets.allUpgrades.ToArray();
         Array.Sort(allUpgrades, (a, b) => a.upgradeId - b.upgradeId);
 
         healthUpgrades = Array.FindAll(allUpgrades, element => element.upgradeType == "HEALTH");

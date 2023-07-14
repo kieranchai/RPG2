@@ -23,7 +23,7 @@ public class ModifierController : MonoBehaviour
 
     private void Start()
     {
-        allMods = Resources.LoadAll<Modifier>("ScriptableObjects/Modifiers");
+        allMods = AssetManager.Assets.allModifiers.ToArray();
         Array.Sort(allMods, (a,b)=>a.modId-b.modId);
         this.apMod = allMods[0].apMod;
         this.speedMod = allMods[0].speedMod;

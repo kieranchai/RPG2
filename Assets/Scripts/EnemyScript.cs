@@ -77,7 +77,7 @@ public class EnemyScript : MonoBehaviour
     {
         allWeapons = ShopController.shop.allWeapons;
         currWeapon = transform.GetChild(0).GetChild(0).GetComponent<EnemyWeaponScript>();
-        SetEnemyData(Resources.LoadAll<Enemy>("ScriptableObjects/Enemies")[Random.Range(0, Resources.LoadAll<Enemy>("ScriptableObjects/Enemies").Length)]);
+        SetEnemyData(AssetManager.Assets.allEnemies.ToArray()[Random.Range(0, AssetManager.Assets.allEnemies.ToArray().Length)]);
         audioSource.volume = 0.15f;
         this.currentState = EnemyState.PATROL;
         targetDirection = transform.up;

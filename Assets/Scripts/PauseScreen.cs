@@ -60,6 +60,7 @@ public class PauseScreen : MonoBehaviour
         exportStats();
         GameControllerScript.GameController.isPaused = false;
         Time.timeScale = 1f;
+        AudioManager.instance.PlayBGM("Main Menu");
         SceneManager.LoadScene("Main Menu");
     }
 

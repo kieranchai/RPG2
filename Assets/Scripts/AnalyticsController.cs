@@ -37,7 +37,7 @@ public class AnalyticsController : MonoBehaviour
         }
         Analytics = this;
 
-        allAchievements = Resources.LoadAll<Achievement>("ScriptableObjects/Achievement");
+        allAchievements = AssetManager.Assets.allAchievements.ToArray();
         Array.Sort(allAchievements, (a, b) => a.achId - b.achId);
 
         foreach (Achievement ach in allAchievements)

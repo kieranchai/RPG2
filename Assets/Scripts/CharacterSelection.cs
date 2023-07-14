@@ -16,7 +16,7 @@ public class CharacterSelection : MonoBehaviour
 
     void Awake()
     {
-        allCharacters = Resources.LoadAll<Character>("ScriptableObjects/Characters");
+        allCharacters = AssetManager.Assets.allCharacters.ToArray();
         UpdateCharacterData(selectedCharacter);
     }
 

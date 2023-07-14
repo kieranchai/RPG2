@@ -187,8 +187,6 @@ MonoBehaviour:
     clip: {fileID: 0}
   - name: Shop Denied
     clip: {fileID: 8300000, guid: 6c5b42968ddac6b4c9278ee22818ff08, type: 3}
-  - name: Shop Denied
-    clip: {fileID: 8300000, guid: 6c5b42968ddac6b4c9278ee22818ff08, type: 3}
   - name: Quest Ringing
     clip: {fileID: 8300000, guid: 17a59680d5895d84fb4c0cfe073e0d1b, type: 3}
   - name: Achievement

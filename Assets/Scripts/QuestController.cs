@@ -43,7 +43,7 @@ public class QuestController : MonoBehaviour
 
     private void Start()
     {
-        allQuests = Resources.LoadAll<Quest>("ScriptableObjects/Quests");
+        allQuests = AssetManager.Assets.allQuests.ToArray();
         Array.Sort(allQuests, (a, b) => a.questId - b.questId);
         playerTarget = PlayerScript.Player.transform.Find("Quest Target Indicator").GetComponent<TargetIndicator>().target;
         targetIndicator = PlayerScript.Player.transform.Find("Quest Target Indicator").gameObject;
@@ -78,7 +78,7 @@ public class QuestController : MonoBehaviour
 
     public void GiveQuest()
     {
-        if (activeQuest || givenQuest || !GameControllerScript.GameController.hasPlayedTutorial) return;
+        if (activeQuest || givenQuest || !GameControllerScript.GameController.hasPlayedTutorial || !GameControllerScript.GameController.isAlive) return;
         givenQuest = allQuests[Random.Range(0, allQuests.Length)];
 
         AudioManager.instance.PlaySFX("Quest Ringing");

@@ -92,7 +92,7 @@ public class GameControllerScript : MonoBehaviour
     public void LoadSceneWithCharacter(Character characterData)
     {
         this.selectedCharacter = characterData;
-        SceneManager.LoadScene("Loading");
+        SceneManager.LoadScene("Scene1");
     }
 
     public void PlayerDied()

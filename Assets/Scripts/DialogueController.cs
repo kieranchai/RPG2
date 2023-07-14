@@ -19,7 +19,7 @@ public class DialogueController : MonoBehaviour
 
     private void Start()
     {
-        allDialogue = Resources.LoadAll<Dialogue>("ScriptableObjects/Dialogue");
+        allDialogue = AssetManager.Assets.allDialogue.ToArray();
         Array.Sort(allDialogue, (a, b) => a.dialogueId - b.dialogueId);
         GameControllerScript.GameController.hasPlayedTutorial = false;
         IntroDialogue();

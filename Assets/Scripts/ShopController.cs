@@ -26,7 +26,7 @@ public class ShopController : MonoBehaviour
             return;
         }
         shop = this;
-        allWeapons = Resources.LoadAll<Weapon>("ScriptableObjects/Weapons");
+        allWeapons = AssetManager.Assets.allWeapons.ToArray();
         allWeapons = Array.FindAll(allWeapons, e => e.weaponName != "Training Glock");
         Array.Sort(allWeapons, (a, b) => a.weaponId - b.weaponId);
 

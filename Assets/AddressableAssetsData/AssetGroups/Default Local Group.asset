@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 5f7437c4fd249564c93d8baf33c5e3c0
+  m_SerializeEntries:
+  - m_GUID: 45e31ae82d802ef469252ed7d3690b5e
+    m_Address: Assets/ScriptableObjects/Achievement
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Achievements
+  - m_GUID: c7a711e55986c35438cb30a2563c9299
+    m_Address: Assets/ScriptableObjects/Characters
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Characters
+  - m_GUID: 3a12caa51d415d047a6993baa69fda96
+    m_Address: Assets/ScriptableObjects/Dialogue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Dialogue
+  - m_GUID: 18a6fa6453e555446bba1927a7edf654
+    m_Address: Assets/ScriptableObjects/Enemies
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemies
+  - m_GUID: 9b2abc361d15c7b4d9b96362ed4ed076
+    m_Address: Assets/ScriptableObjects/Enemy Spawn
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - EnemySpawns
+  - m_GUID: 8891fdc743848e540912870c78b93ae7
+    m_Address: Assets/ScriptableObjects/Modifiers
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Modifiers
+  - m_GUID: dbf77121be957964c8380e1f073ad2f8
+    m_Address: Assets/ScriptableObjects/Quests
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Quests
+  - m_GUID: 58eb5db5895b9494995d9009a162bbd4
+    m_Address: Assets/ScriptableObjects/Upgrades
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Upgrades
+  - m_GUID: 436869765c6228c4f8524deece4dd566
+    m_Address: Assets/ScriptableObjects/Weapons
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Weapons
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: b7d7faaa2cacc08439e593ccc24875d3, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: a3d7352f20a59d143ae3ed136f60cc26, type: 2}
+    - {fileID: 11400000, guid: 1e79af98d4bd1a24a9217a5b969e326c, type: 2}

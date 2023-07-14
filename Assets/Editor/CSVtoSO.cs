@@ -35,7 +35,7 @@ public class CSVtoSO
             character.characterName = splitData[3];
             character.spritePath = splitData[4];
 
-            AssetDatabase.CreateAsset(character, $"Assets/Resources/ScriptableObjects/Characters/{character.characterName}.asset");
+            AssetDatabase.CreateAsset(character, $"Assets/ScriptableObjects/Characters/{character.characterName}.asset");
         }
 
         AssetDatabase.SaveAssets();
@@ -65,7 +65,7 @@ public class CSVtoSO
             enemy.xpDrop = int.Parse(splitData[6]);
             enemy.cashDrop = splitData[7];
 
-            AssetDatabase.CreateAsset(enemy, $"Assets/Resources/ScriptableObjects/Enemies/{enemy.enemyName}.asset");
+            AssetDatabase.CreateAsset(enemy, $"Assets/ScriptableObjects/Enemies/{enemy.enemyName}.asset");
         }
 
         AssetDatabase.SaveAssets();
@@ -98,7 +98,7 @@ public class CSVtoSO
             weapon.cost = int.Parse(splitData[9]);
             weapon.reloadSpeed = float.Parse(splitData[10]);
 
-            AssetDatabase.CreateAsset(weapon, $"Assets/Resources/ScriptableObjects/Weapons/{weapon.weaponName}.asset");
+            AssetDatabase.CreateAsset(weapon, $"Assets/ScriptableObjects/Weapons/{weapon.weaponName}.asset");
         }
 
         AssetDatabase.SaveAssets();
@@ -127,7 +127,7 @@ public class CSVtoSO
             quest.cashReward = int.Parse(splitData[5]);
 
 
-            AssetDatabase.CreateAsset(quest, $"Assets/Resources/ScriptableObjects/Quests/{quest.questId}.asset");
+            AssetDatabase.CreateAsset(quest, $"Assets/ScriptableObjects/Quests/{quest.questId}.asset");
         }
 
         AssetDatabase.SaveAssets();
@@ -159,7 +159,7 @@ public class CSVtoSO
             dialogue.dialogueType = splitData[8];
 
 
-            AssetDatabase.CreateAsset(dialogue, $"Assets/Resources/ScriptableObjects/Dialogue/{dialogue.dialogueId}.asset");
+            AssetDatabase.CreateAsset(dialogue, $"Assets/ScriptableObjects/Dialogue/{dialogue.dialogueId}.asset");
         }
 
         AssetDatabase.SaveAssets();
@@ -185,7 +185,7 @@ public class CSVtoSO
             modifier.speedMod = float.Parse(splitData[2]);
             modifier.apMod = float.Parse(splitData[3]);
 
-            AssetDatabase.CreateAsset(modifier, $"Assets/Resources/ScriptableObjects/Modifiers/{modifier.modId}.asset");
+            AssetDatabase.CreateAsset(modifier, $"Assets/ScriptableObjects/Modifiers/{modifier.modId}.asset");
         }
 
         AssetDatabase.SaveAssets();
@@ -212,7 +212,7 @@ public class CSVtoSO
             upgrades.upgradeModifier = float.Parse(splitData[3]);
             upgrades.upgradeCost = int.Parse(splitData[4]);
 
-            AssetDatabase.CreateAsset(upgrades, $"Assets/Resources/ScriptableObjects/Upgrades/{upgrades.upgradeId}.asset");
+            AssetDatabase.CreateAsset(upgrades, $"Assets/ScriptableObjects/Upgrades/{upgrades.upgradeId}.asset");
         }
 
         AssetDatabase.SaveAssets();
@@ -240,7 +240,7 @@ public class CSVtoSO
             achievement.achType = splitData[3];
             achievement.achValue = splitData[4];
             achievement.isCompleted = false;
-            AssetDatabase.CreateAsset(achievement, $"Assets/Resources/ScriptableObjects/Achievement/{achievement.achId}.asset");
+            AssetDatabase.CreateAsset(achievement, $"Assets/ScriptableObjects/Achievement/{achievement.achId}.asset");
         }
         AssetDatabase.SaveAssets();
     }
@@ -263,7 +263,7 @@ public class CSVtoSO
             EnemySpawn enemySpawn = ScriptableObject.CreateInstance<EnemySpawn>();
             enemySpawn.enemySpawnId = int.Parse(splitData[0]);
             enemySpawn.spawnLocation = splitData[1];
-            AssetDatabase.CreateAsset(enemySpawn, $"Assets/Resources/ScriptableObjects/Enemy Spawn/{enemySpawn.enemySpawnId}.asset");
+            AssetDatabase.CreateAsset(enemySpawn, $"Assets/ScriptableObjects/Enemy Spawn/{enemySpawn.enemySpawnId}.asset");
         }
         AssetDatabase.SaveAssets();
     }

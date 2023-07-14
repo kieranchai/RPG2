@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 1348544909}
   - component: {fileID: 1348544908}
   m_Layer: 0
-  m_Name: Loading
+  m_Name: Asset Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,6 +690,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 5
   scroll: {fileID: 1136950776}
+  allCharacters: []
+  allWeapons: []
+  allDialogue: []
+  allQuests: []
+  allEnemies: []
+  allEnemySpawns: []
+  allAchievements: []
+  allModifiers: []
+  allUpgrades: []
 --- !u!4 &1348544909
 Transform:
   m_ObjectHideFlags: 0
