@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5
   m_EditorClassIdentifier: 
   dialogueId: 5
-  portraitSpritePath: Sprites/Roman
+  portraitSpritePath: CharacterSprites/Roman
   speakerName: Roman
   dialogueText: Yo my bro. [COLOR]QUEST_TYPE[!COLOR] [COLOR]QUEST_AMOUNT[!COLOR]
     [COLOR]QUEST_OBJECT[!COLOR]. [COLOR]$QUEST_REWARD.[!COLOR]

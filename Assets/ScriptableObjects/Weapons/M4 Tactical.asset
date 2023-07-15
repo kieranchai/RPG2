@@ -15,8 +15,8 @@ MonoBehaviour:
   weaponId: 1
   weaponName: M4 Tactical
   attackPower: 3
-  spritePath: Sprites/M4 Tactical
-  thumbnailPath: Sprites/UI/M4 Tactical
+  spritePath: WeaponSprites/M4 Tactical
+  thumbnailPath: UISprites/M4 Tactical
   weaponType: line
   cooldown: 0.2
   weaponRange: 8

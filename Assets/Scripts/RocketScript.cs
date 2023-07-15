@@ -17,7 +17,7 @@ public class RocketScript : MonoBehaviour
 
     private void Explode()
     {
-        GameObject explosion = Instantiate(Resources.Load<GameObject>("Prefabs/Explosion"), transform.position, transform.rotation);
+        GameObject explosion = Instantiate(AssetManager.Assets.GetPrefab("Explosion"), transform.position, transform.rotation);
         explosion.GetComponent<ExplosionScript>().Initialize(attackPower, splashRange);
         Destroy(gameObject);
     }

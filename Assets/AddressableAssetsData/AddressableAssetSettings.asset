@@ -93,6 +93,11 @@ MonoBehaviour:
     - Quests
     - Upgrades
     - Weapons
+    - AudioClips
+    - CharacterSprites
+    - Prefabs
+    - UISprites
+    - WeaponSprites
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: c19cf5257a0eca54ab7713d0675e3eea, type: 2}

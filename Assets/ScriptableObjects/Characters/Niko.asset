@@ -16,4 +16,4 @@ MonoBehaviour:
   characterName: Niko
   maxHealth: 100
   speed: 3
-  spritePath: Sprites/Niko
+  spritePath: CharacterSprites/Niko

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponId: 2
   weaponName: Desert Eagle
-  attackPower: 5
-  spritePath: Sprites/Desert Eagle
-  thumbnailPath: Sprites/UI/Desert Eagle
+  attackPower: 6
+  spritePath: WeaponSprites/Desert Eagle
+  thumbnailPath: UISprites/Desert Eagle
   weaponType: line
   cooldown: 0.7
   weaponRange: 8

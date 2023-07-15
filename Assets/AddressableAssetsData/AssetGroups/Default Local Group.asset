@@ -62,6 +62,31 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Weapons
+  - m_GUID: 58fc98e3c70cee64393e650963868b5e
+    m_Address: Assets/Audio Clips
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioClips
+  - m_GUID: ffee1d06bf6b72f4293676421c28361a
+    m_Address: Assets/Character Sprites
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CharacterSprites
+  - m_GUID: 3bb4c6dadc5ce2942936ea53e2a20814
+    m_Address: Assets/Prefabs
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+  - m_GUID: 3d5485aee1e802e4882cf8da0b703211
+    m_Address: Assets/UI Sprites
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UISprites
+  - m_GUID: 66ee6a9930c6a5f4798bd03db5defd06
+    m_Address: Assets/Weapon Sprites
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - WeaponSprites
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b7d7faaa2cacc08439e593ccc24875d3, type: 2}
   m_SchemaSet:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 14
   m_EditorClassIdentifier: 
   dialogueId: 14
-  portraitSpritePath: Sprites/Roman
+  portraitSpritePath: CharacterSprites/Roman
   speakerName: Roman
   dialogueText: The [GREEN]green[!GREEN] marker beside you points to the [COLOR]GUN
     SHOP[!COLOR] where you can buy weapons.

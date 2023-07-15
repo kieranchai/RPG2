@@ -1,16 +1,16 @@
-1,Sprites/Roman,Roman,Hey [COLOR]QUEST_TYPE[!COLOR] [COLOR]QUEST_AMOUNT[!COLOR] [COLOR]QUEST_OBJECT[!COLOR] for me. I'll transfer you [COLOR]$QUEST_REWARD![!COLOR],YES,NO,2,3,INTRO
-2,Sprites/Player,Player Name,Aight sure. Better have my money ready when I'm done.,NEXT,NULL,7,0,ACCEPT
-3,Sprites/Player,Player Name,Nah bro#another time.,NEXT,NULL,8,0,DECLINE
-4,Sprites/Roman,Roman,Ay yo I knew I could count on you bro.,CLOSE,NULL,0,0,THANKS
-5,Sprites/Roman,Roman,Yo my bro. [COLOR]QUEST_TYPE[!COLOR] [COLOR]QUEST_AMOUNT[!COLOR] [COLOR]QUEST_OBJECT[!COLOR]. [COLOR]$QUEST_REWARD.[!COLOR],YES,NO,2,3,INTRO
-6,Sprites/Roman,Roman,Sheesh great job! Here's your money.,CLOSE,NULL,0,0,THANKS
-7,Sprites/Roman,Roman,Thanks. U a bro for sure.,CLOSE,NULL,0,0,REACTION
-8,Sprites/Roman,Roman,Next time then...,CLOSE,NULL,0,0,REACTION
-9,Sprites/Roman,Roman,You're almost halfway there! Keep it up!,CLOSE,NULL,0,0,HALFWAY
-10,Sprites/Roman,Roman,Welcome to Los Santos#CHARACTER_NAME!,NEXT,NULL,11,0,TUTORIAL
-11,Sprites/Roman,Roman,Your duty in Los Santos is to become the most respected homie on the block.,NEXT,NULL,12,0,TUTORIAL
-12,Sprites/Roman,Roman,You can earn [COLOR]RESPECT[!COLOR] and [COLOR]CASH[!COLOR] by completing quests or killing enemies.,NEXT,NULL,13,0,TUTORIAL
-13,Sprites/Roman,Roman,Use the [COLOR]CASH[!COLOR] you earned to buy new weapons and upgrade your stats.,NEXT,NULL,14,0,TUTORIAL
-14,Sprites/Roman,Roman,The [GREEN]green[!GREEN] marker beside you points to the [COLOR]GUN SHOP[!COLOR] where you can buy weapons.,NEXT,NULL,15,0,TUTORIAL
-15,Sprites/Roman,Roman,The [RED]red[!RED] marker beside you points to the [COLOR]HOSPITAL[!COLOR] where you can upgrade yourself.,NEXT,NULL,16,0,TUTORIAL
-16,Sprites/Roman,Roman,Have fun and remember#RESPECT is EVERYTHING!,DONE,NULL,0,0,TUTORIAL
+1,CharacterSprites/Roman,Roman,Hey [COLOR]QUEST_TYPE[!COLOR] [COLOR]QUEST_AMOUNT[!COLOR] [COLOR]QUEST_OBJECT[!COLOR] for me. I'll transfer you [COLOR]$QUEST_REWARD![!COLOR],YES,NO,2,3,INTRO
+2,CharacterSprites/Player,Player Name,Aight sure. Better have my money ready when I'm done.,NEXT,NULL,7,0,ACCEPT
+3,CharacterSprites/Player,Player Name,Nah bro#another time.,NEXT,NULL,8,0,DECLINE
+4,CharacterSprites/Roman,Roman,Ay yo I knew I could count on you bro.,CLOSE,NULL,0,0,THANKS
+5,CharacterSprites/Roman,Roman,Yo my bro. [COLOR]QUEST_TYPE[!COLOR] [COLOR]QUEST_AMOUNT[!COLOR] [COLOR]QUEST_OBJECT[!COLOR]. [COLOR]$QUEST_REWARD.[!COLOR],YES,NO,2,3,INTRO
+6,CharacterSprites/Roman,Roman,Sheesh great job! Here's your money.,CLOSE,NULL,0,0,THANKS
+7,CharacterSprites/Roman,Roman,Thanks. U a bro for sure.,CLOSE,NULL,0,0,REACTION
+8,CharacterSprites/Roman,Roman,Next time then...,CLOSE,NULL,0,0,REACTION
+9,CharacterSprites/Roman,Roman,You're almost halfway there! Keep it up!,CLOSE,NULL,0,0,HALFWAY
+10,CharacterSprites/Roman,Roman,Welcome to Los Santos#CHARACTER_NAME!,NEXT,NULL,11,0,TUTORIAL
+11,CharacterSprites/Roman,Roman,Your duty in Los Santos is to become the most respected homie on the block.,NEXT,NULL,12,0,TUTORIAL
+12,CharacterSprites/Roman,Roman,You can earn [COLOR]RESPECT[!COLOR] and [COLOR]CASH[!COLOR] by completing quests or killing enemies.,NEXT,NULL,13,0,TUTORIAL
+13,CharacterSprites/Roman,Roman,Use the [COLOR]CASH[!COLOR] you earned to buy new weapons and upgrade your stats.,NEXT,NULL,14,0,TUTORIAL
+14,CharacterSprites/Roman,Roman,The [GREEN]green[!GREEN] marker beside you points to the [COLOR]GUN SHOP[!COLOR] where you can buy weapons.,NEXT,NULL,15,0,TUTORIAL
+15,CharacterSprites/Roman,Roman,The [RED]red[!RED] marker beside you points to the [COLOR]HOSPITAL[!COLOR] where you can upgrade yourself.,NEXT,NULL,16,0,TUTORIAL
+16,CharacterSprites/Roman,Roman,Have fun and remember#RESPECT is EVERYTHING!,DONE,NULL,0,0,TUTORIAL

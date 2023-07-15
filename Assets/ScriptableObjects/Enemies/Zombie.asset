@@ -16,7 +16,7 @@ MonoBehaviour:
   enemyName: Zombie
   maxHealth: 20
   speed: 3.5
-  spritePath: Sprites/Zombie
+  spritePath: CharacterSprites/Zombie
   equippedWeaponName: Mag 7
   xpDrop: 8
   cashDrop: 20@70#40@50#70@15

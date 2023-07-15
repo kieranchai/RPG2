@@ -50,7 +50,7 @@ public class WeaponScript : MonoBehaviour
         this.currentAmmoCount = 0;
 
         SpriteRenderer weaponSprite = gameObject.GetComponent<SpriteRenderer>();
-        Sprite sprite = Resources.Load<Sprite>(this.spritePath);
+        Sprite sprite = AssetManager.Assets.GetSprite(this.spritePath);
         weaponSprite.sprite = sprite;
     }
 
@@ -89,7 +89,7 @@ public class WeaponScript : MonoBehaviour
 
     IEnumerator Reload()
     {
-        audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/Reload");
+        audioSource.clip = AssetManager.Assets.GetAudioClip("Reload");
         audioSource.Play();
         yield return new WaitForSeconds(this.reloadSpeed);
         audioSource.Stop();
@@ -104,8 +104,8 @@ public class WeaponScript : MonoBehaviour
         limitAttack = true;
         if (this.currentAmmoCount > 0)
         {
-            GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"), transform.position, transform.rotation);
-            audioSource.clip = (AudioClip) Resources.Load($"Audio Clips/{this.weaponName}_Fire");
+            GameObject bullet = Instantiate(AssetManager.Assets.GetPrefab("Bullet"), transform.position, transform.rotation);
+            audioSource.clip = AssetManager.Assets.GetAudioClip($"{this.weaponName}_Fire");
             audioSource.Play();
             bullet.GetComponent<BulletScript>().Initialize(this.attackPower * ModifierController.Modifier.apMod, weaponRange);
             //can add Projectile Speed to CSV (600 here)
@@ -129,11 +129,11 @@ public class WeaponScript : MonoBehaviour
             {
                 Vector3 pos = new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y, transform.position.z); // random x pos
                 float spread = Random.Range(-10.0f, 10.0f);
-                GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"), pos, Quaternion.Euler(0, 0, spread));
+                GameObject bullet = Instantiate(AssetManager.Assets.GetPrefab("Bullet"), pos, Quaternion.Euler(0, 0, spread));
                 bullet.GetComponent<BulletScript>().Initialize(this.attackPower, weaponRange);
                 bullet.GetComponent<Rigidbody2D>().AddRelativeForce(transform.right * 600);
             }
-            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.weaponName}_Fire");
+            audioSource.clip = AssetManager.Assets.GetAudioClip($"{this.weaponName}_Fire");
             audioSource.Play();
             --this.currentAmmoCount;
             PlayerScript.Player.RefreshUI();
@@ -148,9 +148,9 @@ public class WeaponScript : MonoBehaviour
         limitAttack = true;
         if (this.currentAmmoCount > 0)
         {
-            GameObject rocket = Instantiate(Resources.Load<GameObject>("Prefabs/Rocket"), transform.position, transform.rotation);
+            GameObject rocket = Instantiate(AssetManager.Assets.GetPrefab("Rocket"), transform.position, transform.rotation);
             rocket.GetComponent<RocketScript>().Initialize(this.attackPower, weaponRange);
-            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.weaponName}_Fire");
+            audioSource.clip = AssetManager.Assets.GetAudioClip($"{this.weaponName}_Fire");
             audioSource.Play();
             //can add Projectile Speed to CSV (600 here)
             rocket.GetComponent<Rigidbody2D>().AddForce(transform.right * 600);

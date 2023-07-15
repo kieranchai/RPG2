@@ -15,8 +15,8 @@ MonoBehaviour:
   weaponId: 5
   weaponName: Training Glock
   attackPower: 2
-  spritePath: Sprites/Training Glock
-  thumbnailPath: Sprites/UI/Training Glock
+  spritePath: WeaponSprites/Training Glock
+  thumbnailPath: UISprites/Training Glock
   weaponType: line
   cooldown: 0.2
   weaponRange: 4

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 11
   m_EditorClassIdentifier: 
   dialogueId: 11
-  portraitSpritePath: Sprites/Roman
+  portraitSpritePath: CharacterSprites/Roman
   speakerName: Roman
   dialogueText: Your duty in Los Santos is to become the most respected homie on
     the block.

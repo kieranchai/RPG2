@@ -22,7 +22,13 @@ public class AssetManager : MonoBehaviour
     public List<Modifier> allModifiers;
     public List<Upgrades> allUpgrades;
 
-    private int totalAssetsToLoad = 9;
+    [SerializeField] private List<Sprite> characterSprites;
+    [SerializeField] private List<Sprite> uiSprites;
+    [SerializeField] private List<Sprite> weaponSprites;
+    [SerializeField] private List<AudioClip> allAudioClips;
+    [SerializeField] private List<GameObject> allPrefabs;
+
+    private readonly int totalAssetsToLoad = 14;
 
     void Awake()
     {
@@ -144,9 +150,93 @@ public class AssetManager : MonoBehaviour
             scroll.size += (float) 1 / totalAssetsToLoad;
         };
 
+        var loadCharacterSprites = Addressables.LoadAssetsAsync<Sprite>("CharacterSprites", (sprite) =>
+        {
+            characterSprites.Add(sprite);
+        });
+
+        loadCharacterSprites.Completed += (operation) =>
+        {
+            ++isDone;
+            scroll.size += (float)1 / totalAssetsToLoad;
+        };
+
+        var loadWeaponSprites = Addressables.LoadAssetsAsync<Sprite>("WeaponSprites", (sprite) =>
+        {
+            weaponSprites.Add(sprite);
+        });
+
+        loadWeaponSprites.Completed += (operation) =>
+        {
+            ++isDone;
+            scroll.size += (float)1 / totalAssetsToLoad;
+        };
+
+        var loadUISprites = Addressables.LoadAssetsAsync<Sprite>("UISprites", (sprite) =>
+        {
+            uiSprites.Add(sprite);
+        });
+
+        loadUISprites.Completed += (operation) =>
+        {
+            ++isDone;
+            scroll.size += (float)1 / totalAssetsToLoad;
+        };
+
+        var loadPrefabs = Addressables.LoadAssetsAsync<GameObject>("Prefabs", (gameobject) =>
+        {
+            allPrefabs.Add(gameobject);
+        });
+
+        loadPrefabs.Completed += (operation) =>
+        {
+            ++isDone;
+            scroll.size += (float)1 / totalAssetsToLoad;
+        };
+
+        var loadAudioClips = Addressables.LoadAssetsAsync<AudioClip>("AudioClips", (audioclip) =>
+        {
+            allAudioClips.Add(audioclip);
+        });
+
+        loadAudioClips.Completed += (operation) =>
+        {
+            ++isDone;
+            scroll.size += (float)1 / totalAssetsToLoad;
+        };
+
+
         yield return new WaitUntil(() => isDone == totalAssetsToLoad);
         yield return new WaitForSeconds(stallTime);
         SceneManager.LoadScene("Character Selection");
+    }
+
+    public Sprite GetSprite(string spritePath)
+    {
+        string[] formatPath = spritePath.Split('/');
+        switch (formatPath[0])
+        {
+            case "CharacterSprites":
+                return characterSprites.Find(x => x.name == formatPath[1]);
+            case "WeaponSprites":
+                return weaponSprites.Find(x => x.name == formatPath[1]);
+            case "UISprites":
+                return uiSprites.Find(x => x.name == formatPath[1]);
+            default:
+                break;
+        };
+
+        return null;
+    }
+
+    public AudioClip GetAudioClip(string audioName)
+    {
+        return allAudioClips.Find(x => x.name == audioName);
+    }
+
+    public GameObject GetPrefab(string prefabName)
+    {
+        return allPrefabs.Find(x => x.name == prefabName);
     }
 
     IEnumerator FakeLoad()

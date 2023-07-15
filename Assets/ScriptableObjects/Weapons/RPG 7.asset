@@ -15,8 +15,8 @@ MonoBehaviour:
   weaponId: 4
   weaponName: RPG 7
   attackPower: 50
-  spritePath: Sprites/RPG 7
-  thumbnailPath: Sprites/UI/RPG 7
+  spritePath: WeaponSprites/RPG 7
+  thumbnailPath: UISprites/RPG 7
   weaponType: explosive
   cooldown: 0.5
   weaponRange: 10

@@ -118,7 +118,7 @@ public class EnemyScript : MonoBehaviour
         {
             string spriteName = enemySprite.sprite.name;
             spriteName = spriteName.Replace("Main", enemyName);
-            enemySprite.sprite = Resources.Load<Sprite>("Sprites/" + spriteName);
+            enemySprite.sprite = AssetManager.Assets.GetSprite($"CharacterSprites/{spriteName}");
         }
     }
 
@@ -141,7 +141,7 @@ public class EnemyScript : MonoBehaviour
             this.availLoot.Add(new Loot(int.Parse(formattedAvailLootString[0]), int.Parse(formattedAvailLootString[1])));
             this.weightedAmt += int.Parse(formattedAvailLootString[1]);
         }
-        Sprite sprite = Resources.Load<Sprite>(this.spritePath);
+        Sprite sprite = AssetManager.Assets.GetSprite(this.spritePath);
         enemySprite.sprite = sprite;
 
         transform.GetChild(0).gameObject.SetActive(true);
@@ -179,7 +179,7 @@ public class EnemyScript : MonoBehaviour
         if (CheckInSight())
         {
             playerLastSeenPos = PlayerScript.Player.transform.position;
-            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyName}_Chase");
+            audioSource.clip = AssetManager.Assets.GetAudioClip($"{this.enemyName}_Chase");
             audioSource.Play();
             this.currentState = EnemyState.CHASE;
         }
@@ -243,7 +243,7 @@ public class EnemyScript : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= duration)
             {
-                audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyName}_Patrol");
+                audioSource.clip = AssetManager.Assets.GetAudioClip($"{this.enemyName}_Patrol");
                 audioSource.Play();
 
                 this.currentState = EnemyState.PATROL;
@@ -261,7 +261,7 @@ public class EnemyScript : MonoBehaviour
         {
             this.currentHealth -= damageTaken;
 
-            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyName}_Hit");
+            audioSource.clip = AssetManager.Assets.GetAudioClip($"{this.enemyName}_Hit");
             audioSource.Play();
 
             this.currentState = EnemyState.CHASE;
@@ -270,7 +270,7 @@ public class EnemyScript : MonoBehaviour
         {
             this.currentHealth -= damageTaken;
 
-            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.enemyName}_Death");
+            audioSource.clip = AssetManager.Assets.GetAudioClip($"{this.enemyName}_Death");
             audioSource.Play();
 
             EnemyDeath();
@@ -304,7 +304,7 @@ public class EnemyScript : MonoBehaviour
     {
         anim.enabled = false;
         enemyColl.enabled = false;
-        enemySprite.sprite = Resources.Load<Sprite>($"Sprites/{this.enemyName}_Death");
+        enemySprite.sprite = AssetManager.Assets.GetSprite($"CharacterSprites/{this.enemyName}_Death");
         Destroy(gameObject, 4f);
     }
 

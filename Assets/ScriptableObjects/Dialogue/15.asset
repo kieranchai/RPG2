@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 15
   m_EditorClassIdentifier: 
   dialogueId: 15
-  portraitSpritePath: Sprites/Roman
+  portraitSpritePath: CharacterSprites/Roman
   speakerName: Roman
   dialogueText: The [RED]red[!RED] marker beside you points to the [COLOR]HOSPITAL[!COLOR]
     where you can upgrade yourself.

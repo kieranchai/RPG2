@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 13
   m_EditorClassIdentifier: 
   dialogueId: 13
-  portraitSpritePath: Sprites/Roman
+  portraitSpritePath: CharacterSprites/Roman
   speakerName: Roman
   dialogueText: Use the [COLOR]CASH[!COLOR] you earned to buy new weapons and upgrade
     your stats.

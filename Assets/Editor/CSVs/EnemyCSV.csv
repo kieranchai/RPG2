@@ -1,3 +1,3 @@
-1,Merc,30,2,Sprites/Merc,M4 Tactical,10,50@70#70@50#100@15
-2,Zombie,20,3.5,Sprites/Zombie,Mag 7,8,20@70#40@50#70@15
-3,Boomer,50,1,Sprites/Boomer,Desert Eagle,15,60@70#80@50#1100@15
+1,Merc,30,2,CharacterSprites/Merc,M4 Tactical,10,50@70#70@50#100@15
+2,Zombie,20,3.5,CharacterSprites/Zombie,Mag 7,8,20@70#40@50#70@15
+3,Boomer,50,1,CharacterSprites/Boomer,Desert Eagle,15,60@70#80@50#1100@15

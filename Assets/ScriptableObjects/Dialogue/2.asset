@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 2
   m_EditorClassIdentifier: 
   dialogueId: 2
-  portraitSpritePath: Sprites/Player
+  portraitSpritePath: CharacterSprites/Player
   speakerName: Player Name
   dialogueText: Aight sure. Better have my money ready when I'm done.
   action1Name: NEXT

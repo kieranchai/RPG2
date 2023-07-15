@@ -116,7 +116,7 @@ public class PlayerScript : MonoBehaviour
         this.healthUpgradeLevel = 0;
         this.speedUpgradeLevel = 0;
 
-        Sprite sprite = Resources.Load<Sprite>(this.spritePath);
+        Sprite sprite = AssetManager.Assets.GetSprite(this.spritePath);
         characterSprite.sprite = sprite;
 
         transform.GetChild(0).gameObject.SetActive(true);
@@ -173,7 +173,7 @@ public class PlayerScript : MonoBehaviour
             try
             {
                 slots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
-                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(inventory[i].thumbnailPath);
+                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = AssetManager.Assets.GetSprite(inventory[i].thumbnailPath);
             }
             catch
             {
@@ -186,7 +186,7 @@ public class PlayerScript : MonoBehaviour
         {
             weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().enabled = true;
             playerWeaponAmmo.enabled = true;
-            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(this.equippedWeapon.thumbnailPath);
+            weaponPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = AssetManager.Assets.GetSprite(this.equippedWeapon.thumbnailPath);
             playerWeaponAmmo.text = transform.GetChild(0).GetChild(0).GetComponent<WeaponScript>().currentAmmoCount.ToString();
         }
         catch
@@ -235,7 +235,7 @@ public class PlayerScript : MonoBehaviour
         if (!GameControllerScript.GameController.isAlive) return;
         currentHealth -= damageTaken;
 
-        audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.characterName}_Hit_{Random.Range(1, 4)}");
+        audioSource.clip = AssetManager.Assets.GetAudioClip($"Audio Clips/{this.characterName}_Hit_{Random.Range(1, 4)}");
         audioSource.Play();
 
         bloodParticles.Play();
@@ -258,7 +258,7 @@ public class PlayerScript : MonoBehaviour
         {
             string spriteName = characterSprite.sprite.name;
             spriteName = spriteName.Replace("Main", characterName);
-            characterSprite.sprite = Resources.Load<Sprite>("Sprites/" + spriteName);
+            characterSprite.sprite = AssetManager.Assets.GetSprite($"CharacterSprites/{spriteName}");
         }
     }
 

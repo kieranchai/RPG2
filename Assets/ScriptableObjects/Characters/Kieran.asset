@@ -16,4 +16,4 @@ MonoBehaviour:
   characterName: Kieran
   maxHealth: 60
   speed: 5
-  spritePath: Sprites/Kieran
+  spritePath: CharacterSprites/Kieran

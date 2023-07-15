@@ -44,7 +44,8 @@ public class DialogueController : MonoBehaviour
         dialoguePanel.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
         Dialogue introDialogue = introDialogues[Random.Range(0, introDialogues.Length)];
 
-        this.portraitImage.sprite = Resources.Load<Sprite>(introDialogue.portraitSpritePath);
+        this.portraitImage.sprite = AssetManager.Assets.GetSprite(introDialogue.portraitSpritePath);
+
         this.portraitName.text = introDialogue.speakerName;
         this.action1Name.text = introDialogue.action1Name;
         this.action2Name.text = introDialogue.action2Name;
@@ -86,7 +87,7 @@ public class DialogueController : MonoBehaviour
         }
 
         Dialogue currentDialogue = Array.Find(allDialogue, dialogue => dialogue.dialogueId == actionDialogueId);
-        if (currentDialogue.portraitSpritePath == "Sprites/Player")
+        if (currentDialogue.portraitSpritePath.Contains("Player"))
         {
             currentDialogue.portraitSpritePath = currentDialogue.portraitSpritePath.Replace("Player", GameControllerScript.GameController.selectedCharacter.characterName);
             currentDialogue.speakerName = currentDialogue.speakerName.Replace("Player Name", GameControllerScript.GameController.selectedCharacter.characterName);
@@ -94,8 +95,7 @@ public class DialogueController : MonoBehaviour
 
         this.formattedDialogueText = FormatDialogueText(currentDialogue.dialogueText, null);
         this.dialogueText.text = this.formattedDialogueText;
-
-        this.portraitImage.sprite = Resources.Load<Sprite>(currentDialogue.portraitSpritePath);
+        this.portraitImage.sprite = AssetManager.Assets.GetSprite(currentDialogue.portraitSpritePath);
         this.portraitName.text = currentDialogue.speakerName;
         this.action1Name.text = currentDialogue.action1Name;
 
@@ -123,7 +123,7 @@ public class DialogueController : MonoBehaviour
 
         Dialogue thanksDialogue = thanksDialogues[Random.Range(0, thanksDialogues.Length)];
 
-        this.portraitImage.sprite = Resources.Load<Sprite>(thanksDialogue.portraitSpritePath);
+        this.portraitImage.sprite = AssetManager.Assets.GetSprite(thanksDialogue.portraitSpritePath);
         this.portraitName.text = thanksDialogue.speakerName;
         this.action1Name.text = thanksDialogue.action1Name;
         this.action2Name.text = thanksDialogue.action2Name;
@@ -154,7 +154,7 @@ public class DialogueController : MonoBehaviour
 
         Dialogue introDialogue = tutorialDialogues[0];
 
-        this.portraitImage.sprite = Resources.Load<Sprite>(introDialogue.portraitSpritePath);
+        this.portraitImage.sprite = AssetManager.Assets.GetSprite(introDialogue.portraitSpritePath);
         this.portraitName.text = introDialogue.speakerName;
         this.action1Name.text = introDialogue.action1Name;
         this.action2Name.text = introDialogue.action2Name;

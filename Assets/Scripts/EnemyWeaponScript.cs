@@ -40,7 +40,7 @@ public class EnemyWeaponScript : MonoBehaviour
         this.currentAmmoCount = 0;
 
         SpriteRenderer weaponSprite = gameObject.GetComponent<SpriteRenderer>();
-        Sprite sprite = Resources.Load<Sprite>(this.spritePath);
+        Sprite sprite = AssetManager.Assets.GetSprite(this.spritePath);
         weaponSprite.sprite = sprite;
     }
 
@@ -87,9 +87,9 @@ public class EnemyWeaponScript : MonoBehaviour
         if (this.currentAmmoCount > 0)
         {
             float spread = Random.Range(-5.0f, 5.0f); // enemy inaccuracy
-            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.weaponName}_Fire");
+            audioSource.clip = AssetManager.Assets.GetAudioClip($"{this.weaponName}_Fire");
             audioSource.Play();
-            GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Enemy Bullet"), transform.position, Quaternion.Euler(0, 0, spread));
+            GameObject bullet = Instantiate(AssetManager.Assets.GetPrefab("Enemy Bullet"), transform.position, Quaternion.Euler(0, 0, spread));
             bullet.GetComponent<EnemyBulletScript>().Initialize(this.attackPower, weaponRange);
             //can add Projectile Speed to CSV (600 here)
             bullet.GetComponent<Rigidbody2D>().AddRelativeForce(transform.right * 600);
@@ -111,11 +111,12 @@ public class EnemyWeaponScript : MonoBehaviour
             {
                 Vector3 pos = new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y, transform.position.z); // random x pos
                 float spread = Random.Range(-10.0f, 10.0f);
-                GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Enemy Bullet"), pos, Quaternion.Euler(0, 0, spread));
+                GameObject bullet = Instantiate(AssetManager.Assets.GetPrefab("Enemy Bullet"), pos, Quaternion.Euler(0, 0, spread));
                 bullet.GetComponent<EnemyBulletScript>().Initialize(this.attackPower, weaponRange);
                 bullet.GetComponent<Rigidbody2D>().AddRelativeForce(transform.right * 600);
             }
-            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.weaponName}_Fire");
+            audioSource.clip = AssetManager.Assets.GetAudioClip($"{this.weaponName}_Fire");
+
             audioSource.Play();
             --this.currentAmmoCount;
             PlayerScript.Player.RefreshUI();

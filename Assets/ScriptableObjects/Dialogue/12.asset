@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 12
   m_EditorClassIdentifier: 
   dialogueId: 12
-  portraitSpritePath: Sprites/Roman
+  portraitSpritePath: CharacterSprites/Roman
   speakerName: Roman
   dialogueText: You can earn [COLOR]RESPECT[!COLOR] and [COLOR]CASH[!COLOR] by completing
     quests or killing enemies.

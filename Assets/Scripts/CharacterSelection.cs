@@ -41,7 +41,7 @@ public class CharacterSelection : MonoBehaviour
     void UpdateCharacterData(int selectedCharacter)
     {
         characterName.text = allCharacters[selectedCharacter].characterName.ToUpper();
-        characterImage.sprite = Resources.Load<Sprite>(allCharacters[selectedCharacter].spritePath);
+        characterImage.sprite = AssetManager.Assets.GetSprite(allCharacters[selectedCharacter].spritePath);
         characterHp.text = allCharacters[selectedCharacter].maxHealth.ToString() + "HP";
         characterSpeed.text = allCharacters[selectedCharacter].speed.ToString() + "MS";
     }

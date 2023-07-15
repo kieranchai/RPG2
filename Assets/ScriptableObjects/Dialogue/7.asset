@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 7
   m_EditorClassIdentifier: 
   dialogueId: 7
-  portraitSpritePath: Sprites/Roman
+  portraitSpritePath: CharacterSprites/Roman
   speakerName: Roman
   dialogueText: Thanks. U a bro for sure.
   action1Name: CLOSE

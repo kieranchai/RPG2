@@ -100,7 +100,7 @@ public class GameControllerScript : MonoBehaviour
         this.isAlive = false;
         PopupController.Popup.SetDeathPopUp();
         PlayerScript.Player.gameObject.GetComponent<Animator>().enabled = false;
-        PlayerScript.Player.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Player_Death");
+        PlayerScript.Player.gameObject.GetComponent<SpriteRenderer>().sprite = AssetManager.Assets.GetSprite("CharacterSprites/Player_Death");
         StartCoroutine(ZoomIn());
     }
 

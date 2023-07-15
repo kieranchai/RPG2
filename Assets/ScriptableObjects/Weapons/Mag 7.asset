@@ -15,8 +15,8 @@ MonoBehaviour:
   weaponId: 3
   weaponName: Mag 7
   attackPower: 2
-  spritePath: Sprites/Mag 7
-  thumbnailPath: Sprites/UI/Mag 7
+  spritePath: WeaponSprites/Mag 7
+  thumbnailPath: UISprites/Mag 7
   weaponType: spread
   cooldown: 0.5
   weaponRange: 5

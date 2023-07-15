@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 9
   m_EditorClassIdentifier: 
   dialogueId: 9
-  portraitSpritePath: Sprites/Roman
+  portraitSpritePath: CharacterSprites/Roman
   speakerName: Roman
   dialogueText: You're almost halfway there! Keep it up!
   action1Name: CLOSE

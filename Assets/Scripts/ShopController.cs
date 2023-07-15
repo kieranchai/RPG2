@@ -96,7 +96,7 @@ public class ShopController : MonoBehaviour
             slots[i].transform.GetComponent<Button>().onClick.RemoveAllListeners();
             int i2 = i;
             slots[i].transform.GetComponent<Button>().onClick.AddListener(() => BuyWeapon(availableWeapons[i2]));
-            slots[i].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(availableWeapons[i].thumbnailPath);
+            slots[i].transform.GetChild(0).GetComponent<Image>().sprite = AssetManager.Assets.GetSprite(availableWeapons[i2].thumbnailPath); 
             slots[i].transform.Find("Name").GetComponent<Text>().text = availableWeapons[i].weaponName.ToUpper();
             slots[i].transform.Find("Cost").GetComponent<Text>().text = "$" + availableWeapons[i].cost.ToString();
 

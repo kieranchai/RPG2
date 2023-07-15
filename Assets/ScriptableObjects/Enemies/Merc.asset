@@ -16,7 +16,7 @@ MonoBehaviour:
   enemyName: Merc
   maxHealth: 30
   speed: 2
-  spritePath: Sprites/Merc
+  spritePath: CharacterSprites/Merc
   equippedWeaponName: M4 Tactical
   xpDrop: 10
   cashDrop: 50@70#70@50#100@15
