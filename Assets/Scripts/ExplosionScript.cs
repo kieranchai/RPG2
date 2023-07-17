@@ -34,12 +34,12 @@ public class ExplosionScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<EnemyScript>().Attacked(attackPower);
         }
 
-        if (collision.gameObject.tag == "Tilemap Colliders")
+        if (collision.gameObject.CompareTag("Tilemap Colliders"))
         {
             Destroy(gameObject);
         }

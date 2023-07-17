@@ -93,7 +93,6 @@ public class EnemyWeaponScript : MonoBehaviour
             bullet.GetComponent<EnemyBulletScript>().Initialize(this.attackPower, weaponRange);
             //can add Projectile Speed to CSV (600 here)
             bullet.GetComponent<Rigidbody2D>().AddRelativeForce(transform.right * 600);
-
             --this.currentAmmoCount;
             yield return new WaitForSeconds(cooldown);
         }
@@ -116,7 +115,6 @@ public class EnemyWeaponScript : MonoBehaviour
                 bullet.GetComponent<Rigidbody2D>().AddRelativeForce(transform.right * 600);
             }
             audioSource.clip = AssetManager.Assets.GetAudioClip($"{this.weaponName}_Fire");
-
             audioSource.Play();
             --this.currentAmmoCount;
             PlayerScript.Player.RefreshUI();

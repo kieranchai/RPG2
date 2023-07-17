@@ -88,7 +88,7 @@ public class QuestController : MonoBehaviour
     IEnumerator QuestWaitForSeconds() {
         yield return new WaitForSeconds(2f);
         AudioManager.instance.sfxSource.Stop();
-        this.dialogueController.StartDialogue(givenQuest);
+        this.dialogueController.StartDialogue("INTRO", givenQuest);
         yield break;
     }
     public void AcceptQuest(Quest givenQuest)
@@ -139,7 +139,7 @@ public class QuestController : MonoBehaviour
 
     public void FinishQuest(Quest givenQuest)
     {
-        this.dialogueController.QuestFinishDialogue();
+        this.dialogueController.StartDialogue("THANKS", null);
         questLog.SetActive(false);
         this.activeQuest = null;
         this.timer = 0;

@@ -47,7 +47,7 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField] private AudioSource audioSource;
 
-    private WeaponScript currWeapon;
+    public WeaponScript currWeapon;
 
     private void Awake()
     {
@@ -149,6 +149,13 @@ public class PlayerScript : MonoBehaviour
         AnalyticsController.Analytics.CheckAchievements("WEAPON");
     }
 
+    public void SwapWeapon()
+    {
+        Weapon temp = inventory[0];
+        inventory[0] = this.equippedWeapon;
+        EquipWeapon(temp);
+    }
+
     public void AddToInventory(Weapon weaponData)
     {
         if (!weaponData) return;
@@ -157,7 +164,7 @@ public class PlayerScript : MonoBehaviour
         RefreshUI();
     }
 
-    public void RemoveFromInventory(Weapon weaponData)
+    public void RemoveFromInventory(Weapon weaponData) //Unused
     {
         if (!weaponData) return;
 
@@ -247,7 +254,7 @@ public class PlayerScript : MonoBehaviour
         if (currentHealth <= 0)
         {
             GameControllerScript.GameController.PlayerDied();
-            audioSource.clip = (AudioClip)Resources.Load($"Audio Clips/{this.characterName}_Death");
+            audioSource.clip = AssetManager.Assets.GetAudioClip($"Audio Clips/{this.characterName}_Death");
             audioSource.Play();
         }
     }

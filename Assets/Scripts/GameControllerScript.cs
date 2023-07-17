@@ -49,14 +49,12 @@ public class GameControllerScript : MonoBehaviour
 
             if (Input.GetMouseButton(0) && canAttack)
             {
-                PlayerScript.Player.transform.GetChild(0).GetComponentInChildren<WeaponScript>().TryAttack();
+                PlayerScript.Player.currWeapon.TryAttack();
             }
 
             if (Input.GetKeyDown(KeyCode.Q) && PlayerScript.Player.inventory.Count == PlayerScript.Player.inventory.Capacity)
             {
-                Weapon temp = PlayerScript.Player.inventory[0];
-                PlayerScript.Player.inventory[0] = PlayerScript.Player.equippedWeapon;
-                PlayerScript.Player.EquipWeapon(temp);
+                PlayerScript.Player.SwapWeapon();
             }
 
 
