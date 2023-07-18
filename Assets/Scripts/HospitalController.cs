@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+// JOEL
+
 public class HospitalController : MonoBehaviour
 {
     public static HospitalController Hospital { get; private set; }
@@ -155,7 +157,7 @@ public class HospitalController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             OpenShop();
             isOpen = true;
@@ -164,7 +166,7 @@ public class HospitalController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             CloseShop();
             isOpen = false;

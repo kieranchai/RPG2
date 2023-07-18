@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// KIERAN AND JOEL
+
 [CreateAssetMenu(fileName = "New Upgrade", menuName = "Assets/New Upgrade")]
 public class Upgrades : ScriptableObject
 {

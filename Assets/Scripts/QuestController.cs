@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+// KIERAN AND JOEL
+
 public class QuestController : MonoBehaviour
 {
     public static QuestController Quest { get; private set; }

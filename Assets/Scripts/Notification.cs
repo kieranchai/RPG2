@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+// KIERAN
+
 public class Notification : MonoBehaviour
 {
     [SerializeField] private TMP_Text Name;

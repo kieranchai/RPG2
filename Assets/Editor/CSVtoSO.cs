@@ -2,6 +2,8 @@ using UnityEditor;
 using UnityEngine;
 using System.IO;
 
+// KIERAN AND JOEL
+
 public class CSVtoSO
 {
     private static string characterCSVPath = "/Assets/Editor/CSVs/CharacterCSV.csv";

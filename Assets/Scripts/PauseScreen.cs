@@ -3,6 +3,8 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// KIERAN AND JOEL
+
 public class PauseScreen : MonoBehaviour
 {
     [SerializeField] private GameObject buttonPanel;
@@ -57,7 +59,7 @@ public class PauseScreen : MonoBehaviour
 
     public void QuitGame()
     {
-        exportStats();
+        ExportStats();
         GameControllerScript.GameController.isPaused = false;
         Time.timeScale = 1f;
         AudioManager.instance.PlayBGM("Main Menu");
@@ -75,7 +77,7 @@ public class PauseScreen : MonoBehaviour
         statsPanel.SetActive(false);
     }
 
-    public void exportStats()
+    public void ExportStats()
     {
         string FileName = "StatsOutput"; // This var will be edited to FileName(1), FileName(2) and so on...
         string BaseFileName = "StatsOutput"; // To prevent cases like "FileName(12345)", we 'reset' it by having a "base name". 

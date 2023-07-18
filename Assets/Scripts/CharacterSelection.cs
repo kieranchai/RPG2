@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// KIERAN
+
 public class CharacterSelection : MonoBehaviour
 {
     public Text characterName;

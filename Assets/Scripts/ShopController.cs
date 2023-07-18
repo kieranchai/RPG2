@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+// KIERAN
+
 public class ShopController : MonoBehaviour
 {
     public static ShopController shop { get; private set; }
@@ -117,7 +119,7 @@ public class ShopController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             OpenShop();
             isOpen = true;
@@ -126,7 +128,7 @@ public class ShopController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             CloseShop();
             isOpen = false;

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// KIERAN AND JOEL
+
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
@@ -32,7 +34,7 @@ public class Spawner : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, spawnerOverlapRadius);
         foreach (Collider2D collider in colliders)
         {
-            if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Player")
+            if (collider.gameObject.CompareTag("Enemy") || collider.gameObject.CompareTag("Player"))
             {
                 return;
             }

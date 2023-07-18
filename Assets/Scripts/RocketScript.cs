@@ -1,5 +1,6 @@
-
 using UnityEngine;
+
+// JOEL
 
 public class RocketScript : MonoBehaviour
 {
@@ -33,17 +34,12 @@ public class RocketScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Tilemap Collider"))
         {
             Explode();
         }
 
-        if (collision.gameObject.tag == "Tilemap Colliders")
-        {
-            Explode();
-        }
-
-        if (collision.gameObject.tag == "Safe Area")
+        if (collision.gameObject.CompareTag("Safe Area"))
         {
             Destroy(gameObject);
         }

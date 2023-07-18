@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// KIERAN AND JOEL
+
 [CreateAssetMenu(fileName = "New Dialogue", menuName = "Assets/New Dialogue")]
 public class Dialogue : ScriptableObject
 {

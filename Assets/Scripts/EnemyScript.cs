@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
+// KIERAN AND JOEL
+
 public class EnemyScript : MonoBehaviour
 {
     public int enemyId;

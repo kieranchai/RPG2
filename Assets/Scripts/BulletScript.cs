@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// KIERAN AND JOEL
+
 public class BulletScript : MonoBehaviour
 {
     private float attackPower;
@@ -23,18 +25,13 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<EnemyScript>().Attacked(this.attackPower);
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.tag == "Tilemap Colliders")
-        {
-            Destroy(gameObject);
-        }
-        
-        if (collision.gameObject.tag == "Safe Area")
+        if (collision.gameObject.CompareTag("Tilemap Colliders") || collision.gameObject.CompareTag("Safe Area"))
         {
             Destroy(gameObject);
         }

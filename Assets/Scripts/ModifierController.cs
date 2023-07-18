@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 
+// KIERAN AND JOEL
+
 public class ModifierController : MonoBehaviour
 {
     public static ModifierController Modifier { get; private set; }

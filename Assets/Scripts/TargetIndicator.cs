@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// KIERAN AND JOEL
+
 public class TargetIndicator : MonoBehaviour
 {
     public Transform target;

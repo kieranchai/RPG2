@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+// KIERAN AND JOEL
+
 public class EnemyWeaponScript : MonoBehaviour
 {
     public int weaponId;

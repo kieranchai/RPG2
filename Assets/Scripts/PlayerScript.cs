@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// KIERAN AND JOEL
+
 public class PlayerScript : MonoBehaviour
 {
     public static PlayerScript Player { get; private set; }
@@ -217,7 +219,7 @@ public class PlayerScript : MonoBehaviour
 
     public void UpdateHealth()
     {
-        playerStatsPanel.GetComponent<HealthBarScript>().updateHealthBar();
+        playerStatsPanel.GetComponent<HealthBarScript>().UpdateHealthBar();
     }
 
     public void UpdateExperience(int experience)

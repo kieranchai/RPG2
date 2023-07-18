@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// KIERAN AND JOEL
+
 public class ExperienceBarScript : MonoBehaviour
 {
     // Start is called before the first frame update
