@@ -10,4 +10,5 @@ public class Upgrades : ScriptableObject
     public int upgradeLevel;
     public float upgradeModifier;
     public int upgradeCost;
+    public bool isCompleted;
 }

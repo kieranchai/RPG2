@@ -213,7 +213,8 @@ public class CSVtoSO
             upgrades.upgradeLevel = int.Parse(splitData[2]);
             upgrades.upgradeModifier = float.Parse(splitData[3]);
             upgrades.upgradeCost = int.Parse(splitData[4]);
-
+            upgrades.isCompleted = false;
+            
             AssetDatabase.CreateAsset(upgrades, $"Assets/ScriptableObjects/Upgrades/{upgrades.upgradeId}.asset");
         }
 

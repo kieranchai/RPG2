@@ -43,6 +43,8 @@ public class ModifierController : MonoBehaviour
                 this.xpNeeded = allMods[i].xpNeeded;
             } else if (PlayerScript.Player.playerLvl == allMods[allMods.Length-1].modId)
             {
+                this.apMod = allMods[i].apMod;
+                this.speedMod = allMods[i].speedMod;
                 this.isMaxLvl = true;
             }
         }

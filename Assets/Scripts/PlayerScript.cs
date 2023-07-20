@@ -17,8 +17,6 @@ public class PlayerScript : MonoBehaviour
     public string spritePath;
     public int playerExperience;
     public int playerLvl;
-    public int healthUpgradeLevel;
-    public int speedUpgradeLevel;
 
     public Rigidbody2D rb;
     public Animator anim;
@@ -115,8 +113,6 @@ public class PlayerScript : MonoBehaviour
         this.cash = 0;
         this.playerExperience = 0;
         this.playerLvl = 1;
-        this.healthUpgradeLevel = 0;
-        this.speedUpgradeLevel = 0;
 
         Sprite sprite = AssetManager.Assets.GetSprite(this.spritePath);
         characterSprite.sprite = sprite;
@@ -224,9 +220,9 @@ public class PlayerScript : MonoBehaviour
 
     public void UpdateExperience(int experience)
     {
-        if (ModifierController.Modifier.isMaxLvl) return;
         AnalyticsController.Analytics.experienceGained += experience;
         playerExperience += experience;
+        if (ModifierController.Modifier.isMaxLvl) return;
         if (playerExperience >= ModifierController.Modifier.xpNeeded)
         {
             playerExperience -= ModifierController.Modifier.xpNeeded;
