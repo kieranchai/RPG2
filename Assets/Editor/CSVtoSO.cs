@@ -176,7 +176,7 @@ public class CSVtoSO
         {
             string[] splitData = s.Split(',');
 
-            if (splitData.Length != 4)
+            if (splitData.Length != 5)
             {
                 return;
             }
@@ -186,6 +186,7 @@ public class CSVtoSO
             modifier.xpNeeded = int.Parse(splitData[1]);
             modifier.speedMod = float.Parse(splitData[2]);
             modifier.apMod = float.Parse(splitData[3]);
+            modifier.totalEnemies = int.Parse(splitData[4]);
 
             AssetDatabase.CreateAsset(modifier, $"Assets/ScriptableObjects/Modifiers/{modifier.modId}.asset");
         }

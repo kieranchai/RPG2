@@ -10,12 +10,10 @@ public class Spawner : MonoBehaviour
     [SerializeField] float spawnerOverlapRadius;
     private EnemySpawn[] allSpawners;
 
-    private int totalEnemies;
     public static int currentEnemies;
 
     private void Start()
     {
-        this.totalEnemies = 10;
         currentEnemies = 0;
 
         allSpawners = AssetManager.Assets.allEnemySpawns.ToArray();
@@ -23,7 +21,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        if (currentEnemies < totalEnemies) SpawnEnemy();
+        if (currentEnemies < ModifierController.Modifier.totalEnemies) SpawnEnemy();
 
     }
 
@@ -39,7 +37,7 @@ public class Spawner : MonoBehaviour
                 return;
             }
         }
-        GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+        Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
         currentEnemies++;
     }
 

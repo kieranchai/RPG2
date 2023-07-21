@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 10
   m_EditorClassIdentifier: 
   modId: 10
-  xpNeeded: 258
+  xpNeeded: 259
   speedMod: 1.45
   apMod: 1.45
+  totalEnemies: 28

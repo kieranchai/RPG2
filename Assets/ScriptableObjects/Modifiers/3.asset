@@ -16,3 +16,4 @@ MonoBehaviour:
   xpNeeded: 133
   speedMod: 1.1
   apMod: 1.1
+  totalEnemies: 14

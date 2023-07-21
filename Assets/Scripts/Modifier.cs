@@ -9,4 +9,5 @@ public class Modifier : ScriptableObject
     public int xpNeeded;
     public float speedMod;
     public float apMod;
+    public int totalEnemies;
 }

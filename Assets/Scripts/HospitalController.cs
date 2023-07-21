@@ -11,8 +11,8 @@ public class HospitalController : MonoBehaviour
     public bool isOpen;
     private GameObject[] slots;
     private Upgrades[] allUpgrades;
-    public Upgrades[] healthUpgrades;
-    public Upgrades[] speedUpgrades;
+    private Upgrades[] healthUpgrades;
+    private Upgrades[] speedUpgrades;
     [SerializeField] private GameObject hospitalPanel;
 
     private void Awake()
