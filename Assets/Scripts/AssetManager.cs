@@ -37,7 +37,6 @@ public class AssetManager : MonoBehaviour
         if (Assets != null && Assets != this)
         {
             StartCoroutine(FakeLoad());
-            Destroy(gameObject);
             return;
         }
         Assets = this;
@@ -251,5 +250,6 @@ public class AssetManager : MonoBehaviour
             yield return null;
         }
         SceneManager.LoadScene("Character Selection");
+        Destroy(gameObject);
     }
 }
